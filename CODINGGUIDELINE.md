@@ -1,9 +1,7 @@
+#GitHub learning experience
 
-```html
-<h1 style="color:red;text-align:left">GitHub learning experience</h1>
+##Configure coding guideline
 
-<h2 style="text-align:center">Configure coding guideline</h2>
-```
 
 --------------------------------------------------------------------------------
 
