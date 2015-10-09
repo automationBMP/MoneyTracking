@@ -27,22 +27,6 @@ void DoCreateWallet::CreateWalletFile()
 	DoCreateWallet::AddDecimalsToDefaultAmount();
 	// creating and opening the file
 	ofstream walletFile(walletName_m.c_str());
-	//checking if the file was created
-	if (!walletFile.good())
-	{
-		cout << "\nError, the path dowsn't exist";
-		return;
-	}
-	// writint the initial amount in the wallet file
-	walletFile << defaultAmount_m << "  RON";
-	if (!walletFile.good())
-	{
-		cout << "\nError, while writing in the file";
-		return;
-	}
-	
-	// closing the file
-	walletFile.close();
 	//adding the sign if is missing
 	if (defaultAmount_m[0] != '+' && defaultAmount_m[0] != '-')
 	{
@@ -53,6 +37,23 @@ void DoCreateWallet::CreateWalletFile()
 	{
 		DoCreateWallet::RemoveStartingZeroes();
 	}
+	//checking if the file was created
+	if (!walletFile.good())
+	{
+		cout << "\nError, the path dosn't exist";
+		return;
+	}
+	// writing the initial amount in the wallet file
+	walletFile << defaultAmount_m << "  RON";
+	if (!walletFile.good())
+	{
+		cout << "\nError, while writing in the file";
+		return;
+	}
+	
+	// closing the file
+	walletFile.close();
+	
 	//printing the wallet created message
 	cout 	<< "\n" 
 			<< walletName_m 
@@ -149,6 +150,12 @@ void DoCreateWallet::AddDecimalsToDefaultAmount()
 			}			
 		}		
 	}	
+	// checking if last item of string is ' ' and delete
+	if (defaultAmount_m[defaultAmount_m.length() - 1] == ' ') 
+	{
+		defaultAmount_m = 
+				defaultAmount_m.substr(0,defaultAmount_m.length() - 1);
+	}
 }
 
 std::string DoCreateWallet::RemoveStartingZeroes()
