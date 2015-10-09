@@ -23,7 +23,8 @@ DoCreateWallet::DoCreateWallet( std::string walletName,
 	{}
 
 void DoCreateWallet::CreateWalletFile()
-{
+{	
+	DoCreateWallet::AddDecimalsToDefaultAmount();
 	// creating and opening the file
 	ofstream walletFile(walletName_m.c_str());
 	//checking if the file was created
@@ -42,6 +43,16 @@ void DoCreateWallet::CreateWalletFile()
 	
 	// closing the file
 	walletFile.close();
+	//adding the sign if is missing
+	if (defaultAmount_m[0] != '+' && defaultAmount_m[0] != '-')
+	{
+		defaultAmount_m = '+' + defaultAmount_m;
+	}
+	// removing the starting 0's if an amount is given
+	if (defaultAmount_m != "+00.00" )
+	{
+		DoCreateWallet::RemoveStartingZeroes();
+	}
 	//printing the wallet created message
 	cout 	<< "\n" 
 			<< walletName_m 
@@ -52,6 +63,7 @@ void DoCreateWallet::CreateWalletFile()
 
 void DoCreateWallet::AddDecimalsToDefaultAmount()
 {
+	
 	unsigned int pointPosition = 0;
 	int i = 0;
 	// searching for the position of the '.'
@@ -82,16 +94,15 @@ void DoCreateWallet::AddDecimalsToDefaultAmount()
 	if (pointPosition == defaultAmount_m.length() - 2)
 			{
 		defaultAmount_m += "0";
-		cout << defaultAmount_m << endl;
+		//cout << defaultAmount_m << endl;
 		
 	}
 	//if more then 2 decimals exists
-	cout << "\n i = " << i;
-	cout << "\n pointPosition  " << pointPosition;
+	
 	if (pointPosition == defaultAmount_m.length() - 4)
 	{
 		unsigned int lastDecimal = defaultAmount_m[pointPosition + 3];
-		cout << "\n lastDecimal = " << lastDecimal;
+		//cout << "\n lastDecimal = " << lastDecimal;
 		defaultAmount_m[defaultAmount_m.length() - 1] = ' ';
 		i = pointPosition + 2;
 		
@@ -112,12 +123,12 @@ void DoCreateWallet::AddDecimalsToDefaultAmount()
 					defaultAmount_m[i] = '0';
 					--i;
 				}
-				cout << "\n i = " << i;
+				
 				//if the number had only 9's and no sign, a 1 will be added
 				if (i == -1)
 				{
 					defaultAmount_m = "1" + defaultAmount_m;
-					cout << "\n i = " << i;
+					
 				}else 
 				//if the number had only 9's and a sign, a 1 will be added
 				if ((i == 0) && 
@@ -135,12 +146,48 @@ void DoCreateWallet::AddDecimalsToDefaultAmount()
 			// adding 1 to the proper digit before the .
 			{
 				++defaultAmount_m[i];
-			}
-			
-			
-		}
-
-		cout << "\n defaultAmount_m = " << defaultAmount_m;
-		
+			}			
+		}		
 	}	
+}
+
+std::string DoCreateWallet::RemoveStartingZeroes()
+{
+	// removing the 0's from the begining
+	unsigned int start = 0, i = 0;
+	char sign ;
+	//searching for an exist sign
+	if (defaultAmount_m[0] == '+' || defaultAmount_m[0] == '-')
+	{
+		sign = defaultAmount_m[0];
+		start = 1;
+	}
+	i = start;
+	// counting the start 0's
+	while (defaultAmount_m[i] == '0')
+	{
+		++i;
+	}
+	// case : 000.7
+	if ((defaultAmount_m[i] == '.') && (i < defaultAmount_m.length()))
+	{
+		defaultAmount_m = 
+					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
+
+	}//case : 001
+	else if (i < defaultAmount_m.length())
+	{
+		defaultAmount_m = 
+					defaultAmount_m.substr (i,defaultAmount_m.length()-i);
+		
+	}
+	//case: 0000
+	else 
+	{
+		defaultAmount_m = 
+					defaultAmount_m.substr (i,defaultAmount_m.length()-i);
+	}
+	defaultAmount_m =sign+defaultAmount_m;
+	
+	return defaultAmount_m;
 }
