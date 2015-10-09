@@ -99,7 +99,9 @@ bool ValidateCreate::IsValidNumber()
 	
 	//print error
 	if (isValid == false)
-		cout << amount << " is not a valid initial amount" << endl;
-	
+	{
+		cout <<"error: "<< amount << " is not a valid initial amount." << endl;
+	    cout<< "Creating "<< walletName_m <<" aborted.";
+	}
 	return isValid;
 }
