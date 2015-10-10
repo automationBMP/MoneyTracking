@@ -27,9 +27,11 @@ HEADERS=\
     inc\DoCreateWallet.h \
 	inc\ValidateCreate.h \
 	inc\PrintError.h \
-	inc\Types.h
+	inc\Types.h \
+	inc\MainFunctions.h
 
-               
+TESTOBJECTS=\
+	inc\PrintError.o
 
 
 # build all
@@ -40,7 +42,7 @@ all: moneytracker.exe
 moneytracker.exe: $(MAIN_OBJECTS) 
 	g++ -o moneytracker.exe $(MAIN_OBJECTS)           
 
-main.o: main.cpp inc\DoCreateWallet.h inc\ValidateCreate.h inc\Types.h inc\PrintError.h
+main.o: main.cpp inc\DoCreateWallet.h inc\ValidateCreate.h inc\Types.h inc\PrintError.h inc\MainFunctions.h
 	g++ $(CPPFLAGS) -o main.o -c main.cpp
                
 src\DoCreateWallet.o: src\DoCreateWallet.cpp inc\DoCreateWallet.h inc\Types.h
@@ -52,7 +54,8 @@ src\ValidateCreate.o: src\ValidateCreate.cpp inc\ValidateCreate.h inc\Types.h
 src\PrintError.o: src\PrintError.cpp inc\PrintError.h inc\Types.h
 	g++ $(CPPFLAGS)  -o src\PrintError.o -c src\PrintError.cpp
 	
-	
+src\MainFunctions.o: src\MainFunctions.cpp inc\MainFunctions.h inc\Types.h
+	g++ $(CPPFLAGS)  -o src\MainFunctions.o -c src\MainFunctions.cpp	
 	
 #run: main.cpp src\DoCreateWallet.cpp inc\DoCreateWallet.h
 #             g++ -Wall -c src\DoCreateWallet.cpp src\DoCreateWallet.o
@@ -83,6 +86,8 @@ tst\TestRemoveStartingZeroes.o: tst\TestRemoveStartingZeroes.cpp
 # run tests
 run: moneytracker.exe
 	moneytracker.exe
+	
+test: 
 
 # clean up
 clean:
