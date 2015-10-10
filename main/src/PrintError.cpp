@@ -44,5 +44,13 @@ void PrintError::Print(Error_E error,
 		case PATH_DOES_NOT_EXIST:
 			std::cout 	<< "\n error : The given path doesn't exist";
 		break;
+		case CREATE_WALLET_MESSAGE:
+			std::cout 	<< "\n" 
+						<< walletName_m 
+						<< " created with the initial amount of "
+						<< defaultAmount_m
+						<< " RON";
+		
+		break;
 	}
 }

@@ -22,7 +22,7 @@ DoCreateWallet::DoCreateWallet( std::string walletName,
 									defaultAmount_m(defaultAmount)
 	{}
 
-void DoCreateWallet::CreateWalletFile()
+Error_E DoCreateWallet::CreateWalletFile()
 {	
 	DoCreateWallet::AddDecimalsToDefaultAmount();
 	// creating and opening the file
@@ -30,15 +30,24 @@ void DoCreateWallet::CreateWalletFile()
 	//checking if the file was created
 	if (!walletFile.good())
 	{
-		cout << "\nError, the path dowsn't exist";
-		return;
+		PrintError::Print(PATH_DOES_NOT_EXIST,
+						walletName_m,
+						defaultAmount_m);
+		return PATH_DOES_NOT_EXIST;
+	}
+	// removing the starting 0's if an amount is given
+	if (defaultAmount_m != "+00.00" )
+	{
+		DoCreateWallet::RemoveStartingZeroes();
 	}
 	// writint the initial amount in the wallet file
 	walletFile << defaultAmount_m << "  RON";
 	if (!walletFile.good())
 	{
-		cout << "\nError, while writing in the file";
-		return;
+		PrintError::Print(WRITE_TO_FILE,
+						walletName_m,
+						defaultAmount_m);
+		return WRITE_TO_FILE;
 	}
 	
 	// closing the file
@@ -48,17 +57,12 @@ void DoCreateWallet::CreateWalletFile()
 	{
 		defaultAmount_m = '+' + defaultAmount_m;
 	}
-	// removing the starting 0's if an amount is given
-	if (defaultAmount_m != "+00.00" )
-	{
-		DoCreateWallet::RemoveStartingZeroes();
-	}
+
 	//printing the wallet created message
-	cout 	<< "\n" 
-			<< walletName_m 
-			<< " created with the initial amount of "
-			<< defaultAmount_m
-			<< " RON";
+	PrintError::Print(CREATE_WALLET_MESSAGE,
+						walletName_m,
+						defaultAmount_m);
+	return ALL_GOOD;
 }
 
 void DoCreateWallet::AddDecimalsToDefaultAmount()
@@ -151,12 +155,12 @@ void DoCreateWallet::AddDecimalsToDefaultAmount()
 	}	
 }
 
+// removing the 0's from the begining
 std::string DoCreateWallet::RemoveStartingZeroes()
 {
-	// removing the 0's from the begining
 	unsigned int start = 0, i = 0;
 	char sign ;
-	//searching for an exist sign
+	//searching for an existing sign
 	if (defaultAmount_m[0] == '+' || defaultAmount_m[0] == '-')
 	{
 		sign = defaultAmount_m[0];

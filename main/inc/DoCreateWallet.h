@@ -13,7 +13,8 @@
 #define DOCREATEWALLET_H
 
 #include <string>
-
+#include "PrintError.h"
+#include "Types.h"
 
 class DoCreateWallet
 {
@@ -26,9 +27,10 @@ public :
 	//constructor
 	DoCreateWallet( std::string walletName,  std::string defaultAmount);
 	// creating the wallet file and adding the default amount
-	void CreateWalletFile();
+	Error_E CreateWalletFile();
 	//adding 2 decimals if needed
 	void AddDecimalsToDefaultAmount();
+	//removes any extra zero from the start of the number
 	std::string RemoveStartingZeroes();
 };
 

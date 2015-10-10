@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <fstream>
 #include <iostream>
+#include "..\inc\PrintError.h"
 using namespace std;
 
 // implementation of constructor without amount
@@ -34,9 +35,12 @@ bool ValidateCreate::WalletExists()
 	if (f.good())
 	{
 		// print error if wallet exists
-		cout << "error: wallet " 
+		PrintError::Print(WALLET_ALREADY_EXISTS,
+						walletName_m,
+						amount_m);
+		/*cout << "error: wallet " 
 			 << walletName 
-			 << " already exists! ";
+			 << " already exists! ";*/
 	}
 	
 	// return if true wallet exists and false if it doesn't exist
@@ -100,8 +104,11 @@ bool ValidateCreate::IsValidNumber()
 	//print error
 	if (isValid == false)
 	{
-		cout <<"error: "<< amount << " is not a valid initial amount." << endl;
-	    cout<< "Creating "<< walletName_m <<" aborted.";
+		PrintError::Print(CREATE_INITIAL_AMMOUNT_INVALID,
+						walletName_m,
+						amount_m);
+		//cout <<"error: "<< amount << " is not a valid initial amount." << endl;
+	    //cout<< "Creating "<< walletName_m <<" aborted.";
 	}
 	return isValid;
 }
