@@ -40,7 +40,6 @@ Error_E DoCreateWallet::CreateWalletFile()
 	//checking if the file was created
 	if (!walletFile.good())
 	{
-<<<<<<< HEAD
 		PrintError::Print(PATH_DOES_NOT_EXIST,
 						walletName_m,
 						defaultAmount_m);
@@ -50,10 +49,6 @@ Error_E DoCreateWallet::CreateWalletFile()
 	if (defaultAmount_m != "+00.00" )
 	{
 		DoCreateWallet::RemoveStartingZeroes();
-=======
-		cout << "\nError, the path dosn't exist";
-		return;
->>>>>>> 3271d406f8228bb5fa07e476f34ae2b8d41bfa3f
 	}
 	// writing the initial amount in the wallet file
 	walletFile << defaultAmount_m << "  RON";
@@ -67,16 +62,6 @@ Error_E DoCreateWallet::CreateWalletFile()
 	
 	// closing the file
 	walletFile.close();
-<<<<<<< HEAD
-	//adding the sign if is missing
-	if (defaultAmount_m[0] != '+' && defaultAmount_m[0] != '-')
-	{
-		defaultAmount_m = '+' + defaultAmount_m;
-	}
-
-=======
-	
->>>>>>> 3271d406f8228bb5fa07e476f34ae2b8d41bfa3f
 	//printing the wallet created message
 	PrintError::Print(CREATE_WALLET_MESSAGE,
 						walletName_m,
