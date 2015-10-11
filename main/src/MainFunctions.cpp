@@ -1,21 +1,31 @@
-#include "C:\learn\MoneyTracking\main\inc\MainFunctions.h"
+/*
+	Author: Andrei Martinescu
+	
+	This file contains implementation for main functions .
+		
+*/
+
+#include "..\inc\MainFunctions.h"
 #include <cstring>
 #include <iostream>
 
 using namespace std ;
-bool checkArgc(int argc)
+
+// function for testing if we have enough arguments
+bool CheckArgcNumbers(int argc)
 {
 	bool flag = true ;
 	
 		if (argc <= 2) 
 		{
-			cout << "error: at least filename should be specified. ";
+			cout << "error: at least filename should be specified. \n";
 			flag =false;
 		}
 	return flag;	
 }
 
-string convertPath(string givenPath)
+//function for converting path  Ex: C:\learn in C:/learn for validating
+string ConvertPath(string givenPath)
 {
 	for(unsigned int i = 0; i < givenPath.length(); i++)
 	{
@@ -28,7 +38,8 @@ string convertPath(string givenPath)
 return givenPath;	
 } 
 
-string convertPathToOriginal(string givenPath)
+//function for converting path to original
+string ConvertPathToOriginal(string givenPath)
 {
 	for(unsigned int i = 0; i < givenPath.length(); i++)
 	{
@@ -40,7 +51,7 @@ string convertPathToOriginal(string givenPath)
 return givenPath;	
 } 
 
-/* function return fileName from path
+/* function return fileName from path for future feature's
 string FileName(string givenPath)
 {  string fileName; 
 

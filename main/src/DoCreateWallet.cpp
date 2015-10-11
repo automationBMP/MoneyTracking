@@ -6,7 +6,6 @@
 */
 
 #include "..\inc\DoCreateWallet.h"
-
 #include <string>
 #include <cstring>
 #include <sys/stat.h>
@@ -59,7 +58,7 @@ Error_E DoCreateWallet::CreateWalletFile()
 						defaultAmount_m);
 		return WRITE_TO_FILE;
 	}
-	
+	walletFile << "\n";
 	// closing the file
 	walletFile.close();
 	//printing the wallet created message
@@ -175,8 +174,7 @@ std::string DoCreateWallet::RemoveStartingZeroes()
 	{
 		sign = defaultAmount_m[0];
 		start = 1;
-	}
-	i = start;
+		i = start;
 	// counting the start 0's
 	while (defaultAmount_m[i] == '0')
 	{
@@ -199,9 +197,49 @@ std::string DoCreateWallet::RemoveStartingZeroes()
 	else 
 	{
 		defaultAmount_m = 
-					defaultAmount_m.substr (i,defaultAmount_m.length()-i);
+					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
 	}
-	defaultAmount_m =sign+defaultAmount_m;
+	if (defaultAmount_m != "0") 
+	{
+		return defaultAmount_m = sign + defaultAmount_m;
+	}else return "0";
 	
+	//return defaultAmount_m;
+	}else 
+		{
+		start = 0;
+		i = start;
+		// counting the start 0's
+		while (defaultAmount_m[i] == '0')
+		{
+			++i;
+		}
+		// case : 000.7
+		if ((defaultAmount_m[i] == '.') && (i < defaultAmount_m.length()))
+		{
+			defaultAmount_m = 
+					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
+
+		}//case : 001
+		else if (i < defaultAmount_m.length())
+		{
+			defaultAmount_m = 
+					defaultAmount_m.substr (i,defaultAmount_m.length()-i);
+		
+		}
+		//case: 0000
+		else 
+		{
+			defaultAmount_m = 
+					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
+		}
+			//defaultAmount_m =sign+defaultAmount_m;
+			//return defaultAmount_m;		
+		}
+		if (defaultAmount_m != "0") 
+		{
+			defaultAmount_m = "+" + defaultAmount_m;
+		}
+		
 	return defaultAmount_m;
 }

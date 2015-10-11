@@ -9,7 +9,6 @@
 
 #include "..\inc\PrintError.h"
 #include "..\inc\Types.h"
-
 #include <iostream>
 		
 void PrintError::Print(Error_E error, 
@@ -19,37 +18,43 @@ void PrintError::Print(Error_E error,
 	switch (error)
 	{
 		case WRITE_TO_FILE:
-			std::cout 	<< "\n error while writing " 
+			std::cout 	<<"error while writing " 
 						<< defaultAmount_m 
 						<< " to wallet "
-						<< walletName_m;
+						<< walletName_m
+						<< "\n";
 		break;
 		case WALLET_ALREADY_EXISTS:
-			std::cout 	<< "\n error: wallet "
+			std::cout 	<<"error: wallet "
 						<< walletName_m
-						<< " already exists";	
+						<< " already exists!"	
+						<< "\n";
 		break;
 		case CREATE_NAME_MISSING:
-			std::cout	<< "\n error: at least filename"
-						<< " should be specified.";
+			std::cout	<<"error: at least filename"
+						<< " should be specified."
+						<< "\n";
 		break;			
 		case CREATE_INITIAL_AMMOUNT_INVALID:
-			std::cout 	<< "\n error: "
+			std::cout 	<<"error: "
 						<< defaultAmount_m 
 						<< " is not a valid initial ammount."
-						<< "\n Creating " 
+						<< "\n"
+						<<"Creating " 
 						<< walletName_m
-						<< " aborted.";
+						<< " aborted."
+						<< "\n";
 		break;
 		case PATH_DOES_NOT_EXIST:
-			std::cout 	<< "\n error : The given path doesn't exist";
+			std::cout 	<<"error : The given path doesn't exist"
+						<< "\n";
 		break;
 		case CREATE_WALLET_MESSAGE:
-			std::cout 	<< "\n" 
-						<< walletName_m 
+			std::cout 	<< walletName_m 
 						<< " created with the initial amount of "
 						<< defaultAmount_m
-						<< " RON";
+						<< " RON"
+						<< "\n";
 		
 		break;
 	}

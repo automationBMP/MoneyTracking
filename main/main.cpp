@@ -1,17 +1,25 @@
+/*
+	Author: Andrei Martinescu
+	
+	This file contains main implementation for MoneyTracking application.
+		
+*/
+
 #include <iostream> 
 #include <cstring>
 #include "C:\learn\MoneyTracking\main\inc\DoCreateWallet.h" 
 #include "C:\learn\MoneyTracking\main\inc\ValidateCreate.h"
 #include "C:\learn\MoneyTracking\main\inc\MainFunctions.h"
+
 using namespace std;
 
 int main(int argc, char* argv[]) { 
 
 	// check if we have enough arguments
-	bool flag2=checkArgc(argc);
+	bool flag2 = CheckArgcNumbers(argc);
 	//cout << argc <<endl;
 	
-	if (flag2==true) 
+	if (flag2 == true) 
 	{	//check if we have 3 arguments
 		if (argc == 3) 
 		{
@@ -26,19 +34,19 @@ int main(int argc, char* argv[]) {
 				// convert =argv[2] in string
 				string 	stringArgumentNr3(argv[nrArg-1]);
 				// convert path
-				string convert = convertPath(stringArgumentNr3);
+				string convertP = ConvertPath(stringArgumentNr3);
 				//create object of class ValidateCreate
-				ValidateCreate validate(convert);
+				ValidateCreate validate(convertP);
 				//return bool if wallet exist
-				bool flag =validate.WalletExists();
+				bool flag = validate.WalletExists();
 				if (flag == false) 
 					{
 					//default amount = 00.00;
 					string amount = "+00.00";
 					//recreate path to initial 
-					string convert2 = convertPathToOriginal(convert);
+					string reconvert = ConvertPathToOriginal(convertP);
 					//apeal function create new wallet with amount 00.00
-					DoCreateWallet newWallet(convert2,amount);
+					DoCreateWallet newWallet(reconvert, amount);
 					newWallet.CreateWalletFile();
 					}
 			
@@ -58,11 +66,11 @@ int main(int argc, char* argv[]) {
 					// convert =argv[2] in string
 					string 	stringArgumentNr3(argv[nrArg-1]);
 					// convert path
-					string convert = convertPath(stringArgumentNr3);
+					string convertP = ConvertPath(stringArgumentNr3);
 					// convert =argv[3] in string
 					string 	stringArgumentNr4(argv[nrArg]);
 					//create object of class ValidateCreate
-					ValidateCreate validate1(convert,stringArgumentNr4);
+					ValidateCreate validate1(convertP, stringArgumentNr4);
 					//cout << convert << endl;
 					//return bool if wallet exist
 					bool flag = validate1.WalletExists();
@@ -72,9 +80,10 @@ int main(int argc, char* argv[]) {
 						if (flag1 == true)
 						{
 							//recreate path to initial 
-							string convert2 = convertPathToOriginal(convert);
+							string reconvert = ConvertPathToOriginal(convertP);
 						    //apeal function create new wallet 
-							DoCreateWallet newWallet(convert2,stringArgumentNr4);
+							DoCreateWallet newWallet(reconvert, 
+														stringArgumentNr4);
 							newWallet.CreateWalletFile();
 						}
 					}						

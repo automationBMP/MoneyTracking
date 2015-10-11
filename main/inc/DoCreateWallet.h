@@ -25,7 +25,7 @@ private :
 	 std::string defaultAmount_m;
 public :
 	//constructor
-	DoCreateWallet( std::string walletName,  std::string defaultAmount);
+	DoCreateWallet(std::string walletName,  std::string defaultAmount);
 	// creating the wallet file and adding the default amount
 	Error_E CreateWalletFile();
 	//adding 2 decimals if needed
