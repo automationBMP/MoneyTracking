@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include "..\inc\PrintError.h"
+
 using namespace std;
 
 // implementation of constructor without amount
