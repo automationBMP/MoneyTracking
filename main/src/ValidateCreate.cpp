@@ -1,6 +1,6 @@
 // validate CreateWallet implementation 
 
-#include "..\inc\ValidateCreate.h"
+#include "..inc\ValidateCreate.h"
 #include <string>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -103,3 +103,4 @@ bool ValidateCreate::IsValidNumber()
 	
 	return isValid;
 }
+
