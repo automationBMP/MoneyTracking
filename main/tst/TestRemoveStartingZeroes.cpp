@@ -1,8 +1,8 @@
 #include "gtest/gtest.h" 
 
-#include "..\inc\PrintError.h"
-#include "..\inc\Types.h"
-#include "..\inc\DoCreateWallet.h"
+#include "PrintError.h"
+#include "Types.h"
+#include "DoCreateWallet.h"
 
 
 //Testing the removal of the zeros at the start of the number

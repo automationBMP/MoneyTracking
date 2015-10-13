@@ -7,9 +7,9 @@
 	
 #include "gtest/gtest.h" 
 
-#include "..\inc\PrintError.h"
-#include "..\inc\Types.h"
-#include "..\inc\DoCreateWallet.h"
+#include "PrintError.h"
+#include "Types.h"
+#include "DoCreateWallet.h"
 #include <cstring>
 
 

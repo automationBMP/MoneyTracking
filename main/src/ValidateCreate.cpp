@@ -1,12 +1,12 @@
 // validate CreateWallet implementation 
 
-#include "..\inc\ValidateCreate.h"
+#include "ValidateCreate.h"
 #include <string>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fstream>
 #include <iostream>
-#include "..\inc\PrintError.h"
+#include "PrintError.h"
 
 using namespace std;
 

@@ -6,7 +6,7 @@
 */
 
 #include "gtest/gtest.h" 
-#include "..\inc\MainFunctions.h"
+#include "MainFunctions.h"
 #include <cstring>
 
 // test if the ConvertPath function returns the corect convert path

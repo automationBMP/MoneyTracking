@@ -7,9 +7,9 @@
 
 #include <iostream> 
 #include <cstring>
-#include "C:\learn\MoneyTracking\main\inc\DoCreateWallet.h" 
-#include "C:\learn\MoneyTracking\main\inc\ValidateCreate.h"
-#include "C:\learn\MoneyTracking\main\inc\MainFunctions.h"
+#include "DoCreateWallet.h" 
+#include "ValidateCreate.h"
+#include "MainFunctions.h"
 
 using namespace std;
 

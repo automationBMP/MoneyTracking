@@ -6,7 +6,7 @@
 */
 
 #include "gtest/gtest.h"
-#include "C:\learn\MoneyTracking\main\inc\DoCreateWallet.h"
+#include "DoCreateWallet.h"
 #include <fstream>
 #include <string>
 

@@ -7,8 +7,8 @@
 	
 */
 
-#include "..\inc\PrintError.h"
-#include "..\inc\Types.h"
+#include "PrintError.h"
+#include "Types.h"
 #include <iostream>
 		
 void PrintError::Print(Error_E error, 

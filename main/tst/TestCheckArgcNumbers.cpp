@@ -6,7 +6,7 @@
 */
 
 #include "gtest/gtest.h" 
-#include "C:\learn\MoneyTracking\main\inc\MainFunctions.h"
+#include "MainFunctions.h"
 
 // test if we have enough arguments 
 

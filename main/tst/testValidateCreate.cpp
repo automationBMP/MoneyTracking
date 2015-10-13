@@ -1,6 +1,6 @@
 
 #include "gtest/gtest.h"
-#include "C:\learn\MoneyTracking\main\inc\ValidateCreate.h"
+#include "ValidateCreate.h"
 
 // tests if the a file exists with relative path
 TEST(FileExists, FileRelativePath)

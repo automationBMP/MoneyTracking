@@ -5,7 +5,7 @@
 		
 */
 
-#include "..\inc\MainFunctions.h"
+#include "MainFunctions.h"
 #include <cstring>
 #include <iostream>
 

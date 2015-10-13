@@ -1,7 +1,7 @@
 #miau 
 
 
-CPPFLAGS=-Wall
+CPPFLAGS=-Wall -Imain\inc
 
 GTEST_DIR=C:\gtest-1.7.0
 

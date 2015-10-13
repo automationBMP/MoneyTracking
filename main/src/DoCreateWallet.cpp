@@ -5,9 +5,9 @@
 	
 */
 
-#include "..\inc\DoCreateWallet.h"
-#include "..\inc\PrintError.h"
-#include "..\inc\Types.h"
+#include "DoCreateWallet.h"
+#include "PrintError.h"
+#include "Types.h"
 #include <string>
 #include <cstring>
 #include <sys/stat.h>

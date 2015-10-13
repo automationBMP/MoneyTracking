@@ -6,9 +6,9 @@
 */
 
 #include "gtest/gtest.h" 
-#include "..\inc\PrintError.h"
-#include "..\inc\Types.h"
-#include "C:\learn\MoneyTracking\main\inc\ValidateCreate.h"
+#include "PrintError.h"
+#include "Types.h"
+#include "ValidateCreate.h"
 
 //Testing if the number is a valid number
 //IsValidNumber tests
