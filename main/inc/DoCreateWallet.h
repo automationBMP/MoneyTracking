@@ -29,7 +29,7 @@ public :
 	// creating the wallet file and adding the default amount
 	Error_E CreateWalletFile();
 	//adding 2 decimals if needed
-	void AddDecimalsToDefaultAmount();
+	std::string AddDecimalsToDefaultAmount();
 	//removes any extra zero from the start of the number
 	std::string RemoveStartingZeroes();
 };

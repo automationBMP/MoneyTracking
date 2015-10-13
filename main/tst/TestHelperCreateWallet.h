@@ -12,9 +12,8 @@
 #include <fstream>
 #include <string>
 
-#include "DoCreateWallet.h"
-#include "..\inc\PrintError.h"
-#include "..\inc\Types.h"
+#include "C:\learn\MoneyTracking\main\inc\DoCreateWallet.h"
+
 
 using namespace std;
 

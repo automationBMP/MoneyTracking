@@ -6,6 +6,8 @@
 */
 
 #include "..\inc\DoCreateWallet.h"
+#include "..\inc\PrintError.h"
+#include "..\inc\Types.h"
 #include <string>
 #include <cstring>
 #include <sys/stat.h>
@@ -23,7 +25,10 @@ DoCreateWallet::DoCreateWallet( std::string walletName,
 
 Error_E DoCreateWallet::CreateWalletFile()
 {	
-	DoCreateWallet::AddDecimalsToDefaultAmount();
+	
+	string returnAmount=DoCreateWallet::AddDecimalsToDefaultAmount();
+	defaultAmount_m=returnAmount;
+	//DoCreateWallet::AddDecimalsToDefaultAmount)()
 	// creating and opening the file
 	ofstream walletFile(walletName_m.c_str());
 	//adding the sign if is missing
@@ -50,7 +55,7 @@ Error_E DoCreateWallet::CreateWalletFile()
 		DoCreateWallet::RemoveStartingZeroes();
 	}
 	// writing the initial amount in the wallet file
-	walletFile << defaultAmount_m << "  RON";
+	walletFile << defaultAmount_m << " RON";
 	if (!walletFile.good())
 	{
 		PrintError::Print(WRITE_TO_FILE,
@@ -68,20 +73,21 @@ Error_E DoCreateWallet::CreateWalletFile()
 	return ALL_GOOD;
 }
 
-void DoCreateWallet::AddDecimalsToDefaultAmount()
+string DoCreateWallet::AddDecimalsToDefaultAmount()
 {
-	
+
 	unsigned int pointPosition = 0;
 	int i = 0;
 	// searching for the position of the '.'
 	do
 	{
-		++i;
+		
 		if (defaultAmount_m[i] == '.')
 		{
 			pointPosition = i;
-			i = defaultAmount_m.length() + 1;
+			//i = defaultAmount_m.length() + 1;
 		}
+		++i;
 	}while (i < defaultAmount_m.length());
 	
 	// if no point is present
@@ -162,6 +168,7 @@ void DoCreateWallet::AddDecimalsToDefaultAmount()
 		defaultAmount_m = 
 				defaultAmount_m.substr(0,defaultAmount_m.length() - 1);
 	}
+	return defaultAmount_m;
 }
 
 // removing the 0's from the begining

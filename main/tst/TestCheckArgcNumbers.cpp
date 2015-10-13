@@ -61,7 +61,7 @@ TEST(CheckArgcNumbers,TestCase1_FalseNotEnoughArgc)
 {	
 	bool actual = CheckArgcNumbers(0);
 	bool expected = true;
-	ASSERT_EQ(expected,actual);
+	ASSERT_NE(expected,actual);
 }
 
 
