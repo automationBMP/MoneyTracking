@@ -18,7 +18,7 @@ bool CheckArgcNumbers(int argc)
 	
 		if (argc <= 2) 
 		{
-			cout << "error: at least filename should be specified. \n";
+			cout << "error: at least filename should be specified.\n";
 			flag =false;
 		}
 	return flag;	

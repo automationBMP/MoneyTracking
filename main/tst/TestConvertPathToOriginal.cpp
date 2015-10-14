@@ -14,7 +14,7 @@
 
 // tests for corect convert path expected , original path contains /
 //TestCase1
-TEST(ConvertPathToOriginal,TestCase1_CorectPathConversion)
+TEST(ConvertPathToOriginal,TestCase1_CorectPathConversion1)
 {	
 	std::string path = "C:/learn";
 	std::string actual = ConvertPathToOriginal(path);
@@ -22,7 +22,7 @@ TEST(ConvertPathToOriginal,TestCase1_CorectPathConversion)
 	ASSERT_EQ(expected,actual);
 }
 //TestCase2
-TEST(ConvertPathToOriginal,TestCase2_CorectPathConversion)
+TEST(ConvertPathToOriginal,TestCase2_CorectPathConversion1)
 {	
 	std::string path = "C:/learn/some.wallet";
 	std::string actual = ConvertPathToOriginal(path);
@@ -31,7 +31,7 @@ TEST(ConvertPathToOriginal,TestCase2_CorectPathConversion)
 }
 
 //TestCase3
-TEST(ConvertPathToOriginal,TestCase3_CorectPathConversion)
+TEST(ConvertPathToOriginal,TestCase3_CorectPathConversion1)
 {	
 	std::string path = "C://";
 	std::string actual = ConvertPathToOriginal(path);
@@ -43,7 +43,7 @@ TEST(ConvertPathToOriginal,TestCase3_CorectPathConversion)
 case \ is escape
 TestCase1
 */
-TEST(ConvertPath,TestCase1_CorectPathConversionEscape)
+TEST(ConvertPath,TestCase1_CorectPathConversionEscape1)
 {	
 	std::string path = "C:/learn";
 	std::string actual = ConvertPath(path);
@@ -51,7 +51,7 @@ TEST(ConvertPath,TestCase1_CorectPathConversionEscape)
 	ASSERT_NE(expected,actual);
 }
 //TestCase2
-TEST(ConvertPath,TestCase2_CorectPathConversionEscape)
+TEST(ConvertPath,TestCase2_CorectPathConversionEscape1)
 {	
 	std::string path = "C:/learn/some.wallet";
 	std::string actual = ConvertPath(path);
@@ -59,7 +59,7 @@ TEST(ConvertPath,TestCase2_CorectPathConversionEscape)
 	ASSERT_NE(expected,actual);
 }
 //TestCase3
-TEST(ConvertPath,TestCase3_CorectPathConversionEscape)
+TEST(ConvertPath,TestCase3_CorectPathConversionEscape1)
 {	
 	std::string path = "C://";
 	std::string actual = ConvertPath(path);
@@ -67,9 +67,9 @@ TEST(ConvertPath,TestCase3_CorectPathConversionEscape)
 	ASSERT_NE(expected,actual);
 }
 
-// tests for corect convert path expected , original path doesn't contains \
-//TestCase1
-TEST(ConvertPathToOriginal,TestCase1_CorectPathConversion1)
+/* tests for corect convert path expected , original path doesn't contains
+TestCase1 */
+TEST(ConvertPathToOriginal,TestCase1_CorectPathConversion11)
 {	
 	std::string path = "my.wallet";
 	std::string actual = ConvertPathToOriginal(path);

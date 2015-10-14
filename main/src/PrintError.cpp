@@ -55,6 +55,8 @@ void PrintError::Print(Error_E error,
 						<< defaultAmount_m
 						<< " RON"
 						<< "\n";
+		case ALL_GOOD:
+			std::cout	<< "";
 		
 		break;
 	}

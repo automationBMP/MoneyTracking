@@ -76,7 +76,7 @@ Error_E DoCreateWallet::CreateWalletFile()
 string DoCreateWallet::AddDecimalsToDefaultAmount()
 {
 
-	unsigned int pointPosition = 0;
+	int pointPosition = 0;
 	int i = 0;
 	// searching for the position of the '.'
 	do
@@ -88,7 +88,7 @@ string DoCreateWallet::AddDecimalsToDefaultAmount()
 			//i = defaultAmount_m.length() + 1;
 		}
 		++i;
-	}while (i < defaultAmount_m.length());
+	}while (i < (int)defaultAmount_m.length());
 	
 	// if no point is present
 	if (pointPosition == 0)
@@ -97,14 +97,14 @@ string DoCreateWallet::AddDecimalsToDefaultAmount()
 	}
 	
 	//if the '.' is the last character
-	if (pointPosition == defaultAmount_m.length() - 1)
+	if (pointPosition == (int)defaultAmount_m.length() - 1)
 	{
 		defaultAmount_m += "00";
 		//cout << defaultAmount_m << endl;
 		
 	}
 	//if one decimal exists after the '.' character
-	if (pointPosition == defaultAmount_m.length() - 2)
+	if (pointPosition == (int)defaultAmount_m.length() - 2)
 			{
 		defaultAmount_m += "0";
 		//cout << defaultAmount_m << endl;
@@ -112,7 +112,7 @@ string DoCreateWallet::AddDecimalsToDefaultAmount()
 	}
 	//if more then 2 decimals exists
 	
-	if (pointPosition == defaultAmount_m.length() - 4)
+	if (pointPosition == (int)defaultAmount_m.length() - 4)
 	{
 		unsigned int lastDecimal = defaultAmount_m[pointPosition + 3];
 		//cout << "\n lastDecimal = " << lastDecimal;
@@ -172,7 +172,7 @@ string DoCreateWallet::AddDecimalsToDefaultAmount()
 }
 
 // removing the 0's from the begining
-std::string DoCreateWallet::RemoveStartingZeroes()
+string DoCreateWallet::RemoveStartingZeroes()
 {
 	unsigned int start = 0, i = 0;
 	char sign ;

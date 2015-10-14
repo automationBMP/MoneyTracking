@@ -11,6 +11,7 @@ private:
 	// declaration of wallet name and amount
 	std::string walletName_m;
 	std::string amount_m;
+	ValidateCreate();
 
 public:
 	// constructor with no amount
