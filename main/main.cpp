@@ -16,9 +16,8 @@ using namespace std;
 int main(int argc, char* argv[]) { 
 
 	// check if we have enough arguments
-	bool flag2 = CheckArgcNumbers(argc);
-	//cout << argc <<endl;
-	
+	bool flag2 = CheckArgcNumbers(argc ,argv[1]);
+	//cout << argc <<endl;	
 	if (flag2 == true) 
 	{	//check if we have 3 arguments
 		if (argc == 3) 
@@ -48,6 +47,7 @@ int main(int argc, char* argv[]) {
 					//apeal function create new wallet with amount 00.00
 					DoCreateWallet newWallet(reconvert, amount);
 					newWallet.CreateWalletFile();
+				//	newWallet.AddLineInWalletFile("+200","income");
 					}
 			
 			}

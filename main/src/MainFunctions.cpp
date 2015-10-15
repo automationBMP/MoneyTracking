@@ -12,14 +12,23 @@
 using namespace std ;
 
 // function for testing if we have enough arguments
-bool CheckArgcNumbers(int argc)
+bool CheckArgcNumbers(int argc ,string argument)
 {
 	bool flag = true ;
-	
-		if (argc <= 2) 
+	if ((argument == "create")&&(argc==2))
 		{
 			cout << "error: at least filename should be specified.\n";
 			flag =false;
+		}
+	else if ((argument == "income")&&(argc==2))
+		{
+			cout << "error: no ammount specified for 'income'.\n";
+			flag =false;		
+		}
+	else if ((argument == "spend")&&(argc==2))
+		{
+			cout << "error: no ammount specified for 'spend'.\n";
+			flag =false;		
 		}
 	return flag;	
 }
@@ -50,6 +59,28 @@ string ConvertPathToOriginal(string givenPath)
 	}
 return givenPath;	
 } 
+
+/*
+string AddInWallet(string amount , string ArgNr2 )
+{
+	string printline;
+	if (amount[0] == '+' || amount[0] != '-')
+	{
+		amount = amount.substr(1,amount.length()-1);
+	}
+	
+	if (ArgNr2 == "income") 
+	{
+		printline += printline + ";" + "+" + ";" 
+		+ amount +";" +"salary" + ";"+ "RON";
+	}
+	else if (ArgNr2 == "spending") 
+		{
+			printline += printline+";" + "-" + ";" + amount +";" +"other" + ";"+ "RON";
+		}
+	
+	return printline;
+}*/
 
 /* function return fileName from path for future feature's
 string FileName(string givenPath)

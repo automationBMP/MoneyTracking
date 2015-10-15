@@ -36,9 +36,9 @@ bool ValidateCreate::WalletExists()
 	if (f.good())
 	{
 		// print error if wallet exists
-		PrintError::Print(WALLET_ALREADY_EXISTS,
+		/*PrintError::Print(WALLET_ALREADY_EXISTS,
 						walletName_m,
-						amount_m);
+						amount_m);*/
 		/*cout << "error: wallet " 
 			 << walletName 
 			 << " already exists! ";*/

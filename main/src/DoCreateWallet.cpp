@@ -14,6 +14,7 @@
 #include <unistd.h> 
 #include <fstream>
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 
@@ -63,8 +64,8 @@ Error_E DoCreateWallet::CreateWalletFile()
 						defaultAmount_m);
 		return WRITE_TO_FILE;
 	}
-	walletFile << "\n";
 	// closing the file
+	walletFile << endl;
 	walletFile.close();
 	//printing the wallet created message
 	PrintError::Print(CREATE_WALLET_MESSAGE,
@@ -72,6 +73,49 @@ Error_E DoCreateWallet::CreateWalletFile()
 						defaultAmount_m);
 	return ALL_GOOD;
 }
+
+Error_E DoCreateWallet::AddLineInWalletFile(string amount , string ArgNr2)
+{
+	time_t result = time(0);
+	string printline;
+	if (amount[0] == '+' || amount[0] != '-')
+		{
+		amount = amount.substr(1,amount.length()-1);
+		}
+	
+	if (ArgNr2 == "income") 
+		{
+			printline += printline + ";" + "+" + ";" 				
+									+ amount +";" +"salary" + ";"+ "RON";
+		}
+	else if (ArgNr2 == "spending") 
+		{
+			printline += printline+";" + "-" + ";" 
+								 + amount +";" +"other" + ";"+ "RON";
+		}
+	ofstream myfile (walletName_m.c_str(),ios::app);
+	if (myfile.is_open())
+	{
+	myfile << result;
+	myfile << printline;
+	myfile << endl;
+    myfile.close();
+  }
+	
+	
+	/*if (walletFile.good())
+	{
+		
+	
+	
+	walletFile.close();
+	}*/
+	else PrintError::Print(WRITE_TO_FILE,
+						walletName_m,
+						defaultAmount_m);
+		return WRITE_TO_FILE;
+}
+
 
 string DoCreateWallet::AddDecimalsToDefaultAmount()
 {

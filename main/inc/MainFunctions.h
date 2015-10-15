@@ -4,7 +4,7 @@
 
 
 // validate nr of arguments return true if we have enough arguments
-bool CheckArgcNumbers(int argc);
+bool CheckArgcNumbers(int argc,std::string argument);
 
 // convert path  Ex: C:\learn in C:/learn for validating 
 // returns the convert path

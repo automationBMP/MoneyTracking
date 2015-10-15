@@ -14,21 +14,21 @@
 //TestCase1
 TEST(CheckArgcNumbers,TestCase1_NotEnoughArgc)
 {	
-	bool actual = CheckArgcNumbers(0);
+	bool actual = CheckArgcNumbers(0,"create");
 	bool expected = false;
 	ASSERT_EQ(expected,actual);
 }
 //TestCase2
 TEST(CheckArgcNumbers,TestCase2_NotEnoughArgc)
 {	
-	bool actual = CheckArgcNumbers(1);
+	bool actual = CheckArgcNumbers(1,"create");
 	bool expected = false;
 	ASSERT_EQ(expected,actual);
 }
 //TestCase3
 TEST(CheckArgcNumbers,TestCase3_NotEnoughArgc)
 {	
-	bool actual = CheckArgcNumbers(2);
+	bool actual = CheckArgcNumbers(2,"create");
 	bool expected = false;
 	ASSERT_EQ(expected,actual);
 }
@@ -37,21 +37,21 @@ TEST(CheckArgcNumbers,TestCase3_NotEnoughArgc)
 //TestCase1
 TEST(CheckArgcNumbers,TestCase1_EnoughArgc)
 {	
-	bool actual = CheckArgcNumbers(3);
+	bool actual = CheckArgcNumbers(3,"create");
 	bool expected = true;
 	ASSERT_EQ(expected,actual);
 }
 //TestCase2
 TEST(CheckArgcNumbers,TestCase2_EnoughArgc)
 {	
-	bool actual = CheckArgcNumbers(4);
+	bool actual = CheckArgcNumbers(4,"create");
 	bool expected = true;
 	ASSERT_EQ(expected,actual);
 }
 //TestCase3
 TEST(CheckArgcNumbers,TestCase3_EnoughArgc)
 {	
-	bool actual = CheckArgcNumbers(5);
+	bool actual = CheckArgcNumbers(5,"create");
 	bool expected = true;
 	ASSERT_EQ(expected,actual);
 }
@@ -59,7 +59,7 @@ TEST(CheckArgcNumbers,TestCase3_EnoughArgc)
 //false test
 TEST(CheckArgcNumbers,TestCase1_FalseNotEnoughArgc)
 {	
-	bool actual = CheckArgcNumbers(0);
+	bool actual = CheckArgcNumbers(0,"create");
 	bool expected = true;
 	ASSERT_NE(expected,actual);
 }
