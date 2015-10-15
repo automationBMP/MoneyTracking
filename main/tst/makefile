@@ -25,7 +25,8 @@ HEADERS = \
 	$(INC_DIR)\ValidateCreate.h \
 	$(INC_DIR)\PrintError.h \
 	$(INC_DIR)\Types.h \
-	$(INC_DIR)\MainFunctions.h
+	$(INC_DIR)\MainFunctions.h \
+	$(INC_DIR)\ReadConfig.h
 
 TST_OBJECTS=\
 	TestRemoveStartingZeroes.o \
@@ -41,7 +42,8 @@ SRC_OBJECTS=\
 	$(SRC_DIR)\DoCreateWallet.o\
 	$(SRC_DIR)\ValidateCreate.o\
 	$(SRC_DIR)\PrintError.o\
-	$(SRC_DIR)\MainFunctions.o
+	$(SRC_DIR)\MainFunctions.o\
+	$(SRC_DIR)\ReadConfig.o
 
 all: test.a test.exe
 	
@@ -123,6 +125,9 @@ TestAddDecimalsToDefaultAmount.o: TestAddDecimalsToDefaultAmount.cpp $(HEADERS)
 
 ..\src\MainFunctions.o:
 	$(MAKE) -c ..\src\MainFunctions.o
+
+..\src\ReadConfig.o:
+	$(MAKE) -c ..\src\ReadConfig.o
 	
 #TestRemoveStartingZeroes.exe: TestRemoveStartingZeroes
 	#TestRemoveStartingZeroes.exe

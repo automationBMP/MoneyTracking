@@ -13,7 +13,8 @@ HEADERS = \
 	main\inc\DoCreateWallet.h \
 	main\inc\ValidateCreate.h \
 	main\inc\MainFunctions.h \
-	main\inc\Types.h
+	main\inc\Types.h \
+	main\inc\ReadConfig.h 
 
 #TEST_OBJECTS=\
 #	main\tst\TestRemoveStartingZeroes.o \
@@ -42,7 +43,7 @@ moneytracker.exe: mymain main\src\src.a
 	g++ -o moneytracker.exe main\main.o main\src\src.a
 
 mymain: main\main.cpp $(HEADERS)
-	$(CPP) -o main\main.o -c main\main.cpp $(INCLUDES)	
+	$(CPP) -o main\main.o -c main\main.cpp $(INCLUDES)
 
 test:
 	$(MAKE) -C main\tst test.exe
@@ -54,3 +55,4 @@ clean:
 	$(MAKE) -C main\src clean
 	$(MAKE) -C main\tst clean
 	$(RM) moneytracker.exe
+	$(RM) main\main.o

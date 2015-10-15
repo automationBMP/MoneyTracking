@@ -1,3 +1,5 @@
+//Co-authors - Andreea Stan, Tudor Chibulcutean, v0.2
+
 // validate CreateWallet implementation 
 
 #include "ValidateCreate.h"

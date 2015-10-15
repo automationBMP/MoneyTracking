@@ -1,3 +1,5 @@
+//Co-authors - Andreea Stan, Tudor Chibulcutean v0.1
+
 // validate Create Wallet function
 
 #ifndef VALIDATECREATE_H
