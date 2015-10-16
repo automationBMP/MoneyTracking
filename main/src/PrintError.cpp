@@ -55,6 +55,28 @@ void PrintError::Print(Error_E error,
 						<< defaultAmount_m
 						<< " RON"
 						<< "\n";
+		break;				
+		case AMOUNT_NOT_POSITIVE:
+			std::cout	<< "error: "
+						<< defaultAmount_m
+						<< " should be higher than 0"
+						<< ".\n";
+		break;
+		case NO_DEFAULT_WALLET:
+			std::cout	<< "error: no default wallet "
+						<< "configured in 'moneytracker.config'"
+						<< "\n";
+		break;
+		case COULD_NOT_OPEN_CONFIG:
+			std::cout	<< "error: could not open configuration "
+					    << "'moneytracker.config'"
+						<< "\n";
+		break;
+		case SHOULD_BE_POSITIVE:
+			std::cout	<< "error: parameter for 'income' "
+						<< "should be a positive number"
+						<< "\n";
+		break;
 		case ALL_GOOD:
 			std::cout	<< "";
 		

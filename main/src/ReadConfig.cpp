@@ -10,13 +10,13 @@
 std::string ReadConfig::ReturnFileasString()
 {
 	//read moneytracker.config file
-	std::ifstream ifs("C:\\learn\\MoneyTracking\\moneytracker.config");
+	std::ifstream ifs("moneytracker.config");
 	
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
 	
-	std::cout << content <<std::endl;
+	//std::cout << content <<std::endl;
 	return content;
 }
 
