@@ -77,6 +77,22 @@ void PrintError::Print(Error_E error,
 						<< "should be a positive number"
 						<< "\n";
 		break;
+		case NO_AMOUNT_SPECIFIED_FOR_INCOME:
+			std::cout	<< "error: no ammount specified for 'income'."
+						<< "\n";
+		break;
+		case NO_AMOUNT_SPECIFIED_FOR_SPEND:
+			std::cout	<< "error: no ammount specified for 'spend'."
+						<< "\n";
+		break;
+		case COULD_NOT_OPEN_PATH:
+			std::cout	<< "error: could not open "
+						<< "'"
+						<< walletName_m
+						<< "'"
+						<< " to register transaction"
+						<< "\n";
+		break;
 		case ALL_GOOD:
 			std::cout	<< "";
 		

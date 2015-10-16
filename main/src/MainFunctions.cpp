@@ -8,6 +8,8 @@
 #include "MainFunctions.h"
 #include <cstring>
 #include <iostream>
+#include "Types.h"
+#include "PrintError.h"
 
 using namespace std ;
 
@@ -15,19 +17,25 @@ using namespace std ;
 bool CheckArgcNumbers(int argc ,string argument)
 {
 	bool flag = true ;
-	if ((argument == "create")&&(argc==2))
+	if ((argument == "create")&&(argc<=2))
 		{
-			cout << "error: at least filename should be specified.\n";
+			//cout << "error: at least filename should be specified.\n";
+			PrintError::Print(CREATE_NAME_MISSING,
+											"create", "+00.00");
 			flag =false;
 		}
-	else if ((argument == "income")&&(argc==2))
+	else if ((argument == "income")&&(argc<=2))
 		{
-			cout << "error: no ammount specified for 'income'.\n";
+			//cout << "error: no ammount specified for 'income'.\n";
+			PrintError::Print(NO_AMOUNT_SPECIFIED_FOR_INCOME,
+											"create", "+00.00");
 			flag =false;		
 		}
-	else if ((argument == "spend")&&(argc==2))
+	else if ((argument == "spend")&&(argc<=2))
 		{
-			cout << "error: no ammount specified for 'spend'.\n";
+			//cout << "error: no ammount specified for 'spend'.\n";
+			PrintError::Print(NO_AMOUNT_SPECIFIED_FOR_SPEND,
+											"create", "+00.00");
 			flag =false;		
 		}
 	return flag;	
@@ -59,29 +67,6 @@ string ConvertPathToOriginal(string givenPath)
 	}
 return givenPath;	
 } 
-
-/*
-string AddInWallet(string amount , string ArgNr2 )
-{
-	string printline;
-	if (amount[0] == '+' || amount[0] != '-')
-	{
-		amount = amount.substr(1,amount.length()-1);
-	}
-	
-	if (ArgNr2 == "income") 
-	{
-		printline += printline + ";" + "+" + ";" 
-		+ amount +";" +"salary" + ";"+ "RON";
-	}
-	else if (ArgNr2 == "spending") 
-		{
-			printline += printline+";" + "-" + ";" + amount +";" +"other" + ";"+ "RON";
-		}
-	
-	return printline;
-}*/
-
 /* function return fileName from path for future feature's
 string FileName(string givenPath)
 {  string fileName; 
