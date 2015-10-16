@@ -35,16 +35,16 @@ bool ValidateCreate::WalletExists()
     ifstream f(walletName.c_str());
 	
 	// check if wallet exists
-	if (f.good())
+	/*if (f.good())
 	{
 		// print error if wallet exists
-		/*PrintError::Print(WALLET_ALREADY_EXISTS,
+		PrintError::Print(WALLET_ALREADY_EXISTS,
 						walletName_m,
-						amount_m);*/
-		/*cout << "error: wallet " 
+						amount_m);
+		cout << "error: wallet " 
 			 << walletName 
 			 << " already exists! ";*/
-	}
+	//}
 	
 	// return if true wallet exists and false if it doesn't exist
 	return f.good();
@@ -69,7 +69,7 @@ bool ValidateCreate::IsValidNumber()
 	{
 		
 		//test each position to be in 0..9 interval
-		if(amount[position] < '9' && amount[position] >= '0')
+		if(amount[position] <= '9' && amount[position] >= '0')
 		{
 			isValid = true;
 		} 
@@ -84,7 +84,7 @@ bool ValidateCreate::IsValidNumber()
 			for(; position < amount.size(); position++)
 			{
 				//test each position after the '.' to be in 0..9 interval
-				if(amount[position] < '9' && amount[position] >= '0')
+				if(amount[position] <= '9' && amount[position] >= '0')
 				{
 					isValid = true;
 				} 

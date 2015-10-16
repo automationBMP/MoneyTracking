@@ -78,17 +78,18 @@ Error_E DoCreateWallet::AddLineInWalletFile(string amount , string ArgNr2)
 {
 	time_t result = time(0);
 	string printline;
-	if (amount[0] == '+' || amount[0] != '-')
+	if (amount[0] == '+')
 		{
 		amount = amount.substr(1,amount.length()-1);
 		}
+	else amount = amount.substr(0,amount.length());
 	
 	if (ArgNr2 == "income") 
 		{
 			printline += printline + ";" + "+" + ";" 				
 									+ amount +";" +"salary" + ";"+ "RON";
 		}
-	else if (ArgNr2 == "spending") 
+	else if (ArgNr2 == "spend") 
 		{
 			printline += printline+";" + "-" + ";" 
 								 + amount +";" +"other" + ";"+ "RON";
