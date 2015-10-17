@@ -10,6 +10,7 @@
 #include <iostream>
 #include "Types.h"
 #include "PrintError.h"
+#include <fstream>
 
 using namespace std ;
 
@@ -67,6 +68,18 @@ string ConvertPathToOriginal(string givenPath)
 	}
 return givenPath;	
 } 
+string ReturnFileasString()
+{
+	//read moneytracker.config file
+	std::ifstream ifs("moneytracker.config");
+	
+	//the content of moneytracker.config is transfered to string content
+    std::string content( (std::istreambuf_iterator<char>(ifs) ),
+                       (std::istreambuf_iterator<char>()    ) );
+	
+	//std::cout << content <<std::endl;
+	return content;
+}
 /* function return fileName from path for future feature's
 string FileName(string givenPath)
 {  string fileName; 

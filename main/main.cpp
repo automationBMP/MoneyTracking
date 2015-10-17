@@ -6,7 +6,7 @@
 */
 
 #include <iostream> 
-#include <cstring>
+#include <string>
 #include "DoCreateWallet.h" 
 #include "ValidateCreate.h"
 #include "MainFunctions.h"
@@ -120,9 +120,12 @@ int main(int argc, char* argv[])
 				//cout << amount <<endl;
 				
 				if (flag1 == true)
-					{	//create object class ReadConfig for apealing Getdefault Wallet
+					{	
+						//read config file
+						string contentConfigFile(ReturnFileasString());
+						//create object class ReadConfig for apealing Getdefault Wallet
 						ReadConfig getWallet;
-						string walletName = getWallet.GetDefaultWallet();
+						string walletName = getWallet.GetDefaultWallet(contentConfigFile);
 						if (walletName=="Error")
 						{
 							PrintError::Print(NO_DEFAULT_WALLET,

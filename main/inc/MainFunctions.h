@@ -14,4 +14,7 @@ std::string ConvertPath(std::string givenPath);
 // returns the original path
 std::string ConvertPathToOriginal(std::string givenPath);
 
+//function read config file
+// returns all content of file
+std::string ReturnFileasString();
 #endif

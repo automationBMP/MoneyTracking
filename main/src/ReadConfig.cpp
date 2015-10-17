@@ -2,23 +2,15 @@
 
 #include "ReadConfig.h"
 
-#include <fstream>
 #include <string>
 #include <iostream>
-
+/*
 //implementation of ReturnFileasString
 std::string ReadConfig::ReturnFileasString()
 {
 	//read moneytracker.config file
 	std::ifstream ifs("moneytracker.config");
-	/*if  (ifs.good()==true)
-	{
-		return "good";
-	}
-	else 
-	{
-		return "bad";
-	}*/
+	
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
@@ -26,12 +18,13 @@ std::string ReadConfig::ReturnFileasString()
 	//std::cout << content <<std::endl;
 	return content;
 }
-
+*/
 //implementation of GetDefaultWallet
-std::string ReadConfig::GetDefaultWallet()
+std::string ReadConfig::GetDefaultWallet(std::string contentConfigFile)
 {
 	//the value returned by ReturnFileasString is transfered to string content
-	std::string content = ReturnFileasString();
+	//std::string content = ReturnFileasString();
+	std::string content = contentConfigFile;
 	if (content.length()==0) 
 	{
 		// if content is zero than ifstream couldn't open config file
