@@ -20,8 +20,8 @@ class PrintError
 public :
 	//printing the desired error message
 	static void Print(Error_E error, 
-					std::string walletName_m,
-					std::string defaultAmount_m);
+					std::string const &walletName_m,
+					std::string const &defaultAmount_m);
 };
 
 

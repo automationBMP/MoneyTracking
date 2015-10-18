@@ -23,14 +23,14 @@ int main(int argc, char* argv[])
 	//cout << argc <<endl;	
 	if (flag2 == true) 
 	{
-	int nrArg = 2;
+	int const nrArg = 2;
 	// convert =argv[1] in string
 	string stringArgumentNr2(argv[nrArg-1]);
 	if (stringArgumentNr2 == "create")
 		{
 		if (argc == 3) 
 		{
-		int nrArg = 3;
+		int const nrArg = 3;
 			// convert =argv[2] in string
 			string 	stringArgumentNr3(argv[nrArg-1]);
 			// convert path
@@ -47,9 +47,7 @@ int main(int argc, char* argv[])
 			DoCreateWallet newWallet(reconvert, amount);
 			if (flag == false) 
 				{
-				
 				newWallet.CreateWalletFile();
-				//	newWallet.AddLineInWalletFile("+200","income");
 				}
 			else
 				{	
@@ -59,7 +57,7 @@ int main(int argc, char* argv[])
 		else if (argc >= 4) 
 			{
 					// pozition 3
-					int nrArg = 3;
+					int const nrArg = 3;
 					// convert =argv[2] in string
 					string 	stringArgumentNr3(argv[nrArg-1]);
 					// convert path
@@ -102,7 +100,7 @@ int main(int argc, char* argv[])
 			if (argc >= 3) 
 			{
 				// pozition 3
-				int nrArg = 3;
+				int const nrArg = 3;
 				// convert =argv[2] in string
 				string 	amount(argv[nrArg-1]);
 				//cout << amount <<endl;

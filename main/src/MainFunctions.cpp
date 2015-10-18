@@ -15,7 +15,7 @@
 using namespace std ;
 
 // function for testing if we have enough arguments
-bool CheckArgcNumbers(int argc ,string argument)
+bool CheckArgcNumbers(int const argc ,string const &argument)
 {
 	bool flag = true ;
 	if ((argument == "create")&&(argc<=2))
@@ -43,7 +43,7 @@ bool CheckArgcNumbers(int argc ,string argument)
 }
 
 //function for converting path  Ex: C:\learn in C:/learn for validating
-string ConvertPath(string givenPath)
+string ConvertPath(string &givenPath)
 {
 	for(unsigned int i = 0; i < givenPath.length(); i++)
 	{
@@ -57,7 +57,7 @@ return givenPath;
 } 
 
 //function for converting path to original
-string ConvertPathToOriginal(string givenPath)
+string ConvertPathToOriginal(string &givenPath)
 {
 	for(unsigned int i = 0; i < givenPath.length(); i++)
 	{

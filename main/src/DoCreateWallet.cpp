@@ -74,7 +74,7 @@ Error_E DoCreateWallet::CreateWalletFile()
 	return ALL_GOOD;
 }
 
-Error_E DoCreateWallet::AddLineInWalletFile(string amount , string ArgNr2)
+Error_E DoCreateWallet::AddLineInWalletFile(string &amount , string &ArgNr2)
 {
 	amount=DoCreateWallet::AddDecimalsToDefaultAmount();
 	defaultAmount_m=amount;
