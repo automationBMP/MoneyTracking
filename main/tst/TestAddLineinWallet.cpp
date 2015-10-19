@@ -10,18 +10,28 @@
 //using namespace std;
 
 // function to return wallet as string
- std::string ReturnWalletasString(DoCreateWallet wallet)
+ std::string ReturnWalletasString(DoCreateWallet &wallet)
 {
 	//read moneytracker.config file
-	std::ifstream ifs("WalletTest");
+	std::ifstream ifs("main\\tst\\WalletTestt");
 	
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
-	
+	//std::cout << content;
 	return content;
 }
-
+ std::string ReturnWalletasStringSpend(DoCreateWallet &wallet)
+{
+	//read moneytracker.config file
+	std::ifstream ifs("main\\tst\\WalletTesttt");
+	
+	//the content of moneytracker.config is transfered to string content
+    std::string content( (std::istreambuf_iterator<char>(ifs) ),
+                       (std::istreambuf_iterator<char>()    ) );
+	//std::cout << content;
+	return content;
+}
 // function to return time, sign, amount, category and currency
 /* std::string ReturnContent()
 {
@@ -33,16 +43,19 @@
 TEST(TestAddLineinWallet, Income)
 {
 	// Create Wallet
-	DoCreateWallet wallet("WalletTest","33");
+	DoCreateWallet wallet("main\\tst\\WalletTestt","-87");
 	wallet.CreateWalletFile();
 	
 	// Add Income
-	Error_E a = wallet.AddLineInWalletFile("+100", "income");
+	std::string amountt = "+100";
+	std::string choise = "income";
+	DoCreateWallet wallet1("main\\tst\\WalletTestt",amountt);
+	wallet1.AddLineInWalletFile(amountt, choise);
 	time_t result = time(0);
 	
 	// return wallet as string
 	std::string walletFile = ReturnWalletasString(wallet);
-	
+	//std::cout << "\n\n\n " << walletFile <<std::endl; 
 	// get the content of file without initial amount (first line)
 	walletFile = walletFile.substr(walletFile.find("\n") + 1, std::string::npos);
 	
@@ -67,10 +80,10 @@ TEST(TestAddLineinWallet, Income)
 	walletFile = walletFile.substr(walletFile.find(';') + 1, std::string::npos);
 	
 	// get the amount
-	std::string amount = walletFile.substr(0, walletFile.find(";"));
+	std::string amount1 = walletFile.substr(0, walletFile.find(";"));
 	
-	EXPECT_EQ("100", amount);
-	
+	EXPECT_EQ("100.00", amount1);
+	std::cout << walletFile ;
 	// get the content of file without epochTime and sign and amount
 	walletFile = walletFile.substr(walletFile.find(';') + 1, std::string::npos);
 	
@@ -94,16 +107,19 @@ TEST(TestAddLineinWallet, Income)
 TEST(TestAddLineInWallet, Spend)
 {
 	// Create Wallet
-	DoCreateWallet wallet("WalletTest","33");
+	DoCreateWallet wallet("main\\tst\\WalletTesttt","33");
 	wallet.CreateWalletFile();
 	
 	time_t result = time(0);
 	
 	// Add Spending
-	Error_E b = wallet.AddLineInWalletFile("+99", "spend");
+	std::string amountt = "+99";
+	std::string choise = "spend";
+	DoCreateWallet wallet1("main\\tst\\WalletTesttt",amountt);
+	wallet1.AddLineInWalletFile(amountt, choise);
 	
 	// return wallet as string
-	std::string walletFile = ReturnWalletasString(wallet);
+	std::string walletFile = ReturnWalletasStringSpend(wallet);
 	
 	// get the content of file without initial amount (first line)
 	walletFile = walletFile.substr(walletFile.find("\n") + 1, std::string::npos);
@@ -131,7 +147,7 @@ TEST(TestAddLineInWallet, Spend)
 	// get the amount
 	std::string amount = walletFile.substr(0, walletFile.find(";"));
 	
-	EXPECT_EQ("99", amount);
+	EXPECT_EQ("99.00", amount);
 	
 	// get the content of file without epochTime and sign and amount
 	walletFile = walletFile.substr(walletFile.find(';') + 1, std::string::npos);

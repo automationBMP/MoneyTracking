@@ -77,7 +77,9 @@ Error_E DoCreateWallet::CreateWalletFile()
 Error_E DoCreateWallet::AddLineInWalletFile(string &amount , string &ArgNr2)
 {
 	amount=DoCreateWallet::AddDecimalsToDefaultAmount();
-	defaultAmount_m=amount;
+	//cout << amount << endl;
+	defaultAmount_m = amount;
+	//cout << defaultAmount_m << endl;
 	time_t result = time(0);
 	char buffer [80];
 	struct tm *tmp;
