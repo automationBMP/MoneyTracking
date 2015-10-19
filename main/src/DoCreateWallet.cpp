@@ -82,7 +82,7 @@ Error_E DoCreateWallet::AddLineInWalletFile(string &amount , string &ArgNr2)
 	char buffer [80];
 	struct tm *tmp;
 	tmp = gmtime(&result);
-	strftime (buffer,80,"Transaction time: %a,%d %b %Y %X",tmp);
+	strftime (buffer,80,"Transaction time: %a, %d %b %Y %X",tmp);
 	string printline;
 	if (defaultAmount_m[0] == '+')
 		{

@@ -18,7 +18,7 @@ std::string ReturnFileAsStringHelper(std::ifstream &configFile)
 //Test 1 
 TEST(GetWalletName, NoDefaultWallet)
 {
-	std::ifstream configFile("ConfigFiles/no_default_wallet.config");
+	std::ifstream configFile("main\\tst\\ConfigFiles\\no_default_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	std::cout << "CONTINUUUT: " << content << std::endl;
 	ReadConfig wallet;
@@ -30,7 +30,7 @@ TEST(GetWalletName, NoDefaultWallet)
 //Test 2 
 TEST(GetWalletName, SpacesBeforeDefWallet)
 {
-	std::ifstream configFile("ConfigFiles/spaces_before_def_wallet.config");
+	std::ifstream configFile("main\\tst\\ConfigFiles\\spaces_before_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	std::cout << "CONTINUUUT: " << content << std::endl;
 	ReadConfig wallet;
@@ -42,7 +42,7 @@ TEST(GetWalletName, SpacesBeforeDefWallet)
 //Test 3 
 TEST(GetWalletName, SpacesAfterDefWallet)
 {
-	std::ifstream configFile("ConfigFiles/spaces_after_def_wallet.config");
+	std::ifstream configFile("main\\tst\\ConfigFiles\\spaces_after_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	ReadConfig wallet;
 	std::string actual = "mywallet";
@@ -53,7 +53,7 @@ TEST(GetWalletName, SpacesAfterDefWallet)
 //Test 4
 TEST(GetWalletName, EmptyAfterDefWallet)
 {
-	std::ifstream configFile("ConfigFiles/empty_after_def_wallet.config");
+	std::ifstream configFile("main\\tst\\ConfigFiles\\empty_after_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	std::cout << "CONTINUUUT: " << content << std::endl;
 	ReadConfig wallet;
@@ -65,7 +65,7 @@ TEST(GetWalletName, EmptyAfterDefWallet)
 //Test 5
 TEST(GetWalletName, EmptyAfterEqual)
 {
-	std::ifstream configFile("ConfigFiles/empty_after_equal.config");
+	std::ifstream configFile("main\\tst\\ConfigFiles\\empty_after_equal.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	std::cout << "CONTINUUUT: " << content << std::endl;
 	ReadConfig wallet;
@@ -77,7 +77,7 @@ TEST(GetWalletName, EmptyAfterEqual)
 //Test 6
 TEST(GetWalletName, MoreDefWallet)
 {
-	std::ifstream configFile("ConfigFiles/more_def_wallet.config");
+	std::ifstream configFile("main\\tst\\ConfigFiles\\more_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	ReadConfig wallet;
 	std::string actual = "mywallet";
@@ -88,7 +88,7 @@ TEST(GetWalletName, MoreDefWallet)
 //Test 7
 TEST(GetWalletName, NoConfig)
 {
-	std::ifstream configFile("ConfigFiles/no_config.config");
+	std::ifstream configFile("main\\tst\\ConfigFiles\\no_config.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	ReadConfig wallet;
 	std::string actual = "NoConfig";
