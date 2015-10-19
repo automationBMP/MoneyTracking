@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
 				if ((amount[0] == '-') || (amount[0] == '0')) 
 				{
 				 PrintError::Print(AMOUNT_NOT_POSITIVE,
-											"default_wallet", amount);
+											stringArgumentNr2, amount);
 				}
 				else 
 				{			   

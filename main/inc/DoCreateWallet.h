@@ -20,9 +20,9 @@ class DoCreateWallet
 {
 private :
 	// the name of the wallet
-	 std::string &walletName_m;
+	 std::string walletName_m;
 	// the default amount to be added to the wallet
-	 std::string &defaultAmount_m;
+	 std::string defaultAmount_m;
 public :
 	//constructor
 	DoCreateWallet(std::string walletName,  std::string defaultAmount);

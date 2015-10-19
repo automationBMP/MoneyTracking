@@ -58,7 +58,7 @@ void PrintError::Print(Error_E error,
 		break;				
 		case AMOUNT_NOT_POSITIVE:
 			std::cout	<< "error: "
-						<< defaultAmount_m
+						<< walletName_m
 						<< " should be higher than 0"
 						<< ".\n";
 		break;
