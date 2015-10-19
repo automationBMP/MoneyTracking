@@ -16,17 +16,6 @@ HEADERS = \
 	main\inc\Types.h \
 	main\inc\ReadConfig.h 
 
-#TEST_OBJECTS=\
-#	main\tst\TestRemoveStartingZeroes.o \
-#	main\tst\TestIsValidNumber.o \
-#	main\tst\TestCheckArgcNumbers.o \
-#	main\tst\TestConvertPath.o \
-#	main\tst\TestConvertPathToOriginal.o \
-#	main\tst\TestValidateCreate.o \
-#	main\tst\TestCreateWallet.o \
-#	main\tst\TestAddDecimalsToDefaultAmount.o 
-
-
 
 #first target, reached when calling make without a target
 moneytracker:

@@ -123,16 +123,3 @@ TEST(CheckArgcNumbers,TestCase2_EnoughArgcSpend)
 	bool expected = true;
 	EXPECT_EQ(expected,actual);
 }
-
-/*//false test
-TEST(CheckArgcNumbers,TestCase1_FalseNotEnoughArgc)
-{	
-	bool actual = CheckArgcNumbers(0,"create");
-	bool expected = true;
-	EXPECT_NE(expected,actual);
-}
-*/
-
-
-
-

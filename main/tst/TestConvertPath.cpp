@@ -39,11 +39,8 @@ TEST(ConvertPath,TestCase3_CorectPathConversion)
 	std::string expected = "C://";
 	EXPECT_EQ(expected,actual);
 }
-
- 
-
+// test case if path is with / 
 //TestCase1
-
  TEST(ConvertPath,TestCase1_CorectPathConversionEscape)
 {	
 	std::string path = "C:/learn";
@@ -59,14 +56,6 @@ TEST(ConvertPath,TestCase3_CorectPathConversion)
 	std::string expected = "C:/learn/some.wallet";
 	EXPECT_EQ(expected,actual);
 } 
-//TestCase3
-TEST(ConvertPath,TestCase3_CorectPathConversionEscape)
-{	
-	std::string path = "C:\\";
-	std::string actual = ConvertPath(path);
-	std::string expected = "C:/";
-	EXPECT_EQ(expected,actual);
-}
 
 /* tests for corect convert path expected , original path doesn't contains \
 TestCase1
@@ -78,6 +67,3 @@ TEST(ConvertPath,TestCase1_CorectPathConversion1)
 	std::string expected = "my.wallet";
 	EXPECT_EQ(expected,actual);
 }
-
-
-

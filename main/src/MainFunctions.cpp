@@ -6,7 +6,7 @@
 */
 
 #include "MainFunctions.h"
-#include <cstring>
+#include <string>
 #include <iostream>
 #include "Types.h"
 #include "PrintError.h"
@@ -76,29 +76,5 @@ string ReturnFileasString()
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
-	
-	//std::cout << content <<std::endl;
 	return content;
 }
-/* function return fileName from path for future feature's
-string FileName(string givenPath)
-{  string fileName; 
-
-	for(unsigned int i = givenPath.length(); i >0; i--)
-	{
-		if(givenPath[i] == '/')
-		{	
-			for (unsigned int j = i+1; j < givenPath.length(); j++)
-			{	
-			fileName+=givenPath[j];
-			}
-			break;
-			//cout << fileName;
-		}
-	}
-	return fileName;
-	
-//return givenPath;	
-	
-}*/
-

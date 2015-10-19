@@ -15,12 +15,12 @@ TEST(FileExists, FileRelativePath)
 // tests if the a file exists with absolute path
 TEST(FileExists, FileAbsolutePath)
 {
-	ValidateCreate validate("C:\\learn\\MoneyTracking\\main\\tst\\TestValidateCreate.cpp");
+	ValidateCreate validate("main\\tst\\TestValidateCreate.cpp");
 	EXPECT_TRUE(validate.WalletExists());
 	
-	ValidateCreate validate2("C:\\learn\\MoneyTracking\\main\\tst\\missingFile");
+	ValidateCreate validate2("main\\tst\\missingFile");
 	EXPECT_FALSE(validate2.WalletExists());
 	
-	ValidateCreate validate3("C:\\learn\\MoneyTracking\\main\\tst\\src\\TestValidateCreate.cpp");
+	ValidateCreate validate3("main\\tst\\src\\TestValidateCreate.cpp");
 	EXPECT_FALSE(validate3.WalletExists());
 }

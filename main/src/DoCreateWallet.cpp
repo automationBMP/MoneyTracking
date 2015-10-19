@@ -9,7 +9,6 @@
 #include "PrintError.h"
 #include "Types.h"
 #include <string>
-#include <cstring>
 #include <sys/stat.h>
 #include <unistd.h> 
 #include <fstream>
@@ -26,10 +25,9 @@ DoCreateWallet::DoCreateWallet( std::string walletName,
 
 Error_E DoCreateWallet::CreateWalletFile()
 {	
-	
+	//apeal function add decimals
 	string returnAmount=DoCreateWallet::AddDecimalsToDefaultAmount();
 	defaultAmount_m=returnAmount;
-	//DoCreateWallet::AddDecimalsToDefaultAmount)()
 	// creating and opening the file
 	ofstream walletFile(walletName_m.c_str());
 	//adding the sign if is missing
@@ -74,39 +72,42 @@ Error_E DoCreateWallet::CreateWalletFile()
 	return ALL_GOOD;
 }
 
-Error_E DoCreateWallet::AddLineInWalletFile(string &amount , string &ArgNr2)
-{
+Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2)
+{	
+	//apeal function add decimals
 	amount=DoCreateWallet::AddDecimalsToDefaultAmount();
-	//cout << amount << endl;
 	defaultAmount_m = amount;
-	//cout << defaultAmount_m << endl;
+	//create variable for epoch time
 	time_t result = time(0);
+	//converting epoch time in text
 	char buffer [80];
 	struct tm *tmp;
 	tmp = gmtime(&result);
 	strftime (buffer,80,"Transaction time: %a, %d %b %Y %X",tmp);
 	string printline;
+	//check if we have sign + before number
 	if (defaultAmount_m[0] == '+')
 		{
 		defaultAmount_m = defaultAmount_m.substr(1,defaultAmount_m.length()-1);
 		}
 	else defaultAmount_m = defaultAmount_m.substr(0,defaultAmount_m.length());
-	
+	// if argument ArgNr2 is income 
 	if (ArgNr2 == "income") 
 		{	
 			cout << "Income 'salary' in an amount of " 
-			    << defaultAmount_m << " RON was registered." << endl;
-			cout << buffer <<" GMT" <<endl;
+			     << defaultAmount_m << " RON was registered." << endl;
+			cout << buffer << " GMT" << endl;
 			printline += printline + ";" + "+" + ";" 				
-									+ defaultAmount_m +";" +"salary" + ";"+ "RON";
+					     + defaultAmount_m +";" +"salary" + ";"+ "RON";
 		}
+	// if argument ArgNr2 is spend
 	else if (ArgNr2 == "spend") 
 		{
 			cout << "Spending 'other' in an amount of " 
-			    << defaultAmount_m << " RON was registered." << endl;
-			cout << buffer <<" GMT" <<endl;
+			     << defaultAmount_m << " RON was registered." << endl;
+			cout << buffer << " GMT" << endl;
 			printline += printline+";" + "-" + ";" 
-								 + defaultAmount_m +";" +"other" + ";"+ "RON";
+						 + defaultAmount_m +";" +"other" + ";"+ "RON";
 		}
 	ofstream myfile (walletName_m.c_str(),ios::app);
 	if (myfile.is_open())
@@ -115,66 +116,60 @@ Error_E DoCreateWallet::AddLineInWalletFile(string &amount , string &ArgNr2)
 	myfile << printline;
 	myfile << endl;
     myfile.close();
-  }
-	
-	
+	}
 	/*if (walletFile.good())
-	{
-		
-	
-	
+	{	
 	walletFile.close();
 	}
 	else PrintError::Print(WRITE_TO_FILE,
 						walletName_m,
 						defaultAmount_m);*/
-		return ALL_GOOD;
+	return ALL_GOOD;
 }
 
 
 string DoCreateWallet::AddDecimalsToDefaultAmount()
 {
 
-	int pointPosition = 0;
+	int pointPosition = -1;
 	int i = 0;
 	// searching for the position of the '.'
 	do
 	{
-		
 		if (defaultAmount_m[i] == '.')
 		{
 			pointPosition = i;
-			//i = defaultAmount_m.length() + 1;
+			i = defaultAmount_m.length() + 1;
 		}
 		++i;
 	}while (i < (int)defaultAmount_m.length());
 	
 	// if no point is present
-	if (pointPosition == 0)
+	if (pointPosition == -1)
 	{
 		defaultAmount_m += ".00";
 	}
+	// if point is first caracter
+	/*if (pointPosition == 0)
+	{
+		defaultAmount_m = "0" + defaultAmount_m;
+	}*/
 	
 	//if the '.' is the last character
 	if (pointPosition == (int)defaultAmount_m.length() - 1)
 	{
-		defaultAmount_m += "00";
-		//cout << defaultAmount_m << endl;
-		
+		defaultAmount_m += "00";		
 	}
 	//if one decimal exists after the '.' character
 	if (pointPosition == (int)defaultAmount_m.length() - 2)
-			{
+	{
 		defaultAmount_m += "0";
-		//cout << defaultAmount_m << endl;
-		
 	}
 	//if more then 2 decimals exists
 	
 	if (pointPosition == (int)defaultAmount_m.length() - 4)
 	{
 		unsigned int lastDecimal = defaultAmount_m[pointPosition + 3];
-		//cout << "\n lastDecimal = " << lastDecimal;
 		defaultAmount_m[defaultAmount_m.length() - 1] = ' ';
 		i = pointPosition + 2;
 		
@@ -241,40 +236,6 @@ string DoCreateWallet::RemoveStartingZeroes()
 		sign = defaultAmount_m[0];
 		start = 1;
 		i = start;
-	// counting the start 0's
-	while (defaultAmount_m[i] == '0')
-	{
-		++i;
-	}
-	// case : 000.7
-	if ((defaultAmount_m[i] == '.') && (i < defaultAmount_m.length()))
-	{
-		defaultAmount_m = 
-					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
-
-	}//case : 001
-	else if (i < defaultAmount_m.length())
-	{
-		defaultAmount_m = 
-					defaultAmount_m.substr (i,defaultAmount_m.length()-i);
-		
-	}
-	//case: 0000
-	else 
-	{
-		defaultAmount_m = 
-					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
-	}
-	if (defaultAmount_m != "0") 
-	{
-		return defaultAmount_m = sign + defaultAmount_m;
-	}else return "0";
-	
-	//return defaultAmount_m;
-	}else 
-		{
-		start = 0;
-		i = start;
 		// counting the start 0's
 		while (defaultAmount_m[i] == '0')
 		{
@@ -284,28 +245,59 @@ string DoCreateWallet::RemoveStartingZeroes()
 		if ((defaultAmount_m[i] == '.') && (i < defaultAmount_m.length()))
 		{
 			defaultAmount_m = 
-					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
+				defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
 
-		}//case : 001
+		}
+		//case : 001
 		else if (i < defaultAmount_m.length())
 		{
 			defaultAmount_m = 
-					defaultAmount_m.substr (i,defaultAmount_m.length()-i);
-		
+				defaultAmount_m.substr (i,defaultAmount_m.length()-i);
 		}
 		//case: 0000
 		else 
 		{
 			defaultAmount_m = 
-					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
+				defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
 		}
-			//defaultAmount_m =sign+defaultAmount_m;
-			//return defaultAmount_m;		
+		if (defaultAmount_m != "0") 
+		{
+		return defaultAmount_m = sign + defaultAmount_m;
+		}
+		else return "0";
+
+	}else 
+		{
+			start = 0;
+			i = start;
+			// counting the start 0's
+			while (defaultAmount_m[i] == '0')
+			{
+			++i;
+			}
+			// case : 000.7
+			if ((defaultAmount_m[i] == '.') && (i < defaultAmount_m.length()))
+			{
+				defaultAmount_m = 
+					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
+
+			}
+			//case : 001
+			else if (i < defaultAmount_m.length())
+			{
+				defaultAmount_m = 
+					defaultAmount_m.substr (i,defaultAmount_m.length()-i);
+			}
+			//case: 0000
+			else 
+			{
+				defaultAmount_m = 
+					defaultAmount_m.substr (i-1,defaultAmount_m.length()-i+1);
+			}		
 		}
 		if (defaultAmount_m != "0") 
 		{
 			defaultAmount_m = "+" + defaultAmount_m;
 		}
-		
 	return defaultAmount_m;
 }

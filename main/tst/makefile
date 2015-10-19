@@ -59,7 +59,6 @@ test.exe: $(TST_OBJECTS) $(SRC_OBJECTS) $(GTEST_LIB)
 #test: test.exe
 #	test.exe --gtest_filter=GetWalletName.NoConfig
 
-	
 # run tests
 test: test.exe
 	test.exe
@@ -153,33 +152,6 @@ TestAddLineinWallet.o: TestAddLineinWallet.cpp $(HEADERS)
 ..\src\ReadConfig.o:
 	$(MAKE) -c ..\src\ReadConfig.o
 	
-#TestRemoveStartingZeroes.exe: TestRemoveStartingZeroes
-	#TestRemoveStartingZeroes.exe
-
-#TestIsValidNumber.exe: TestIsValidNumber
-	#TestIsValidNumber.exe
-
-#TestCheckArgcNumbers.exe: TestCheckArgcNumbers
-	#TestCheckArgcNumbers.exe
-	
-#TestConvertPath.exe: TestConvertPath
-	#TestConvertPath.exe
-
-#TestConvertPathToOriginal.exe: TestConvertPathToOriginal
-	#TestConvertPathToOriginal.exe
-
-#TestValidateCreate.exe: TestValidateCreate
-	#TestValidateCreate.exe
-
-#TestCreateWallet.exe:TestCreateWallet
-	#TestCreateWallet.exe
-
-#TestAddDecimalsToDefaultAmount.exe:	TestAddDecimalsToDefaultAmount
-	#TestAddDecimalsToDefaultAmount.exe
-	
-#test: test.exe
-	#test.exe
-	
 clean:
 	$(RM) test.a
 	$(RM) $(TST_OBJECTS)
@@ -192,5 +164,5 @@ clean:
 	$(RM) TestCreateWallet.exe
 	$(RM) TestAddDecimalsToDefaultAmount.exe
 	$(RM) TestWalletName.exe
+	$(RM) TestAddLineinWallet.exe
 	$(RM) test.exe
-

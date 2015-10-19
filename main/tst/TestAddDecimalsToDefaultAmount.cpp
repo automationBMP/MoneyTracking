@@ -6,9 +6,6 @@
 */
 	
 #include "gtest/gtest.h" 
-
-//#include "PrintError.h"
-//#include "Types.h"
 #include "DoCreateWallet.h"
 #include <cstring>
 
@@ -101,14 +98,14 @@ TEST(AddDecimalsToDefaultAmount, Decimals99AfterPointOneCharacterBeforePoint)
 	wallet.CreateWalletFile();
 	std::string returnAmount=wallet.AddDecimalsToDefaultAmount();
 	EXPECT_EQ(returnAmount, "+8.99");
-}
-/*//TestCase11
+}/*
+//TestCase11
 TEST(AddDecimalsToDefaultAmount, PointPresentAndTwoDecimals)
 {
 	DoCreateWallet wallet("WalletTest",".12");
 	wallet.CreateWalletFile();
 	std::string returnAmount=wallet.AddDecimalsToDefaultAmount();
-	ASSERT_EQ(returnAmount, "+0.12");
+	EXPECT_EQ(returnAmount, "+0.12");
 }
 
 //TestCase12
@@ -117,5 +114,5 @@ TEST(AddDecimalsToDefaultAmount, PointPresentAndOneDecimals)
 	DoCreateWallet wallet("WalletTest",".1");
 	wallet.CreateWalletFile();
 	std::string returnAmount=wallet.AddDecimalsToDefaultAmount();
-	ASSERT_EQ(returnAmount, "+0.10");
+	EXPECT_EQ(returnAmount, "+0.10");
 }*/

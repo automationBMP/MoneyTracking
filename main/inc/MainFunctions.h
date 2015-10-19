@@ -1,3 +1,10 @@
+/*
+	Author: Andrei Martinescu
+	
+	This file contains header for main functions .
+		
+*/
+
 #ifndef MAINFUNCTIONS_H
 #define MAINFUNCTIONS_H
 #include <string>

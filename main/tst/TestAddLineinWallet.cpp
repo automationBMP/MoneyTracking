@@ -7,7 +7,6 @@
 #include <fstream>
 #include <ctime>
 #include <cstdlib>
-//using namespace std;
 
 // function to return wallet as string
  std::string ReturnWalletasString(DoCreateWallet &wallet)
@@ -18,7 +17,6 @@
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
-	//std::cout << content;
 	return content;
 }
  std::string ReturnWalletasStringSpend(DoCreateWallet &wallet)
@@ -29,17 +27,10 @@
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
-	//std::cout << content;
 	return content;
 }
-// function to return time, sign, amount, category and currency
-/* std::string ReturnContent()
-{
-	
-} */
 
 // TestAddLineinWallet implementation
-
 TEST(TestAddLineinWallet, Income)
 {
 	// Create Wallet
@@ -55,7 +46,7 @@ TEST(TestAddLineinWallet, Income)
 	
 	// return wallet as string
 	std::string walletFile = ReturnWalletasString(wallet);
-	//std::cout << "\n\n\n " << walletFile <<std::endl; 
+ 
 	// get the content of file without initial amount (first line)
 	walletFile = walletFile.substr(walletFile.find("\n") + 1, std::string::npos);
 	
@@ -98,10 +89,9 @@ TEST(TestAddLineinWallet, Income)
 	// get the currency
 	std::string currency = walletFile.substr(0, walletFile.find("\n"));
 	
-	std::cout << "\n\n" << currency << "\n\n";
+	//std::cout << "\n\n" << currency << "\n\n";
 	
-	EXPECT_EQ("RON", currency);
-	
+	EXPECT_EQ("RON", currency);	
 }
 
 TEST(TestAddLineInWallet, Spend)

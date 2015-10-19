@@ -7,8 +7,6 @@
 	
 */
 
-
-
 #ifndef DOCREATEWALLET_H
 #define DOCREATEWALLET_H
 
@@ -34,7 +32,4 @@ public :
 	//removes any extra zero from the start of the number
 	std::string RemoveStartingZeroes();
 };
-
-
-
 #endif

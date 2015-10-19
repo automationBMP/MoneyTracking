@@ -17,7 +17,7 @@
 using namespace std;
 
 int main(int argc, char* argv[])
- { 
+{ 
 	// check if we have enough arguments
 	bool flag2 = CheckArgcNumbers(argc ,argv[1]);
 	//cout << argc <<endl;	
@@ -103,40 +103,44 @@ int main(int argc, char* argv[])
 				int const nrArg = 3;
 				// convert =argv[2] in string
 				string 	amount(argv[nrArg-1]);
-				//cout << amount <<endl;
-				//cout << amount[0] <<endl;
+				//check if amount is a positive number
 				if ((amount[0] == '-') || (amount[0] == '0')) 
 				{
-				 PrintError::Print(AMOUNT_NOT_POSITIVE,
+				// if not positive print error
+				PrintError::Print(AMOUNT_NOT_POSITIVE,
 											stringArgumentNr2, amount);
 				}
 				else 
 				{			   
-			   //creeam obiectul de tip validate cu suma aflata pe poz 3 si calea ==suma
+			//create object validate with parameters "defaut_wallet" and amount
 				ValidateCreate validate("default_wallet",amount);
+				// check if amount is a valid number
 				bool flag1 = validate.IsValidNumber();
-				//cout << amount <<endl;
 				
 				if (flag1 == true)
 					{	
 						//read config file
 						string contentConfigFile(ReturnFileasString());
-						//create object class ReadConfig for apealing Getdefault Wallet
+						//create object ReadConfig for geting the wallet
 						ReadConfig getWallet;
-						string walletName = getWallet.GetDefaultWallet(contentConfigFile);
-						if (walletName=="Error")
-						{
+						string walletName = 
+								getWallet.GetDefaultWallet(contentConfigFile);
+								
+						if (walletName == "Error")
+						{	
+							// if the method GetDefaultWallet return Error
 							PrintError::Print(NO_DEFAULT_WALLET,
 											"default wallet", amount);							
-							
 						}
-						else if (walletName=="NoConfig")
-						{
+						else if (walletName == "NoConfig")
+						{	
+							// if the method GetDefaultWallet return NoConfig
 							PrintError::Print(COULD_NOT_OPEN_CONFIG,
 											"default_wallet", amount);
 						}
-						else if (walletName=="") 
+						else if (walletName == "") 
 						{
+							// if the method GetDefaultWallet return ""
 							PrintError::Print(NO_DEFAULT_WALLET,
 											"default_wallet", amount);
 						}
@@ -144,28 +148,33 @@ int main(int argc, char* argv[])
 						{
 							//converting Path for validating
 							string convertP = ConvertPath(walletName);
+							//validating path
 							ValidateCreate validate1(convertP,amount);
 							bool flag = validate1.WalletExists();
-							// reconvert path
+							// reconvert path to original
 							string reconvert = ConvertPathToOriginal(convertP);
 							if (flag == true )
 								{	
+									//if valid path then add new line in wallet
 									DoCreateWallet newWallet(reconvert,amount);	
-									newWallet.AddLineInWalletFile(amount,stringArgumentNr2);
+									newWallet.AddLineInWalletFile(amount,
+															stringArgumentNr2);
 								}
 							else 
 							{
+								//if path is not valid print error
 								PrintError::Print(COULD_NOT_OPEN_PATH,
 											reconvert, amount);
 							}
 							
 						}
 					}
+					//if amount is not valid number print error
 					else PrintError::Print(SHOULD_BE_POSITIVE,
 											stringArgumentNr2, amount);
 				}
 			}
 		}
 	}
-   return 0; 
+return 0; 
 }

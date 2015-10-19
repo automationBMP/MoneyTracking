@@ -13,18 +13,12 @@
 #include <string>
 #include "Types.h"
 
-
 class PrintError
 {
-	
 public :
 	//printing the desired error message
 	static void Print(Error_E error, 
 					std::string const &walletName_m,
 					std::string const &defaultAmount_m);
 };
-
-
-
-
 #endif

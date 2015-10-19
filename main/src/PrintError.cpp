@@ -96,8 +96,7 @@ void PrintError::Print(Error_E error,
 						<< "\n";
 		break;
 		case ALL_GOOD:
-			std::cout	<< "";
-		
+			std::cout	<< "";		
 		break;
 	}
 }

@@ -26,26 +26,13 @@ ValidateCreate :: ValidateCreate(string walletName, string amount)
 	amount_m = amount;
 }
 
-
 // implementation of wallet exists function
 bool ValidateCreate::WalletExists() 
 {
 	string walletName = walletName_m;
 	
     ifstream f(walletName.c_str());
-	
-	// check if wallet exists
-	/*if (f.good())
-	{
-		// print error if wallet exists
-		PrintError::Print(WALLET_ALREADY_EXISTS,
-						walletName_m,
-						amount_m);
-		cout << "error: wallet " 
-			 << walletName 
-			 << " already exists! ";*/
-	//}
-	
+
 	// return if true wallet exists and false if it doesn't exist
 	return f.good();
 }
@@ -67,13 +54,11 @@ bool ValidateCreate::IsValidNumber()
 	//go through the string
 	for(; position < amount.size(); position++)
 	{
-		
 		//test each position to be in 0..9 interval
 		if(amount[position] <= '9' && amount[position] >= '0')
 		{
 			isValid = true;
 		} 
-		
 		//test if '.' is found 
 		else if (amount[position] == '.') 
 		{
@@ -95,7 +80,6 @@ bool ValidateCreate::IsValidNumber()
 				}
 			}
 		}
-		
 		//if the string elements are not in 0..9 interval return false
 		else
 		{
@@ -103,15 +87,5 @@ bool ValidateCreate::IsValidNumber()
 			break;
 		}
 	}
-	
-	//print error
-	/*if (isValid == false)
-	{
-		PrintError::Print(CREATE_INITIAL_AMMOUNT_INVALID,
-						walletName_m,
-						amount_m);
-		//cout <<"error: "<< amount << " is not a valid initial amount." << endl;
-	    //cout<< "Creating "<< walletName_m <<" aborted.";
-	}*/
 	return isValid;
 }
