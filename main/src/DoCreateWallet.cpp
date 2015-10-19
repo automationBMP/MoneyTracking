@@ -74,25 +74,37 @@ Error_E DoCreateWallet::CreateWalletFile()
 	return ALL_GOOD;
 }
 
-Error_E DoCreateWallet::AddLineInWalletFile(string amount , string ArgNr2)
+Error_E DoCreateWallet::AddLineInWalletFile(string &amount , string &ArgNr2)
 {
+	amount=DoCreateWallet::AddDecimalsToDefaultAmount();
+	defaultAmount_m=amount;
 	time_t result = time(0);
+	char buffer [80];
+	struct tm *tmp;
+	tmp = gmtime(&result);
+	strftime (buffer,80,"Transaction time: %a, %d %b %Y %X",tmp);
 	string printline;
-	if (amount[0] == '+')
+	if (defaultAmount_m[0] == '+')
 		{
-		amount = amount.substr(1,amount.length()-1);
+		defaultAmount_m = defaultAmount_m.substr(1,defaultAmount_m.length()-1);
 		}
-	else amount = amount.substr(0,amount.length());
+	else defaultAmount_m = defaultAmount_m.substr(0,defaultAmount_m.length());
 	
 	if (ArgNr2 == "income") 
-		{
+		{	
+			cout << "Income 'salary' in an amount of " 
+			    << defaultAmount_m << " RON was registered." << endl;
+			cout << buffer <<" GMT" <<endl;
 			printline += printline + ";" + "+" + ";" 				
-									+ amount +";" +"salary" + ";"+ "RON";
+									+ defaultAmount_m +";" +"salary" + ";"+ "RON";
 		}
 	else if (ArgNr2 == "spend") 
 		{
+			cout << "Spending 'other' in an amount of " 
+			    << defaultAmount_m << " RON was registered." << endl;
+			cout << buffer <<" GMT" <<endl;
 			printline += printline+";" + "-" + ";" 
-								 + amount +";" +"other" + ";"+ "RON";
+								 + defaultAmount_m +";" +"other" + ";"+ "RON";
 		}
 	ofstream myfile (walletName_m.c_str(),ios::app);
 	if (myfile.is_open())
@@ -110,11 +122,11 @@ Error_E DoCreateWallet::AddLineInWalletFile(string amount , string ArgNr2)
 	
 	
 	walletFile.close();
-	}*/
+	}
 	else PrintError::Print(WRITE_TO_FILE,
 						walletName_m,
-						defaultAmount_m);
-		return WRITE_TO_FILE;
+						defaultAmount_m);*/
+		return ALL_GOOD;
 }
 
 

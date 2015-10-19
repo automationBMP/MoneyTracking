@@ -105,13 +105,13 @@ bool ValidateCreate::IsValidNumber()
 	}
 	
 	//print error
-	if (isValid == false)
+	/*if (isValid == false)
 	{
 		PrintError::Print(CREATE_INITIAL_AMMOUNT_INVALID,
 						walletName_m,
 						amount_m);
 		//cout <<"error: "<< amount << " is not a valid initial amount." << endl;
 	    //cout<< "Creating "<< walletName_m <<" aborted.";
-	}
+	}*/
 	return isValid;
 }
