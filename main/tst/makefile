@@ -37,6 +37,7 @@ TST_OBJECTS=\
 	TestValidateCreate.o \
 	TestCreateWallet.o \
 	TestAddDecimalsToDefaultAmount.o
+#	TestPrintError
 
 SRC_OBJECTS=\
 	$(SRC_DIR)\DoCreateWallet.o\
@@ -86,6 +87,11 @@ TestAddDecimalsToDefaultAmount: TestAddDecimalsToDefaultAmount.o ..\src\DoCreate
 	$(CPP) -o TestAddDecimalsToDefaultAmount.exe TestAddDecimalsToDefaultAmount.o \
 	..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 
+#TestPrintError: TestPrintError.o ..\src\DoCreateWallet.o  ..\src\PrintError.o ..\src\Types.h $(GTEST_LIB)
+#	$(CPP) -o TestPrintError.exe TestPrintError.o ..\src\Types.h\
+#	..\src\DoCreateWallet.o ..\src\PrintError.o ..\src\Types.h$(GTEST_LIB)	
+	
+
 #Test.o 
 TestRemoveStartingZeroes.o: TestRemoveStartingZeroes.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestRemoveStartingZeroes.o -c TestRemoveStartingZeroes.cpp
@@ -110,6 +116,9 @@ TestCreateWallet.o: TestCreateWallet.cpp $(HEADERS)
 
 TestAddDecimalsToDefaultAmount.o: TestAddDecimalsToDefaultAmount.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestAddDecimalsToDefaultAmount.o -c TestAddDecimalsToDefaultAmount.cpp
+	
+#TestPrintError.o: TestPrintError.cpp $(HEADERS)
+#	$(CPP) $(GTEST_INC) -o TestPrintError.o -c TestPrintError.cpp	
 
 #..\main.o:
 #	..\$(MAKE) -c ..\main.o	

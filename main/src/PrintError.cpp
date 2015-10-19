@@ -18,35 +18,35 @@ void PrintError::Print(Error_E error,
 	switch (error)
 	{
 		case WRITE_TO_FILE:
-			std::cout 	<<"error while writing " 
+			std::cout 	<< "error while writing " 
 						<< defaultAmount_m 
 						<< " to wallet "
 						<< walletName_m
 						<< "\n";
 		break;
 		case WALLET_ALREADY_EXISTS:
-			std::cout 	<<"error: wallet "
+			std::cout 	<< "error: wallet "
 						<< walletName_m
 						<< " already exists!"	
 						<< "\n";
 		break;
 		case CREATE_NAME_MISSING:
-			std::cout	<<"error: at least filename"
+			std::cout	<< "error: at least filename"
 						<< " should be specified."
 						<< "\n";
 		break;			
 		case CREATE_INITIAL_AMMOUNT_INVALID:
-			std::cout 	<<"error: "
+			std::cout 	<< "error: "
 						<< defaultAmount_m 
 						<< " is not a valid initial ammount."
 						<< "\n"
-						<<"Creating " 
+						<< "Creating " 
 						<< walletName_m
 						<< " aborted."
 						<< "\n";
 		break;
 		case PATH_DOES_NOT_EXIST:
-			std::cout 	<<"error : The given path doesn't exist"
+			std::cout 	<< "error : The given path doesn't exist"
 						<< "\n";
 		break;
 		case CREATE_WALLET_MESSAGE:
@@ -73,16 +73,18 @@ void PrintError::Print(Error_E error,
 						<< "\n";
 		break;
 		case SHOULD_BE_POSITIVE:
-			std::cout	<< "error: parameter for 'income' "
+			std::cout	<< "error: parameter for "
+						<< "'"
+						<< walletName_m
+						<< "' "
 						<< "should be a positive number"
 						<< "\n";
 		break;
-		case NO_AMOUNT_SPECIFIED_FOR_INCOME:
-			std::cout	<< "error: no ammount specified for 'income'."
-						<< "\n";
-		break;
-		case NO_AMOUNT_SPECIFIED_FOR_SPEND:
-			std::cout	<< "error: no ammount specified for 'spend'."
+		case NO_AMOUNT_SPECIFIED:
+			std::cout	<< "error: no ammount specified for "
+						<< "'"
+						<< walletName_m
+						<< "'."
 						<< "\n";
 		break;
 		case COULD_NOT_OPEN_PATH:

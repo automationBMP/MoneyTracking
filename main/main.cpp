@@ -162,7 +162,7 @@ int main(int argc, char* argv[])
 						}
 					}
 					else PrintError::Print(SHOULD_BE_POSITIVE,
-											"default_wallet", amount);
+											stringArgumentNr2, amount);
 				}
 			}
 		}

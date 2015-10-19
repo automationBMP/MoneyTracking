@@ -28,15 +28,15 @@ bool CheckArgcNumbers(int const argc ,string const &argument)
 	else if ((argument == "income")&&(argc<=2))
 		{
 			//cout << "error: no ammount specified for 'income'.\n";
-			PrintError::Print(NO_AMOUNT_SPECIFIED_FOR_INCOME,
-											"create", "+00.00");
+			PrintError::Print(NO_AMOUNT_SPECIFIED,
+											"income", "+00.00");
 			flag =false;		
 		}
 	else if ((argument == "spend")&&(argc<=2))
 		{
 			//cout << "error: no ammount specified for 'spend'.\n";
-			PrintError::Print(NO_AMOUNT_SPECIFIED_FOR_SPEND,
-											"create", "+00.00");
+			PrintError::Print(NO_AMOUNT_SPECIFIED,
+											"spend", "+00.00");
 			flag =false;		
 		}
 	return flag;	
