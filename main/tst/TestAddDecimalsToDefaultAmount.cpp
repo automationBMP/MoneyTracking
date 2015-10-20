@@ -1,9 +1,4 @@
-/*
-	Author: AndreeaIoanaStan
-	
-	This file contains the tests for AddDecimalsToDefaultAmount method
-	
-*/
+//Author: AndreeaIoanaStan, v0.1
 	
 #include "gtest/gtest.h" 
 #include "DoCreateWallet.h"

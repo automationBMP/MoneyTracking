@@ -1,9 +1,4 @@
-/*
-	Author: AndreeaIoanaStan
-	
-	This file contains tests for checking if a new wallet is created
-	
-*/
+//Author: AndreeaIoanaStan, v0.1
 
 #include "gtest/gtest.h"
 #include "DoCreateWallet.h"
@@ -65,10 +60,10 @@ TEST(TestCreateWallet, CreateFile)
 {
 	DoCreateWallet wallet("newWallet","+100");
 	wallet.CreateWalletFile();
-	DoCreateWallet wallet1("C:/Learn/MoneyTracking/WalletTest.txt","+100");
+	DoCreateWallet wallet1("main/tst/WalletTest.txt","+100");
 	wallet1.CreateWalletFile();	
 	EXPECT_EQ(true , WalletCreated("newWallet"));
-	EXPECT_EQ(true , WalletCreated("C:/Learn/MoneyTracking/WalletTest.txt"));
-	EXPECT_NE(true , WalletCreated("C:/Learn/MoneyTracking/src/WalletTest.txt"));
+	EXPECT_EQ(true , WalletCreated("main/tst/WalletTest.txt"));
+	EXPECT_NE(true , WalletCreated("main/src/WalletTest.txt"));
 	EXPECT_NE(true , WalletCreated("inexistent.txt"));
 }
