@@ -107,8 +107,17 @@ int main(int argc, char* argv[])
 				if ((amount[0] == '-') || (amount[0] == '0')) 
 				{
 				// if not positive print error
-				PrintError::Print(AMOUNT_NOT_POSITIVE,
+					if (stringArgumentNr2 == "income")
+					{
+						PrintError::Print(AMOUNT_NOT_POSITIVE_INCOME,
 											stringArgumentNr2, amount);
+					}
+					else if (stringArgumentNr2 == "spend")
+					{
+						PrintError::Print(AMOUNT_NOT_POSITIVE_SPEND,
+											stringArgumentNr2, amount);
+					}
+				
 				}
 				else 
 				{			   

@@ -56,9 +56,15 @@ void PrintError::Print(Error_E error,
 						<< " RON"
 						<< "\n";
 		break;				
-		case AMOUNT_NOT_POSITIVE:
+		case AMOUNT_NOT_POSITIVE_INCOME:
 			std::cout	<< "error: "
-						<< walletName_m
+						<< "income"
+						<< " should be higher than 0"
+						<< ".\n";
+		break;
+		case AMOUNT_NOT_POSITIVE_SPEND:
+			std::cout	<< "error: "
+						<< "spending"
 						<< " should be higher than 0"
 						<< ".\n";
 		break;
