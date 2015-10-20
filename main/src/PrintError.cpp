@@ -38,7 +38,7 @@ void PrintError::Print(Error_E error,
 		case CREATE_INITIAL_AMMOUNT_INVALID:
 			std::cout 	<< "error: "
 						<< defaultAmount_m 
-						<< " is not a valid initial ammount."
+						<< " is not a valid initial amount."
 						<< "\n"
 						<< "Creating " 
 						<< walletName_m

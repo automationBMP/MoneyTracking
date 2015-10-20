@@ -23,76 +23,75 @@ int main(int argc, char* argv[])
 	//cout << argc <<endl;	
 	if (flag2 == true) 
 	{
-	int const nrArg = 2;
-	// convert =argv[1] in string
-	string stringArgumentNr2(argv[nrArg-1]);
-	if (stringArgumentNr2 == "create")
+		int const nrArg = 2;
+		// convert =argv[1] in string
+		string stringArgumentNr2(argv[nrArg-1]);
+		if (stringArgumentNr2 == "create")
 		{
-		if (argc == 3) 
-		{
-		int const nrArg = 3;
-			// convert =argv[2] in string
-			string 	stringArgumentNr3(argv[nrArg-1]);
-			// convert path
-			string convertP = ConvertPath(stringArgumentNr3);
-			//create object of class ValidateCreate
-			ValidateCreate validate(convertP);
-			//return bool if wallet exist
-			bool flag = validate.WalletExists();
-			//default amount = 00.00;
-			string amount = "+00.00";
-			//recreate path to initial 
-			string reconvert = ConvertPathToOriginal(convertP);
-			//apeal function create new wallet with amount 00.00
-			DoCreateWallet newWallet(reconvert, amount);
-			if (flag == false) 
+			if (argc == 3) 
+			{
+				int const nrArg = 3;
+				// convert =argv[2] in string
+				string 	stringArgumentNr3(argv[nrArg-1]);
+				// convert path
+				string convertP = ConvertPath(stringArgumentNr3);
+				//create object of class ValidateCreate
+				ValidateCreate validate(convertP);
+				//return bool if wallet exist
+				bool flag = validate.WalletExists();
+				//default amount = 00.00;
+				string amount = "+00.00";
+				//recreate path to initial 
+				string reconvert = ConvertPathToOriginal(convertP);
+				//apeal function create new wallet with amount 00.00
+				DoCreateWallet newWallet(reconvert, amount);
+				if (flag == false) 
 				{
-				newWallet.CreateWalletFile();
+					newWallet.CreateWalletFile();
 				}
-			else
+				else
 				{	
 					PrintError::Print(WALLET_ALREADY_EXISTS, reconvert,	amount);
 				}
-		} 
-		else if (argc >= 4) 
+			} 
+			else if (argc >= 4) 
 			{
-					// pozition 3
-					int const nrArg = 3;
-					// convert =argv[2] in string
-					string 	stringArgumentNr3(argv[nrArg-1]);
-					// convert path
-					string convertP = ConvertPath(stringArgumentNr3);
-					// convert =argv[3] in string
-					string 	stringArgumentNr4(argv[nrArg]);
-					//create object of class ValidateCreate
-					ValidateCreate validate1(convertP, stringArgumentNr4);
-					//cout << convert << endl;
-					//return bool if wallet exist
-					bool flag = validate1.WalletExists();
-					//recreate path to initial 
-					string reconvert = ConvertPathToOriginal(convertP);
-					//apeal function create new wallet 
-					DoCreateWallet newWallet(reconvert, 
-														stringArgumentNr4);
-					if (flag == false) 
-					{
-						bool flag1 = validate1.IsValidNumber();
+				// pozition 3
+				int const nrArg = 3;
+				// convert =argv[2] in string
+				string 	stringArgumentNr3(argv[nrArg-1]);
+				// convert path
+				string convertP = ConvertPath(stringArgumentNr3);
+				// convert =argv[3] in string
+				string 	stringArgumentNr4(argv[nrArg]);
+				//create object of class ValidateCreate
+				ValidateCreate validate1(convertP, stringArgumentNr4);
+				//return bool if wallet exist
+				bool flag = validate1.WalletExists();
+				//recreate path to initial 
+				string reconvert = ConvertPathToOriginal(convertP);
+				//apeal function create new wallet 
+				DoCreateWallet newWallet(reconvert, 
+													stringArgumentNr4);
+				if (flag == false) 
+				{
+					bool flag1 = validate1.IsValidNumber();
 						
-						if (flag1 == true)
-						{
-							newWallet.CreateWalletFile();
-						}
-						else 
-						{
-							PrintError::Print(CREATE_INITIAL_AMMOUNT_INVALID,
-												reconvert, stringArgumentNr4);	
-						}
+					if (flag1 == true)
+					{
+						newWallet.CreateWalletFile();
 					}
-					else
-						{
-							PrintError::Print(WALLET_ALREADY_EXISTS,
-											reconvert, stringArgumentNr4);
-					}					
+					else 
+					{
+						PrintError::Print(CREATE_INITIAL_AMMOUNT_INVALID,
+											reconvert, stringArgumentNr4);	
+					}
+				}
+				else
+				{
+					PrintError::Print(WALLET_ALREADY_EXISTS,
+										reconvert, stringArgumentNr4);
+				}					
 			}	
 		}
 		else if (stringArgumentNr2 == "income"||stringArgumentNr2 == "spend") 
@@ -121,12 +120,12 @@ int main(int argc, char* argv[])
 				}
 				else 
 				{			   
-			//create object validate with parameters "defaut_wallet" and amount
-				ValidateCreate validate("default_wallet",amount);
-				// check if amount is a valid number
-				bool flag1 = validate.IsValidNumber();
-				
-				if (flag1 == true)
+					//create object validate with parameters "defaut_wallet" 
+					//and amount
+					ValidateCreate validate("default_wallet",amount);
+					// check if amount is a valid number
+					bool flag1 = validate.IsValidNumber();
+					if (flag1 == true)
 					{	
 						//read config file
 						string contentConfigFile(ReturnFileasString());
@@ -175,7 +174,6 @@ int main(int argc, char* argv[])
 								PrintError::Print(COULD_NOT_OPEN_PATH,
 											reconvert, amount);
 							}
-							
 						}
 					}
 					//if amount is not valid number print error

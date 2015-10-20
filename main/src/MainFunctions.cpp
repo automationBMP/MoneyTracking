@@ -72,6 +72,7 @@ string ReturnFileasString()
 {
 	//read moneytracker.config file
 	std::ifstream ifs("moneytracker.config");
+	//check if is open
 	
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(ifs) ),

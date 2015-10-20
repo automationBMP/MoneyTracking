@@ -14,7 +14,7 @@ std::string ReadConfig::GetDefaultWallet(std::string &contentConfigFile)
 	if (content.length()==0) 
 	{
 		// if content is zero than ifstream couldn't open config file
-		return "NoConfig";
+		return "NoConfig";//empty config or doesn't exist
 	}
 	else
 	{
