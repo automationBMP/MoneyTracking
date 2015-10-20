@@ -46,7 +46,8 @@ void PrintError::Print(Error_E error,
 						<< "\n";
 		break;
 		case PATH_DOES_NOT_EXIST:
-			std::cout 	<< "error : The given path doesn't exist"
+			std::cout 	<< "error: could not create "
+						<< walletName_m
 						<< "\n";
 		break;
 		case CREATE_WALLET_MESSAGE:
