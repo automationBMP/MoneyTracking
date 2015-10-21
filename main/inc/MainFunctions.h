@@ -24,4 +24,9 @@ std::string ConvertPathToOriginal(std::string &givenPath);
 //function read config file
 // returns all content of file
 std::string ReturnFileasString();
+
+void CommandInterpreter(int arc, char *argv[]);
+
+void ImpelmentCreate(int arc, char *argv[]);
+void ImplementIncomeSpend(int arc, char *argv[]);
 #endif
