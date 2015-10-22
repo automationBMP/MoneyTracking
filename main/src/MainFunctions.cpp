@@ -1,9 +1,4 @@
-/*
-	Author: Andrei Martinescu
-	
-	This file contains implementation for main functions .
-		
-*/
+//Author: Andrei Martinescu, v0.2
 
 #include "MainFunctions.h"
 #include <string>
@@ -164,6 +159,7 @@ void ImpelmentCreate(int arc , char *argv[])
 		}			
 	}
 }
+
 void CommandInterpreter(int arc, char *argv[])
 {
 	int const nrArg = 2;
@@ -177,11 +173,6 @@ void CommandInterpreter(int arc, char *argv[])
 	{
 		ImplementIncomeSpend(arc, argv);
 	}
-/*  else if (stringArgumentNr2 == "balance")
-	{
-		ImpelmentBalance(arc, argv);
-	}
-*/	
 }
 
 //print errors if the amount is <= 0
@@ -298,7 +289,11 @@ void ImplementIncomeSpend(int argc, char *argv[])
 		// convert =argv[2] in string
 		string 	stringArgumentNr3(argv[2]);
 		//check if amount is a positive number amount
-		if ((stringArgumentNr3[0] == '-') || (stringArgumentNr3[0] == '0')) 
+		if (stringArgumentNr3[0] == '0') 
+		{
+			PrintIncomeSpendNegative(stringArgumentNr2, stringArgumentNr3);
+		}
+		else if ((stringArgumentNr3[0] == '-') ) 
 		{
 			string number = stringArgumentNr3.substr(1, stringArgumentNr3.length() - 1);
 			ValidateCreate validateNumber("default_wallet",number);
@@ -322,7 +317,8 @@ void ImplementIncomeSpend(int argc, char *argv[])
 			bool flag1 = validate.IsValidNumber();
 			if (flag1 == true)
 			{
-			PrintInFileIfWalletFound(stringArgumentNr3, stringArgumentNr2, category);
+				PrintInFileIfWalletFound(stringArgumentNr3, 
+													stringArgumentNr2, category);
 			}
 			//if amount is not valid number print error
 			else PrintError::Print(SHOULD_BE_POSITIVE,
@@ -344,7 +340,8 @@ void ImplementIncomeSpend(int argc, char *argv[])
 			bool flag1 = validate.IsValidNumber();
 			if (flag1 == true)
 			{
-				PrintInFileIfWalletFound(stringArgumentNr3, stringArgumentNr2, category);
+				PrintInFileIfWalletFound(stringArgumentNr3, 
+												stringArgumentNr2, category);
 			}
 			//if amount is not valid number print error
 			else PrintError::Print(SHOULD_BE_POSITIVE,
@@ -372,18 +369,24 @@ void ImplementIncomeSpend(int argc, char *argv[])
 				ValidateCreate validate("default_wallet",stringArgumentNr5);
 				// check if stringArgumentNr3 is a valid number
 				bool flag1 = validate.IsValidNumber();
-				if (flag1 == true)
+				if (flag1 == true) 
 				{
-					PrintInFileIfWalletFound(stringArgumentNr5, stringArgumentNr2, category);
+					PrintInFileIfWalletFound(stringArgumentNr5,
+										stringArgumentNr2, category);
 				}
 					//if amount is not valid number print error
 				else PrintError::Print(SHOULD_BE_POSITIVE,
-											stringArgumentNr2, stringArgumentNr5);
+										stringArgumentNr2, stringArgumentNr5);
 			}
 		}
-		else if ((stringArgumentNr4 == "-c") || (stringArgumentNr4 == "--category"))
+		else if ((stringArgumentNr4 == "-c") ||
+									(stringArgumentNr4 == "--category"))
 		{
-			if ((stringArgumentNr3[0] == '-') || (stringArgumentNr3[0] == '0')) 
+			if (stringArgumentNr3[0] == '0') 
+			{
+				PrintIncomeSpendNegative(stringArgumentNr2, stringArgumentNr3);
+			} 
+			else if (stringArgumentNr3[0] == '-') 
 			{
 				// if not positive print error
 				PrintIncomeSpendNegative(stringArgumentNr2, stringArgumentNr3);
@@ -398,7 +401,8 @@ void ImplementIncomeSpend(int argc, char *argv[])
 				bool flag1 = validate.IsValidNumber();
 				if (flag1 == true)
 				{
-					PrintInFileIfWalletFound(stringArgumentNr3, stringArgumentNr2, category);
+					PrintInFileIfWalletFound(stringArgumentNr3, 	
+												stringArgumentNr2, category);
 				}
 					//if amount is not valid number print error
 				else PrintError::Print(SHOULD_BE_POSITIVE,
@@ -407,13 +411,18 @@ void ImplementIncomeSpend(int argc, char *argv[])
 		}
 		else 
 		{
-			if ((stringArgumentNr3[0] == '-') || (stringArgumentNr3[0] == '0')) 
+			if (stringArgumentNr3[0] == '0') 
 			{
-			string number = stringArgumentNr3.substr(1, stringArgumentNr3.length() - 1);
-			ValidateCreate validateNumber("default_wallet",number);
+				PrintIncomeSpendNegative(stringArgumentNr2, stringArgumentNr3);
+			} 
+			else if (stringArgumentNr3[0] == '-')
+			{
+				string number = stringArgumentNr3.substr(1,
+												stringArgumentNr3.length() - 1);
+				ValidateCreate validateNumber("default_wallet",number);
+			
 			// check if stringArgumentNr3 is a valid number
 			bool flag2 = validateNumber.IsValidNumber();
-			
 			if (flag2 == true)
 			{
 				// if not positive print error
@@ -424,17 +433,18 @@ void ImplementIncomeSpend(int argc, char *argv[])
 			}
 			else 	
 			{			
-			//create object validate with parameters "defaut_wallet" 
-			//and stringArgumentNr3
-			ValidateCreate validate("default_wallet",stringArgumentNr3);
-			// check if stringArgumentNr3 is a valid number
-			bool flag1 = validate.IsValidNumber();
-			if (flag1 == true)
-			{
-			PrintInFileIfWalletFound(stringArgumentNr3, stringArgumentNr2, category);
-			}
-			//if amount is not valid number print error
-			else PrintError::Print(SHOULD_BE_POSITIVE,
+				//create object validate with parameters "defaut_wallet" 
+				//and stringArgumentNr3
+				ValidateCreate validate("default_wallet",stringArgumentNr3);
+				// check if stringArgumentNr3 is a valid number
+				bool flag1 = validate.IsValidNumber();
+				if (flag1 == true)
+				{
+					PrintInFileIfWalletFound(stringArgumentNr3, 
+													stringArgumentNr2, category);
+				}
+				//if amount is not valid number print error
+				else PrintError::Print(SHOULD_BE_POSITIVE,
 										stringArgumentNr2, stringArgumentNr3);
 			}	
 		}
