@@ -72,7 +72,7 @@ Error_E DoCreateWallet::CreateWalletFile()
 	return ALL_GOOD;
 }
 
-Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2)
+Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, string &category)
 {	
 	//apeal function add decimals
 	amount=DoCreateWallet::AddDecimalsToDefaultAmount();
@@ -94,20 +94,20 @@ Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2)
 	// if argument ArgNr2 is income 
 	if (ArgNr2 == "income") 
 		{	
-			cout << "Income 'salary' in an amount of " 
+			cout << "Income '" << category << "' in an amount of " 
 			     << defaultAmount_m << " RON was registered." << endl;
 			cout << buffer << " GMT" << endl;
 			printline += printline + ";" + "+" + ";" 				
-					     + defaultAmount_m +";" +"salary" + ";"+ "RON";
+					     + defaultAmount_m +";" +category + ";"+ "RON";
 		}
 	// if argument ArgNr2 is spend
 	else if (ArgNr2 == "spend") 
 		{
-			cout << "Spending 'other' in an amount of " 
+			cout << "Spending '" << category << "' in an amount of " 
 			     << defaultAmount_m << " RON was registered." << endl;
 			cout << buffer << " GMT" << endl;
 			printline += printline+";" + "-" + ";" 
-						 + defaultAmount_m +";" +"other" + ";"+ "RON";
+						 + defaultAmount_m +";" + category + ";"+ "RON";
 		}
 	ofstream myfile (walletName_m.c_str(),ios::app);
 	if (myfile.is_open())

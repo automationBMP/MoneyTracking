@@ -37,7 +37,7 @@ TST_OBJECTS=\
 	TestValidateCreate.o \
 	TestCreateWallet.o \
 	TestAddDecimalsToDefaultAmount.o \
-	TestAddLineinWallet.o \
+	#TestAddLineinWallet.o \
 	TestWalletName.o
 
 
@@ -96,8 +96,8 @@ TestAddDecimalsToDefaultAmount: TestAddDecimalsToDefaultAmount.o ..\src\DoCreate
 	$(CPP) -o TestAddDecimalsToDefaultAmount.exe TestAddDecimalsToDefaultAmount.o \
 	..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 	
-TestAddLineinWallet: TestAddLineinWallet.o ..\src\DoCreateWallet.o  ..\src\PrintError.o $(GTEST_LIB)
-	$(CPP) -o TestAddLineinWallet.exe TestAddLineinWallet.o \
+#TestAddLineinWallet: TestAddLineinWallet.o ..\src\DoCreateWallet.o  ..\src\PrintError.o $(GTEST_LIB)
+#	$(CPP) -o TestAddLineinWallet.exe TestAddLineinWallet.o \
 
 TestWalletName: TestWalletName.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 	$(CPP) -o TestWalletName.exe TestWalletName.o
@@ -131,8 +131,8 @@ TestAddDecimalsToDefaultAmount.o: TestAddDecimalsToDefaultAmount.cpp $(HEADERS)
 TestWalletName.o: TestWalletName.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestWalletName.o -c TestWalletName.cpp
 
-TestAddLineinWallet.o: TestAddLineinWallet.cpp $(HEADERS)
-	$(CPP) $(GTEST_INC) -o TestAddLineinWallet.o -c TestAddLineinWallet.cpp
+#TestAddLineinWallet.o: TestAddLineinWallet.cpp $(HEADERS)
+#	$(CPP) $(GTEST_INC) -o TestAddLineinWallet.o -c TestAddLineinWallet.cpp
 	
 #..\main.o:
 #	..\$(MAKE) -c ..\main.o	
