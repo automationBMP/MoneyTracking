@@ -4,6 +4,8 @@
 
 #include <string>
 #include <iostream>
+#include <PrintError.h>
+#include "Types.h"
 
 //implementation of GetDefaultWallet
 std::string ReadConfig::GetDefaultWallet(std::string &contentConfigFile)
@@ -11,16 +13,23 @@ std::string ReadConfig::GetDefaultWallet(std::string &contentConfigFile)
 	//the value returned by ReturnFileasString is transfered to string content
 	//std::string content = ReturnFileasString();
 	std::string content = contentConfigFile;
-	if (content.length()==0) 
+	if (content == "NotOpen") 
 	{
+		return content;
+	}
+	else if (content.length() == 0) 
+	{
+		//std::cout << "empty\n";
 		// if content is zero than ifstream couldn't open config file
-		return "NoConfig";//empty config or doesn't exist
+		return "EmptyConfig";//empty config or doesn't exist
 	}
 	else
 	{
+	//if (content.length() > 0) 
+	//{
 		//if no default wallet is found an empty string is returned
 		if(content.find("default_wallet") == std::string::npos)
-				return "Error";	
+				return "NoDefaultWalletFound";	
 		//else return the name of the default wallet
 		else 
 		{
@@ -62,8 +71,9 @@ std::string ReadConfig::GetDefaultWallet(std::string &contentConfigFile)
 			//return an empty string if no wallet name is found
 			else
 			{
-				return "";
+				return "NoWalletNameFound";
 			}
 		}
 	}
+	
 }

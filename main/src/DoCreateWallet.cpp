@@ -117,16 +117,8 @@ Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, stri
 	myfile << endl;
     myfile.close();
 	}
-	/*if (walletFile.good())
-	{	
-	walletFile.close();
-	}
-	else PrintError::Print(WRITE_TO_FILE,
-						walletName_m,
-						defaultAmount_m);*/
 	return ALL_GOOD;
 }
-
 
 string DoCreateWallet::AddDecimalsToDefaultAmount()
 {

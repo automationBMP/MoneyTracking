@@ -26,10 +26,14 @@ std::string ConvertPathToOriginal(std::string &givenPath);
 std::string ReturnFileasString();
 
 void CommandInterpreter(int arc, char *argv[]);
-
+void ImplementCreateThreeArguments(int arc,char *argv[]);
+void ImplementCreateFourArguments(int arc,char *argv[]);
+void ImprementIncomeSpendThreeArguments(int argc, char *argv[], std::string stringArgumentNr, std::string category1);
+void ImprementIncomeSpendFourArguments(int argc, char *argv[], std::string stringArgumentNr, std::string category1);
+void ImprementIncomeSpendFiveArguments(int argc, char *argv[], std::string stringArgumentNr, std::string category1);
 void ImpelmentCreate(int arc, char *argv[]);
 void ImplementIncomeSpend(int arc, char *argv[]);
 void PrintIncomeSpendNegative(std::string, std::string);
 void PrintNoAmountSpecified(std::string);
-void PrintInFileIfWalletFound(std::string, std::string);
+void PrintInFileIfWalletFound(std::string, std::string, std:: string);
 #endif

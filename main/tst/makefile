@@ -31,14 +31,13 @@ HEADERS = \
 TST_OBJECTS=\
 	TestRemoveStartingZeroes.o \
 	TestIsValidNumber.o \
-	TestCheckArgcNumbers.o \
 	TestConvertPath.o \
 	TestConvertPathToOriginal.o \
 	TestValidateCreate.o \
 	TestCreateWallet.o \
 	TestAddDecimalsToDefaultAmount.o \
-	#TestAddLineinWallet.o \
-	TestWalletName.o
+	TestWalletName.o \
+	TestAddLineinWallet.o
 
 
 SRC_OBJECTS=\
@@ -72,10 +71,6 @@ TestIsValidNumber: TestIsValidNumber.o ..\src\ValidateCreate.o ..\src\PrintError
 	$(CPP) -o TestIsValidNumber.exe TestIsValidNumber.o \
 	..\src\ValidateCreate.o ..\src\PrintError.o $(GTEST_LIB)
 
-TestCheckArgcNumbers: TestCheckArgcNumbers.o ..\src\MainFunctions.o $(GTEST_LIB) 
-	$(CPP) -o TestCheckArgcNumbers.exe TestCheckArgcNumbers.o \
-	..\src\MainFunctions.o $(GTEST_LIB)
-
 TestConvertPath: TestConvertPath.o ..\src\MainFunctions.o $(GTEST_LIB)
 	$(CPP) -o TestConvertPath.exe TestConvertPath.o \
 	..\src\MainFunctions.o $(GTEST_LIB)
@@ -96,8 +91,8 @@ TestAddDecimalsToDefaultAmount: TestAddDecimalsToDefaultAmount.o ..\src\DoCreate
 	$(CPP) -o TestAddDecimalsToDefaultAmount.exe TestAddDecimalsToDefaultAmount.o \
 	..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 	
-#TestAddLineinWallet: TestAddLineinWallet.o ..\src\DoCreateWallet.o  ..\src\PrintError.o $(GTEST_LIB)
-#	$(CPP) -o TestAddLineinWallet.exe TestAddLineinWallet.o \
+TestAddLineinWallet: TestAddLineinWallet.o ..\src\DoCreateWallet.o  ..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o TestAddLineinWallet.exe TestAddLineinWallet.o \
 
 TestWalletName: TestWalletName.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 	$(CPP) -o TestWalletName.exe TestWalletName.o
@@ -109,9 +104,6 @@ TestRemoveStartingZeroes.o: TestRemoveStartingZeroes.cpp $(HEADERS)
 	
 TestIsValidNumber.o: TestIsValidNumber.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestIsValidNumber.o -c TestIsValidNumber.cpp
-
-TestCheckArgcNumbers.o: TestCheckArgcNumbers.cpp $(HEADERS)
-	$(CPP) $(GTEST_INC) -o TestCheckArgcNumbers.o -c TestCheckArgcNumbers.cpp
 
 TestConvertPath.o: TestConvertPath.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestConvertPath.o -c TestConvertPath.cpp
@@ -130,9 +122,9 @@ TestAddDecimalsToDefaultAmount.o: TestAddDecimalsToDefaultAmount.cpp $(HEADERS)
 	
 TestWalletName.o: TestWalletName.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestWalletName.o -c TestWalletName.cpp
-
-#TestAddLineinWallet.o: TestAddLineinWallet.cpp $(HEADERS)
-#	$(CPP) $(GTEST_INC) -o TestAddLineinWallet.o -c TestAddLineinWallet.cpp
+	
+TestAddLineinWallet.o: TestAddLineinWallet.cpp $(HEADERS)
+	$(CPP) $(GTEST_INC) -o TestAddLineinWallet.o -c TestAddLineinWallet.cpp
 	
 #..\main.o:
 #	..\$(MAKE) -c ..\main.o	

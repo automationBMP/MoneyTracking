@@ -21,7 +21,7 @@ TEST(GetWalletName, NoDefaultWallet)
 	std::ifstream configFile("main\\tst\\ConfigFiles\\no_default_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	ReadConfig wallet;
-	std::string actual = "Error";
+	std::string actual = "NoDefaultWalletFound";
 	
 	EXPECT_EQ(actual, wallet.GetDefaultWallet(content));
 }
@@ -54,7 +54,7 @@ TEST(GetWalletName, EmptyAfterDefWallet)
 	std::ifstream configFile("main\\tst\\ConfigFiles\\empty_after_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	ReadConfig wallet;
-	std::string actual = "";
+	std::string actual = "NoWalletNameFound";
 	
 	EXPECT_EQ(actual, wallet.GetDefaultWallet(content));
 }
@@ -65,7 +65,7 @@ TEST(GetWalletName, EmptyAfterEqual)
 	std::ifstream configFile("main\\tst\\ConfigFiles\\empty_after_equal.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	ReadConfig wallet;
-	std::string actual = "";
+	std::string actual = "NoWalletNameFound";
 	
 	EXPECT_EQ(actual, wallet.GetDefaultWallet(content));
 }
@@ -82,12 +82,12 @@ TEST(GetWalletName, MoreDefWallet)
 }
 
 //Test 7
-TEST(GetWalletName, NoConfig)
+TEST(GetWalletName, EmptyConfig)
 {
 	std::ifstream configFile("main\\tst\\ConfigFiles\\no_config.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	ReadConfig wallet;
-	std::string actual = "NoConfig";
+	std::string actual = "EmptyConfig";
 	
 	EXPECT_EQ(actual, wallet.GetDefaultWallet(content));
 }
