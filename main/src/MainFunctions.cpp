@@ -1,9 +1,4 @@
-/*
-	Author: Andrei Martinescu
-	
-	This file contains implementation for main functions .
-		
-*/
+//Author: Andrei Martinescu, v0.2
 
 #include "MainFunctions.h"
 #include <string>
@@ -283,6 +278,7 @@ void ImprementIncomeSpendFiveArguments(int argc, char *argv[], std::string strin
 		}	
 	}
 }
+
 //function command interpreter
 void CommandInterpreter(int arc, char *argv[])
 {
@@ -297,11 +293,6 @@ void CommandInterpreter(int arc, char *argv[])
 	{
 		ImplementIncomeSpend(arc, argv);
 	}
-/*  else if (stringArgumentNr2 == "balance")
-	{
-		ImpelmentBalance(arc, argv);
-	}
-*/	
 }
 //implement create commands and apeal functions for comands
 void ImpelmentCreate(int arc , char *argv[])
