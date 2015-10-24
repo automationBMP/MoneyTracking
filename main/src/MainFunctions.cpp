@@ -10,6 +10,7 @@
 #include "ValidateCreate.h"
 #include "ReadConfig.h"
 #include <string>
+#include "GetBalance.h"
 
 using namespace std ;
 
@@ -40,10 +41,11 @@ string ConvertPathToOriginal(string &givenPath)
 return givenPath;	
 } 
 
-string ReturnFileasString()
+string ReturnFileasString(const string &filename)
 {
+	//string filename1 = filename;
 	//read moneytracker.config file
-	std::ifstream ifs("moneytracker.config");
+	std::ifstream ifs(filename.c_str());
 	//check if is open
 	if (!ifs.is_open()) 
 	{  
@@ -53,8 +55,10 @@ string ReturnFileasString()
 	{	//the content of moneytracker.config is transfered to string content
 		std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
+		ifs.close();
 		return content;
 	}
+	
 }
 //function implementCreateForThreeArguments
 void ImplementCreateThreeArguments(int arc,char *argv[])
@@ -293,6 +297,26 @@ void CommandInterpreter(int arc, char *argv[])
 	{
 		ImplementIncomeSpend(arc, argv);
 	}
+	else if (stringArgumentNr2 == "balance")
+	{
+		std::string str = "moneytracker.config";
+		//const char *cstr = str.c_str();
+		string contentConfigFile(ReturnFileasString(str));
+		ReadConfig getWallet;
+		string walletName = 
+				getWallet.GetDefaultWallet(contentConfigFile);
+		//const char *cstrwallet = walletName.c_str();
+		string contentWalletFile(ReturnFileasString(walletName));
+		GetBalance balance;
+		string balanceFromWallet = balance.PrintBalance(contentWalletFile);
+		//cout << balanceDecimals;
+		DoCreateWallet addDecimals(walletName, balanceFromWallet);
+		string balanceWithdecimals = addDecimals.AddDecimalsToDefaultAmount();
+		
+		cout << "Balance for " << walletName << " is " << balanceWithdecimals << " RON";
+		cout << endl;
+		
+	}
 }
 //implement create commands and apeal functions for comands
 void ImpelmentCreate(int arc , char *argv[])
@@ -351,8 +375,12 @@ void PrintNoAmountSpecified(string incomeOrSpend)
 
 void PrintInFileIfWalletFound(string amount, string incomeOrSpend, string category)
 {	
+	std::string str = "moneytracker.config";
+	//const char *cstr = str.c_str();
+	string contentConfigFile(ReturnFileasString(str));
 	//read config file
-	string contentConfigFile(ReturnFileasString());
+	//string moneytrackerConfig = "moneytracker.config";
+	//string contentConfigFile(ReturnFileasString(moneytrackerConfig));
 	//create object ReadConfig for geting the wallet
 	ReadConfig getWallet;
 	string walletName = 

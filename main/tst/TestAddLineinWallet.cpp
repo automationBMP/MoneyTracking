@@ -17,6 +17,7 @@
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
+	ifs.close();
 	return content;
 }
  std::string ReturnWalletasStringSpend(DoCreateWallet &wallet)
@@ -27,6 +28,7 @@
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                        (std::istreambuf_iterator<char>()    ) );
+	ifs.close();
 	return content;
 }
 

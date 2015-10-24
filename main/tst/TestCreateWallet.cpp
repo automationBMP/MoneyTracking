@@ -7,7 +7,7 @@
 
 using namespace std;
 //helper function for reading from the file created and return the content
-string ReadWallet(const string walletName)
+string ReadWallet(const string &walletName)
 {
 	
 	ifstream wallet(walletName.c_str());
@@ -16,12 +16,13 @@ string ReadWallet(const string walletName)
 	
 	//read from the given file
 	getline(wallet,walletContent);
+	wallet.close();
 	
 	return walletContent;
 }
 
 //helper function for checking if the file has been created
-bool WalletCreated(const string walletName)
+bool WalletCreated(const string &walletName)
 {
 	bool isCreated = false;
 	ifstream wallet(walletName.c_str());
@@ -35,7 +36,7 @@ bool WalletCreated(const string walletName)
 	{
 		isCreated = false;
 	}
-	
+	wallet.close();
 	return isCreated;
 }
 

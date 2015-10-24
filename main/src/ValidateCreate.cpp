@@ -32,9 +32,18 @@ bool ValidateCreate::WalletExists()
 	string walletName = walletName_m;
 	
     ifstream f(walletName.c_str());
-
+	bool flag;
 	// return if true wallet exists and false if it doesn't exist
-	return f.good();
+	if (f.good() == true)
+	{ 
+		flag = true;
+	}
+	else 
+	{
+		flag = false;
+	}
+	f.close();
+	return flag;
 }
 
 // implementation of is valid number function

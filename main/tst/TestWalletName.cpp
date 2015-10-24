@@ -11,6 +11,7 @@ std::string ReturnFileAsStringHelper(std::ifstream &configFile)
 	//the content of moneytracker.config is transfered to string content
     std::string content( (std::istreambuf_iterator<char>(configFile) ),
                        (std::istreambuf_iterator<char>()    ) );
+	configFile.close();
 	
 	return content;
 }
@@ -20,6 +21,7 @@ TEST(GetWalletName, NoDefaultWallet)
 {
 	std::ifstream configFile("main\\tst\\ConfigFiles\\no_default_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
+	configFile.close();
 	ReadConfig wallet;
 	std::string actual = "NoDefaultWalletFound";
 	
@@ -31,6 +33,7 @@ TEST(GetWalletName, SpacesBeforeDefWallet)
 {
 	std::ifstream configFile("main\\tst\\ConfigFiles\\spaces_before_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
+	configFile.close();
 	ReadConfig wallet;
 	std::string actual = "mywallet";
 	
@@ -42,6 +45,7 @@ TEST(GetWalletName, SpacesAfterDefWallet)
 {
 	std::ifstream configFile("main\\tst\\ConfigFiles\\spaces_after_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
+	configFile.close();
 	ReadConfig wallet;
 	std::string actual = "mywallet";
 	
@@ -53,6 +57,7 @@ TEST(GetWalletName, EmptyAfterDefWallet)
 {
 	std::ifstream configFile("main\\tst\\ConfigFiles\\empty_after_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
+	configFile.close();
 	ReadConfig wallet;
 	std::string actual = "NoWalletNameFound";
 	
@@ -64,6 +69,7 @@ TEST(GetWalletName, EmptyAfterEqual)
 {
 	std::ifstream configFile("main\\tst\\ConfigFiles\\empty_after_equal.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
+	configFile.close();
 	ReadConfig wallet;
 	std::string actual = "NoWalletNameFound";
 	
@@ -75,6 +81,7 @@ TEST(GetWalletName, MoreDefWallet)
 {
 	std::ifstream configFile("main\\tst\\ConfigFiles\\more_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
+	configFile.close();
 	ReadConfig wallet;
 	std::string actual = "mywallet";
 	
@@ -86,6 +93,7 @@ TEST(GetWalletName, EmptyConfig)
 {
 	std::ifstream configFile("main\\tst\\ConfigFiles\\no_config.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
+	configFile.close();
 	ReadConfig wallet;
 	std::string actual = "EmptyConfig";
 	

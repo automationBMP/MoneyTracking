@@ -26,7 +26,8 @@ HEADERS = \
 	$(INC_DIR)\PrintError.h \
 	$(INC_DIR)\Types.h \
 	$(INC_DIR)\MainFunctions.h \
-	$(INC_DIR)\ReadConfig.h
+	$(INC_DIR)\ReadConfig.h \
+	$(INC_DIR)\GetBalance.h
 
 TST_OBJECTS=\
 	TestRemoveStartingZeroes.o \
@@ -45,7 +46,8 @@ SRC_OBJECTS=\
 	$(SRC_DIR)\ValidateCreate.o\
 	$(SRC_DIR)\PrintError.o\
 	$(SRC_DIR)\MainFunctions.o\
-	$(SRC_DIR)\ReadConfig.o
+	$(SRC_DIR)\ReadConfig.o\
+	$(SRC_DIR)\GetBalance.o
 
 all: test.a test.exe
 	

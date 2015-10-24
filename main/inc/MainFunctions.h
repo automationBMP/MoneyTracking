@@ -23,7 +23,7 @@ std::string ConvertPathToOriginal(std::string &givenPath);
 
 //function read config file
 // returns all content of file
-std::string ReturnFileasString();
+std::string ReturnFileasString(const std::string &filename);
 
 void CommandInterpreter(int arc, char *argv[]);
 void ImplementCreateThreeArguments(int arc,char *argv[]);
