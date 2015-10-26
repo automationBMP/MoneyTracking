@@ -38,7 +38,8 @@ TST_OBJECTS=\
 	TestCreateWallet.o \
 	TestAddDecimalsToDefaultAmount.o \
 	TestWalletName.o \
-	TestAddLineinWallet.o
+	TestAddLineinWallet.o \
+	TestReturnFileasString.o
 
 
 SRC_OBJECTS=\
@@ -100,6 +101,10 @@ TestWalletName: TestWalletName.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(G
 	$(CPP) -o TestWalletName.exe TestWalletName.o
 	..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 
+TestReturnFileasString: TestReturnFileasString.o ..\src\MainFunctions.o $(GTEST_LIB)
+	$(CPP) -o TestReturnFileasString.exe TestReturnFileasString.o \
+	..\src\MainFunctions.o $(GTEST_LIB)
+
 #Test.o 
 TestRemoveStartingZeroes.o: TestRemoveStartingZeroes.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestRemoveStartingZeroes.o -c TestRemoveStartingZeroes.cpp
@@ -127,6 +132,11 @@ TestWalletName.o: TestWalletName.cpp $(HEADERS)
 	
 TestAddLineinWallet.o: TestAddLineinWallet.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestAddLineinWallet.o -c TestAddLineinWallet.cpp
+
+TestReturnFileasString.o: TestReturnFileasString.cpp $(HEADERS)
+	$(CPP) $(GTEST_INC) -o TestReturnFileasString.o -c TestReturnFileasString.cpp
+ 	
+	
 	
 #..\main.o:
 #	..\$(MAKE) -c ..\main.o	

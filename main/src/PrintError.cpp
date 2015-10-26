@@ -88,7 +88,7 @@ void PrintError::Print(Error_E error,
 						<< "\n";
 		break;
 		case NO_AMOUNT_SPECIFIED:
-			std::cout	<< "error: no ammount specified for "
+			std::cout	<< "error: no amount specified for "
 						<< "'"
 						<< walletName_m
 						<< "'."

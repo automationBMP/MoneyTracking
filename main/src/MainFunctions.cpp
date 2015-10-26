@@ -126,7 +126,8 @@ void ImplementCreateFourArguments(int arc,char *argv[])
 	}				
 }
 
-void ImprementIncomeSpendThreeArguments(int argc, char *argv[], string stringArgumentNr, string category1)
+void ImprementIncomeSpendThreeArguments(int argc, char *argv[], 
+									string stringArgumentNr, string category1)
 {
 	string stringArgumentNr2 = stringArgumentNr;
 	string category = category1;
@@ -169,23 +170,26 @@ void ImprementIncomeSpendThreeArguments(int argc, char *argv[], string stringArg
 									stringArgumentNr2, stringArgumentNr3);
 		}	
 }
-void ImprementIncomeSpendFourArguments(int argc, char *argv[], std::string stringArgumentNr, std::string category1)
+void ImprementIncomeSpendFourArguments(int argc, char *argv[], 
+							std::string stringArgumentNr, std::string category1)
 {
 	string stringArgumentNr2 = stringArgumentNr;
 	string category = category1;
+	//check argument nr 3
 	string 	stringArgumentNr3(argv[2]);
 	if((stringArgumentNr3 == "-c") || (stringArgumentNr3 == "--category"))
 	{
 		PrintNoAmountSpecified(stringArgumentNr2);
 	}
 	else 
-	{
+	{	// check if argument nr 3 is a valid number
 		ValidateCreate validate("default_wallet",stringArgumentNr3);
 		// check if stringArgumentNr3 is a valid number
 		bool flag1 = validate.IsValidNumber();
 		if (flag1 == true)
 		{
-			PrintInFileIfWalletFound(stringArgumentNr3, stringArgumentNr2, category);
+			PrintInFileIfWalletFound(stringArgumentNr3, stringArgumentNr2, 
+																	category);
 		}
 		//if amount is not valid number print error
 		else PrintError::Print(SHOULD_BE_POSITIVE,
@@ -193,7 +197,8 @@ void ImprementIncomeSpendFourArguments(int argc, char *argv[], std::string strin
 	}
 }
 
-void ImprementIncomeSpendFiveArguments(int argc, char *argv[], std::string stringArgumentNr, std::string category1)
+void ImprementIncomeSpendFiveArguments(int argc, char *argv[], 
+							std::string stringArgumentNr, std::string category1)
 {
 	string stringArgumentNr2 = stringArgumentNr;
 	string category = category1;
@@ -217,7 +222,8 @@ void ImprementIncomeSpendFiveArguments(int argc, char *argv[], std::string strin
 			bool flag1 = validate.IsValidNumber();
 			if (flag1 == true)
 			{
-				PrintInFileIfWalletFound(stringArgumentNr5, stringArgumentNr2, category);
+				PrintInFileIfWalletFound(stringArgumentNr5, stringArgumentNr2, 
+																	category);
 			}
 				//if amount is not valid number print error
 			else PrintError::Print(SHOULD_BE_POSITIVE,
@@ -241,7 +247,8 @@ void ImprementIncomeSpendFiveArguments(int argc, char *argv[], std::string strin
 			bool flag1 = validate.IsValidNumber();
 			if (flag1 == true)
 			{
-				PrintInFileIfWalletFound(stringArgumentNr3, stringArgumentNr2, category);
+				PrintInFileIfWalletFound(stringArgumentNr3, stringArgumentNr2, 
+																	category);
 			}
 				//if amount is not valid number print error
 			else PrintError::Print(SHOULD_BE_POSITIVE,
@@ -291,6 +298,7 @@ void ImplementBalance (int arc, char *argv[])
 		ReadConfig getWallet;
 		string walletName = 
 				getWallet.GetDefaultWallet(contentConfigFile);
+		//check if wallet name is valid
 		if ((walletName == "NoDefaultWalletFound") ||
 											(walletName == "EmptyConfig")
 											||
@@ -316,19 +324,25 @@ void ImplementBalance (int arc, char *argv[])
 				//if valid path then add new line in wallet
 				string contentWalletFile(ReturnFileasString(walletName));
 				GetBalance balance;
-				string balanceFromWallet = balance.PrintBalance(contentWalletFile);
-				//cout << balanceDecimals;
+				string balanceFromWallet = 
+									balance.PrintBalance(contentWalletFile);
+				// add decimals to balance 
 				DoCreateWallet addDecimals(walletName, balanceFromWallet);
-				string balanceWithdecimals = addDecimals.AddDecimalsToDefaultAmount();
+				string balanceWithdecimals = 
+									addDecimals.AddDecimalsToDefaultAmount();
 
-				cout << "Balance for " << walletName << " is " << balanceWithdecimals << " RON";
-				cout << endl;	
+				cout << "Balance for " 
+					 << walletName 
+					 << " is " 
+					 << balanceWithdecimals 
+					 << " RON"
+				     << endl;	
 			}
 			else 
 			{
 				//if path is not valid print error
-				PrintError::Print(COULD_NOT_OPEN_PATH_BALANCE, reconvert, "+00.00");
-				//const char *cstrwallet = walletName.c_str();
+				PrintError::Print(COULD_NOT_OPEN_PATH_BALANCE, 
+														reconvert, "+00.00");
 			}
 		
 		}

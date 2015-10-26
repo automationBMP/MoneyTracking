@@ -22,7 +22,7 @@ moneytracker:
 # call make in 'main\src' subdir
 	$(MAKE) -C main\src
 	
-	$(MAKE) -C main\tst
+#	$(MAKE) -C main\tst
 # call make with target 'moneytracker.exe'
 	$(MAKE) moneytracker.exe
 	
@@ -34,10 +34,18 @@ moneytracker.exe: mymain main\src\src.a
 mymain: main\main.cpp $(HEADERS)
 	$(CPP) -o main\main.o -c main\main.cpp $(INCLUDES)
 
-test.exe:
-	$(MAKE) -C main\tst test.exe
+#test.exe:
+#	$(MAKE) -C main\tst test.exe
 
-test: main\tst\test.exe
+#test:main\tst\test.exe
+#	main\tst\test.exe
+test:
+	$(MAKE) -C main\src
+	$(MAKE) moneytracker.exe
+	$(MAKE) -C main\tst test.exe
+	$(MAKE) test.exe
+	
+test.exe: main\tst\test.exe
 	main\tst\test.exe
 	
 clean:
