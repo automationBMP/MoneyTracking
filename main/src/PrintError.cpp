@@ -102,6 +102,14 @@ void PrintError::Print(Error_E error,
 						<< " to register transaction"
 						<< "\n";
 		break;
+		case COULD_NOT_OPEN_PATH_BALANCE:
+			std::cout	<< "error: could not open "
+						<< "'"
+						<< walletName_m
+						<< "'"
+						<< " to calculate balance"
+						<< "\n";
+		break;
 		case ALL_GOOD:
 			std::cout	<< "";		
 		break;

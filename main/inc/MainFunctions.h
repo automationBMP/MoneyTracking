@@ -32,6 +32,7 @@ void ImprementIncomeSpendThreeArguments(int argc, char *argv[], std::string stri
 void ImprementIncomeSpendFourArguments(int argc, char *argv[], std::string stringArgumentNr, std::string category1);
 void ImprementIncomeSpendFiveArguments(int argc, char *argv[], std::string stringArgumentNr, std::string category1);
 void ImpelmentCreate(int arc, char *argv[]);
+void ImpelmentBalance(int arc, char *argv[]);
 void ImplementIncomeSpend(int arc, char *argv[]);
 void PrintIncomeSpendNegative(std::string, std::string);
 void PrintNoAmountSpecified(std::string);

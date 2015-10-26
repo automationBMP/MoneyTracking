@@ -283,6 +283,57 @@ void ImprementIncomeSpendFiveArguments(int argc, char *argv[], std::string strin
 	}
 }
 
+void ImplementBalance (int arc, char *argv[])
+{
+	std::string str = "moneytracker.config";
+		//const char *cstr = str.c_str();
+		string contentConfigFile(ReturnFileasString(str));
+		ReadConfig getWallet;
+		string walletName = 
+				getWallet.GetDefaultWallet(contentConfigFile);
+		if ((walletName == "NoDefaultWalletFound") ||
+											(walletName == "EmptyConfig")
+											||
+											(walletName == "NoWalletNameFound"))
+		{	
+			PrintError::Print(NO_DEFAULT_WALLET,"default wallet", "+00.00");							
+		}
+		else if (walletName == "NotOpen")
+		{	
+			// if the method GetDefaultWallet return NoConfig
+			PrintError::Print(COULD_NOT_OPEN_CONFIG,"default_wallet", "+00.00");
+		}
+		else 
+		{
+			string convertP = ConvertPath(walletName);
+			//validating path
+			ValidateCreate validate1(convertP,"+00.00");
+			bool flag = validate1.WalletExists();
+			// reconvert path to original
+			string reconvert = ConvertPathToOriginal(convertP);
+			if (flag == true )
+			{	
+				//if valid path then add new line in wallet
+				string contentWalletFile(ReturnFileasString(walletName));
+				GetBalance balance;
+				string balanceFromWallet = balance.PrintBalance(contentWalletFile);
+				//cout << balanceDecimals;
+				DoCreateWallet addDecimals(walletName, balanceFromWallet);
+				string balanceWithdecimals = addDecimals.AddDecimalsToDefaultAmount();
+
+				cout << "Balance for " << walletName << " is " << balanceWithdecimals << " RON";
+				cout << endl;	
+			}
+			else 
+			{
+				//if path is not valid print error
+				PrintError::Print(COULD_NOT_OPEN_PATH_BALANCE, reconvert, "+00.00");
+				//const char *cstrwallet = walletName.c_str();
+			}
+		
+		}
+}
+
 //function command interpreter
 void CommandInterpreter(int arc, char *argv[])
 {
@@ -299,23 +350,7 @@ void CommandInterpreter(int arc, char *argv[])
 	}
 	else if (stringArgumentNr2 == "balance")
 	{
-		std::string str = "moneytracker.config";
-		//const char *cstr = str.c_str();
-		string contentConfigFile(ReturnFileasString(str));
-		ReadConfig getWallet;
-		string walletName = 
-				getWallet.GetDefaultWallet(contentConfigFile);
-		//const char *cstrwallet = walletName.c_str();
-		string contentWalletFile(ReturnFileasString(walletName));
-		GetBalance balance;
-		string balanceFromWallet = balance.PrintBalance(contentWalletFile);
-		//cout << balanceDecimals;
-		DoCreateWallet addDecimals(walletName, balanceFromWallet);
-		string balanceWithdecimals = addDecimals.AddDecimalsToDefaultAmount();
-		
-		cout << "Balance for " << walletName << " is " << balanceWithdecimals << " RON";
-		cout << endl;
-		
+		ImplementBalance(arc, argv);
 	}
 }
 //implement create commands and apeal functions for comands
