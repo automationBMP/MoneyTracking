@@ -11,7 +11,7 @@ CPP = $(COMPILER) $(CPPFLAGS) $(INCLUDES)
 
 AR = ar crf
 
-GTEST_DIR=C:\gtest-1.7.0
+GTEST_DIR=C:\gtest-1.7.0\gtest-1.7.0
 
 GTEST_LIB=$(GTEST_DIR)\make\gtest_main.a
 
@@ -39,7 +39,8 @@ TST_OBJECTS=\
 	TestAddDecimalsToDefaultAmount.o \
 	TestWalletName.o \
 	TestAddLineinWallet.o \
-	TestReturnFileasString.o
+	TestReturnFileasString.o \
+	TestGetBalance.o
 
 
 SRC_OBJECTS=\
@@ -105,6 +106,9 @@ TestReturnFileasString: TestReturnFileasString.o ..\src\MainFunctions.o $(GTEST_
 	$(CPP) -o TestReturnFileasString.exe TestReturnFileasString.o \
 	..\src\MainFunctions.o $(GTEST_LIB)
 
+TestGetBalance: TestGetBalance.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o TestGetBalance.exe TestGetBalance.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
+
 #Test.o 
 TestRemoveStartingZeroes.o: TestRemoveStartingZeroes.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestRemoveStartingZeroes.o -c TestRemoveStartingZeroes.cpp
@@ -136,7 +140,8 @@ TestAddLineinWallet.o: TestAddLineinWallet.cpp $(HEADERS)
 TestReturnFileasString.o: TestReturnFileasString.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestReturnFileasString.o -c TestReturnFileasString.cpp
  	
-	
+TestGetBalance.o: TestGetBalance.cpp $(HEADERS)
+	$(CPP) $(GTEST_INC) -o TestGetBalance.o -c TestGetBalance.cpp
 	
 #..\main.o:
 #	..\$(MAKE) -c ..\main.o	
@@ -170,3 +175,4 @@ clean:
 	$(RM) TestWalletName.exe
 	$(RM) TestAddLineinWallet.exe
 	$(RM) test.exe
+	$(RM) TestGetBalance.exe
