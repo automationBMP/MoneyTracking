@@ -40,6 +40,7 @@ std::string readLastLine()
 //Test 1
 TEST(SpecifyCategory, IncomeCCategoryAmount)
 {
+	std::ofstream ifs("mywallet");
 	char* argumente[5]= {(char*)"moneytracker", (char*)"income", (char*)"--category", (char*)"category1", (char*)"300"};
 	ImplementIncomeSpend(5, argumente);
 	time_t currentTime = time(NULL);
