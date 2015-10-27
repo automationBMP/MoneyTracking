@@ -11,7 +11,7 @@ CPP = $(COMPILER) $(CPPFLAGS) $(INCLUDES)
 
 AR = ar crf
 
-GTEST_DIR=C:\gtest-1.7.0\gtest-1.7.0
+GTEST_DIR=C:\gtest-1.7.0
 
 GTEST_LIB=$(GTEST_DIR)\make\gtest_main.a
 
@@ -40,7 +40,8 @@ TST_OBJECTS=\
 	TestWalletName.o \
 	TestAddLineinWallet.o \
 	TestReturnFileasString.o \
-	TestGetBalance.o
+	TestGetBalance.o \
+	TestSpecifyCategory.o
 
 
 SRC_OBJECTS=\
@@ -108,6 +109,9 @@ TestReturnFileasString: TestReturnFileasString.o ..\src\MainFunctions.o $(GTEST_
 
 TestGetBalance: TestGetBalance.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 	$(CPP) -o TestGetBalance.exe TestGetBalance.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
+	
+TestSpecifyCategory: TestSpecifyCategory.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o TestSpecifyCategory.exe TestSpecifyCategory.o .\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
 
 #Test.o 
 TestRemoveStartingZeroes.o: TestRemoveStartingZeroes.cpp $(HEADERS)
@@ -142,6 +146,9 @@ TestReturnFileasString.o: TestReturnFileasString.cpp $(HEADERS)
  	
 TestGetBalance.o: TestGetBalance.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestGetBalance.o -c TestGetBalance.cpp
+	
+TestSpecifyCategory.o: TestSpecifyCategory.cpp $(HEADERS)
+	$(CPP) $(GTEST_INC) -o TestSpecifyCategory.o -c TestSpecifyCategory.cpp
 	
 #..\main.o:
 #	..\$(MAKE) -c ..\main.o	
