@@ -110,6 +110,11 @@ void PrintError::Print(Error_E error,
 						<< " to calculate balance"
 						<< "\n";
 		break;
+		case INVALID_PARAMETER:
+			std::cout	<< "Invalid parameter for "
+						<< walletName_m
+						<< ".\n";
+		break;
 		case ALL_GOOD:
 			std::cout	<< "";		
 		break;

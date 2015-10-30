@@ -3,21 +3,19 @@
 #include "GetBalance.h"
 using namespace std;
 
-string GetBalance::PrintBalance(std::string &content)
-
+bool GetBalance::CategoryExists()
 {
+	return categoryExists;
+}
+
+string GetBalance::PrintBalance(std::string &content, std::string category)
+{
+	categoryExists = false;
     double balance = 0.00;
+	double balanceCategory = 0.00;
 	double result;	
 	string ss;
-
-	/*//read my.wallet file
-	std::ifstream ifs("my.wallet.txt");
 	
-	//the content of my.wallet is transfered to string content
-    std::string content( (std::istreambuf_iterator<char>(ifs) ),
-                       (std::istreambuf_iterator<char>()    ) );
-	
-	cout<<content;*/
 	//get the first line containing the initial amount and sign
 	ss = content.substr(0,content.find("\n"));
 	
@@ -25,6 +23,7 @@ string GetBalance::PrintBalance(std::string &content)
 	string amountsign = ss.substr(0,1);
 	string amount = ss.substr(1, content.length());
 
+	
 	//initialize balance with the amount the wallet is created
 	if (amountsign == "+")
 		{
@@ -58,8 +57,30 @@ string GetBalance::PrintBalance(std::string &content)
 
 			// get the amount
 			std::string amount1 = s1.substr(0, s1.find(";"));
-			std::istringstream i(amount1);
+			//get the content of the file without epoch time, sign, amount
+			s1 = s1.substr(s1.find(';') + 1, std::string::npos);
+			
+			// get the category
+			std::string categoryInWallet = s1.substr(0, s1.find(";"));
+			
+			//convert amount from string into double
 			result = atof(amount1.c_str());
+			
+			//calculate the balance for a certain category
+			if (categoryInWallet == category)
+			{
+				categoryExists = true;
+				
+				//calculate balance
+				if (sign == "+") 
+				{
+					balanceCategory = balanceCategory + result;
+				}
+				else
+				{
+					balanceCategory = balanceCategory - result;
+				}
+			}
 			
 			//calculate balance
 			if (sign == "+")
@@ -73,6 +94,12 @@ string GetBalance::PrintBalance(std::string &content)
 		}
 
 	//convert duble balance to string balance
+	
+	if (categoryExists == true)
+	{
+		balance = balanceCategory;
+	}
+	
 	stringstream convert; 
 	convert << balance;
 	

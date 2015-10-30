@@ -11,8 +11,10 @@ class GetBalance
 {
 	private:
 		double balance;
+		bool categoryExists;
 	public:
-	std::string PrintBalance(std::string &content);
+		std::string PrintBalance(std::string &content, std::string category);
+		bool CategoryExists();
 };
 
 

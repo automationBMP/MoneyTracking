@@ -9,7 +9,7 @@
 #include "DoCreateWallet.h" 
 #include "ValidateCreate.h"
 #include "ReadConfig.h"
-#include <string>
+#include <cstring>
 #include "GetBalance.h"
 
 using namespace std ;
@@ -293,7 +293,9 @@ void ImprementIncomeSpendFiveArguments(int argc, char *argv[],
 void ImplementBalance (int arc, char *argv[])
 {
 	std::string str = "moneytracker.config";
-		//const char *cstr = str.c_str();
+	std::string category = "";
+	bool validCommand = true;
+	//const char *cstr = str.c_str();
 		string contentConfigFile(ReturnFileasString(str));
 		ReadConfig getWallet;
 		string walletName = 
@@ -313,6 +315,34 @@ void ImplementBalance (int arc, char *argv[])
 		}
 		else 
 		{
+			//if a category is introduced after balance 
+			if ((arc > 2) && (arc < 5))
+			{
+				if ((strcmp(argv[2],"-c")) == 0||(strcmp(argv[2],"--category") == 0))
+				{
+					if (arc == 3)
+					{
+						validCommand = false;
+						PrintError::Print(INVALID_PARAMETER,"balance", "+00.00");
+					}
+					else
+					{
+						category = argv[3]; 
+					}
+				}
+				else
+				{
+					validCommand = false;
+					PrintError::Print(INVALID_PARAMETER,"balance", "+00.00");
+				}
+			}
+			else if (arc > 4)
+			{
+				validCommand = false;
+				PrintError::Print(INVALID_PARAMETER,"balance", "+00.00");
+			}
+		
+			
 			string convertP = ConvertPath(walletName);
 			//validating path
 			ValidateCreate validate1(convertP,"+00.00");
@@ -325,18 +355,47 @@ void ImplementBalance (int arc, char *argv[])
 				string contentWalletFile(ReturnFileasString(walletName));
 				GetBalance balance;
 				string balanceFromWallet = 
-									balance.PrintBalance(contentWalletFile);
+									balance.PrintBalance(contentWalletFile, category);
 				// add decimals to balance 
 				DoCreateWallet addDecimals(walletName, balanceFromWallet);
 				string balanceWithdecimals = 
 									addDecimals.AddDecimalsToDefaultAmount();
-
-				cout << "Balance for " 
+				
+				//if the category exists print balance for the specified category
+				if (balance.CategoryExists()) 
+				{
+					cout << "Balance for '" 
+					 << category 
+					 << "' in "
 					 << walletName 
 					 << " is " 
 					 << balanceWithdecimals 
 					 << " RON"
 				     << endl;	
+				}
+				
+				//if the category introduced is not found in the wallet file
+				//print message 
+				 else if (category != "")
+				{
+					cout << "No transaction with category '" 
+						 << category 
+						 << "' is registered in "
+						 << walletName
+						 << "."
+						 << endl;
+				}  
+				else if (validCommand == true)
+					
+				//if no category is introduced print balance for the whole wallet
+				{
+				cout << "Balance for " 
+					 << walletName 
+					 << " is " 
+					 << balanceWithdecimals 
+					 << " RON"
+				     << endl;
+				}					 
 			}
 			else 
 			{
@@ -367,6 +426,7 @@ void CommandInterpreter(int arc, char *argv[])
 		ImplementBalance(arc, argv);
 	}
 }
+
 //implement create commands and apeal functions for comands
 void ImpelmentCreate(int arc , char *argv[])
 {
