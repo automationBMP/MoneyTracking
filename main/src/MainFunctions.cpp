@@ -11,6 +11,7 @@
 #include "ReadConfig.h"
 #include <cstring>
 #include "GetBalance.h"
+#include "ConfigFile.h"
 
 using namespace std ;
 
@@ -298,8 +299,9 @@ void ImplementBalance (int arc, char *argv[])
 	//const char *cstr = str.c_str();
 		string contentConfigFile(ReturnFileasString(str));
 		ReadConfig getWallet;
+		std::string defaultEntry = "default_wallet";
 		string walletName = 
-				getWallet.GetDefaultWallet(contentConfigFile);
+				getWallet.GetDefaultWallet(contentConfigFile, defaultEntry);
 		//check if wallet name is valid
 		if ((walletName == "NoDefaultWalletFound") ||
 											(walletName == "EmptyConfig")
@@ -341,7 +343,6 @@ void ImplementBalance (int arc, char *argv[])
 				validCommand = false;
 				PrintError::Print(INVALID_PARAMETER,"balance", "+00.00");
 			}
-		
 			
 			string convertP = ConvertPath(walletName);
 			//validating path
@@ -407,6 +408,256 @@ void ImplementBalance (int arc, char *argv[])
 		}
 }
 
+void ImplementConfig(int arc, char *argv[])
+{
+	std::string configString = "moneytracker.config";
+	std::string printConfig = ReturnFileasString(configString);
+	if (arc == 2) 
+	{
+		cout << printConfig;
+	}
+	else if (arc > 2)
+	{
+		string *arguments = new string [arc-2];
+		int j = 0;
+		for (int i =2; i<arc; i++)
+		{
+			arguments[j] = argv[i];
+			//cout << arguments[j] << endl;
+			j++;
+		}
+		for (int i =0; i<arc-2; i++)
+		{
+			 if (((arguments[i].find("default_wallet") != std::string::npos)||
+				(arguments[i].find("default_currency") != std::string::npos)||
+				(arguments[i].find("default_income_category") != std::string::npos)||
+				(arguments[i].find("default_spending_category") != std::string::npos)||
+				(arguments[i].find("currencies") != std::string::npos)||
+				(arguments[i].find("rate_EUR_RON") != std::string::npos)||
+				(arguments[i].find("rate_RON_EUR") != std::string::npos)||
+				(arguments[i].find("rate_USD_RON") != std::string::npos)||
+				(arguments[i].find("rate_EUR_USD") != std::string::npos))&&
+				(arguments[i].find("=")!= std::string::npos))
+				{
+					//cout << arguments[i].find("default_wallet") <<endl;
+					std:: string checkIfCorect = arguments[i].substr(0,arguments[i].find('='));
+					if ((checkIfCorect == "default_wallet")||
+						(checkIfCorect == "default_currency")||
+						(checkIfCorect == "default_income_category")||
+						(checkIfCorect == "default_spending_category")||
+						(checkIfCorect == "currencies")||
+						(checkIfCorect == "rate_EUR_RON")||
+						(checkIfCorect == "rate_RON_EUR")||
+						(checkIfCorect == "rate_USD_RON")||
+						(checkIfCorect == "rate_EUR_USD"))
+						{
+							// apeal function change
+							 size_t pozEquals = arguments[i].find('=');
+							size_t lengthOfCommandWithoutFirstParameter = arguments[i].length()-arguments[i].find('=');
+							
+							std:: string changeValue = arguments[i].substr(pozEquals+1,lengthOfCommandWithoutFirstParameter);
+							//cout << changeValue <<endl;
+							//cout << checkIfCorect <<endl;
+							ConfigFile changeConfig(printConfig, changeValue, checkIfCorect);
+							std::string newConfig = changeConfig.ChangeConfigFile();
+							changeConfig.ReWriteConfigFile(); 
+						}
+					else 
+					{
+						cout << "'" 
+							 << checkIfCorect
+							 << "'"
+							 << " is not a valid configuration value.";
+					}   
+				} 
+				else 
+				{
+					cout << "Invalid" 
+						 << " parameter"
+						 << " for"
+						 << " config.";
+					break;
+				}
+		}
+	}
+	
+}
+
+std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
+{
+	// implement for default categorry
+	string *arguments = new string [argc-2];
+	int j = 0;
+	 for (int i =2; i<argc; i++)
+	{
+		arguments[j] = argv[i];
+		j++;
+	} 
+	int k = 0;
+	int pozition = 0;
+	bool flag = false;
+	while (k <= argc-3) 
+	{
+		if ((argc-3)==0)
+		{
+			ValidateCreate validateNumber("default_wallet",arguments[k]);
+			bool flag2 = validateNumber.IsValidNumber();
+			if (flag2 == true)
+			{	
+				pozition = k;
+				flag = true;
+				k = argc;				
+			}
+			else 
+			{
+				PrintError::Print(SHOULD_BE_POSITIVE,
+									argv[1], argv[2]);
+				k = argc;
+			}
+		}
+		else if ((argc-3)==2)
+		{
+			cout << "enter";
+			ValidateCreate validateNumber("default_wallet",arguments[k]);
+			bool flag2 = validateNumber.IsValidNumber();
+			if (flag2 == true)
+			{
+				if ((arguments[k+1]=="-c")||(arguments[k+1]=="--category")||(arguments[k+1]=="-w")||(arguments[k+1]=="--wallet"))
+				{
+					pozition = k;
+					k = argc;
+					flag = true;
+				}
+				else 
+				{
+					cout << "Not a valid comand for " << argv[1] << endl;
+					k = argc;
+				}
+			}
+			else 
+			{
+				ValidateCreate validateNumber("default_wallet",arguments[2]);
+				bool flag2 = validateNumber.IsValidNumber();
+				k = 2;
+				if (flag2 == true)
+				{
+					if ((arguments[k-2]=="-c")||(arguments[k-2]=="--category")||(arguments[k-2]=="-w")||(arguments[k-2]=="--wallet"))
+					{
+						pozition = k;
+						k = argc;
+						flag = true;
+					}
+					else 
+					{
+						cout << "Not a valid comand for " << argv[1] << endl;
+						k = argc;
+						
+					}
+				}
+				else 
+				{
+					cout << "Not a valid comand for " << argv[1] << endl;
+					k = argc;
+				}
+			}	
+		}
+		else if ((argc-3)==4)
+		{
+			ValidateCreate validateNumber("default_wallet",arguments[k]);
+			bool flag2 = validateNumber.IsValidNumber();
+			if (flag2 == true)
+			{	
+				if ((arguments[k+1] != arguments[k+3])&&((arguments[k+1]=="-c")||(arguments[k+1]=="--category")||(arguments[k+1]=="-w")||(arguments[k+1]=="--wallet"))
+								&&((arguments[k+3]=="-c")||(arguments[k+3]=="--category")||(arguments[k+3]=="-w")||(arguments[k+3]=="--wallet")))
+				{	
+					pozition = k;
+					k = argc;
+					flag = true;
+				}
+				else 
+				{
+					cout << "Not a valid comand for " << argv[1] << endl;
+					k = argc;
+					
+				}
+			}
+			else 
+			{
+				ValidateCreate validateNumber("default_wallet",arguments[2]);
+				bool flag2 = validateNumber.IsValidNumber();
+				k = 2;
+				if (flag2 == true)
+				{
+					if ((arguments[k-2] != arguments[k+1])&&((arguments[k-2]=="-c")||(arguments[k-2]=="--category")||(arguments[k-2]=="-w")||(arguments[k-2]=="--wallet"))
+								&&((arguments[k+1]=="-c")||(arguments[k+1]=="--category")||(arguments[k+1]=="-w")||(arguments[k+1]=="--wallet")))
+					{
+						pozition = k;
+						k = argc;
+						flag = true;
+					}
+					else 
+					{
+						cout << "Not a valid comand for " << argv[1] << endl;
+						k = argc;
+					}
+				}
+				else 
+				{
+					ValidateCreate validateNumber("default_wallet",arguments[4]);
+					bool flag2 = validateNumber.IsValidNumber();
+					k = 4;
+					if (flag2 == true)
+					{
+						if ((arguments[k-2] != arguments[k-4])&&((arguments[k-2]=="-c")||(arguments[k-2]=="--category")||(arguments[k-2]=="-w")||(arguments[k-2]=="--wallet"))
+									&&((arguments[k-4]=="-c")||(arguments[k-4]=="--category")||(arguments[k-4]=="-w")||(arguments[k-4]=="--wallet")))
+						{
+							pozition = k;
+							k = argc;
+							flag = true;
+						}
+						else 
+						{
+							cout << "Not a valid comand for " << argv[1] << endl;
+							k = argc;
+						}
+					}
+					else 
+					{
+						cout << "Not a valid comand for " << argv[1] << endl;
+						k = argc;
+										
+					}
+				}
+			}		
+		}
+	}
+
+std::string * newArguments = new string [argc-2];
+newArguments[0] = arguments[pozition];
+int iterator = 1;
+if (flag == true) 
+{
+	for (int i=0 ; i<=argc-3; i++)
+	{
+		if (i != pozition) 
+		{
+			newArguments[iterator] = arguments[i] ;
+			iterator++;
+		}
+	}
+}
+/*  for (int i=0 ; i<=argc-3; i++)
+{
+	cout << newArguments[i] << endl;
+}  */
+/* else
+{
+	cout << "no valid " << endl;
+}
+  */
+return newArguments;
+}
+
 //function command interpreter
 void CommandInterpreter(int arc, char *argv[])
 {
@@ -425,6 +676,15 @@ void CommandInterpreter(int arc, char *argv[])
 	{
 		ImplementBalance(arc, argv);
 	}
+	else if (stringArgumentNr2 == "config")
+	{
+		ImplementConfig(arc, argv);
+	}
+	else 
+	{
+		cout << "Not a valid command.";
+	}
+	
 }
 
 //implement create commands and apeal functions for comands
@@ -444,10 +704,15 @@ void ImpelmentCreate(int arc , char *argv[])
 			ImplementCreateThreeArguments(arc, argv);
 			
 		} 
-		else if (arc >= 4) 
+		else if (arc == 4) 
 		{
 			ImplementCreateFourArguments(arc, argv);	
-		}			
+		}
+		else if (arc > 4)
+		{
+			PrintError::Print(INVALID_PARAMETER,
+							"create", "+00.00");
+		}
 	}
 }
 
@@ -492,8 +757,9 @@ void PrintInFileIfWalletFound(string amount, string incomeOrSpend, string catego
 	//string contentConfigFile(ReturnFileasString(moneytrackerConfig));
 	//create object ReadConfig for geting the wallet
 	ReadConfig getWallet;
+	std::string defaultEntry = "default_wallet";
 	string walletName = 
-				getWallet.GetDefaultWallet(contentConfigFile);
+				getWallet.GetDefaultWallet(contentConfigFile,defaultEntry);
 	// if return NoDefaultWalletFound or EmptyConfig or NoWalletNameFound		
 	if ((walletName == "NoDefaultWalletFound") ||
 											(walletName == "EmptyConfig")
@@ -534,6 +800,7 @@ void ImplementIncomeSpend(int argc, char *argv[])
 {
 	string stringArgumentNr2(argv[1]);
 	string category;
+	//cout << "DSFs";
 	if (argc<=2)
 	{
 		PrintNoAmountSpecified(stringArgumentNr2);
@@ -550,19 +817,28 @@ void ImplementIncomeSpend(int argc, char *argv[])
 			category = "other";
 		}
 	}
-	
-	if (argc == 3) 
+	if (argc < 6) // <8
 	{
-		ImprementIncomeSpendThreeArguments(argc, argv, stringArgumentNr2, category);
-	} 
-	
-	if (argc == 4) 
+		//std::string* argum = ValidateIncomeSpendCommands(argc, argv);	
+		
+	     if (argc == 3) 
+		{
+			ImprementIncomeSpendThreeArguments(argc, argv, stringArgumentNr2, category);
+		} 
+		
+		if (argc == 4) 
+		{
+			ImprementIncomeSpendFourArguments(argc, argv, stringArgumentNr2, category);
+		}	
+		
+		if (argc == 5) 
+		{
+			ImprementIncomeSpendFiveArguments(argc, argv, stringArgumentNr2, category);
+		}  
+	}
+	else 
 	{
-		ImprementIncomeSpendFourArguments(argc, argv, stringArgumentNr2, category);
-	}	
-	
-	if (argc >= 5) 
-	{
-		ImprementIncomeSpendFiveArguments(argc, argv, stringArgumentNr2, category);
+		PrintError::Print(INVALID_PARAMETER,
+							stringArgumentNr2, "+00.00");
 	}
 }

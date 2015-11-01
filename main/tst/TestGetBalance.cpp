@@ -33,7 +33,7 @@ TEST(TestGetBalance, ZeroAmountBalance)
 	//convert file content to string
 	std::string walletFile = ReturnWalletString(wallet);
 	
-	EXPECT_EQ("+0",balance.PrintBalance(walletFile));
+	EXPECT_EQ("+0",balance.PrintBalance(walletFile,""));
 }
 //=============================================================================
 
@@ -48,7 +48,7 @@ TEST(TestGetBalance, NegAmountBalance)
 	//convert file content to string
 	std::string walletFile = ReturnWalletString(wallet);
 	
-	EXPECT_EQ("-200.55",balance.PrintBalance(walletFile));
+	EXPECT_EQ("-200.55",balance.PrintBalance(walletFile,""));
 
 }
 //=============================================================================
@@ -64,7 +64,7 @@ TEST(TestGetBalance, PosAmountBalance)
 	//convert file content to string
 	std::string walletFile = ReturnWalletString(wallet);
 	
-	EXPECT_EQ("+200.55",balance.PrintBalance(walletFile));
+	EXPECT_EQ("+200.55",balance.PrintBalance(walletFile,""));
 }
 //=============================================================================
 
@@ -94,7 +94,7 @@ TEST(TestGetBalance, IncomeAmountBalance)
 	std::string walletFile = ReturnWalletString(wallet);
 	//std :: cout<<walletFile;
 	
-	EXPECT_EQ("+1000.55",balance.PrintBalance(walletFile));
+	EXPECT_EQ("+1000.55",balance.PrintBalance(walletFile,""));
 }
 //=============================================================================
 
@@ -124,6 +124,6 @@ TEST(TestGetBalance, SpendAmountBalance)
 	std::string walletFile = ReturnWalletString(wallet);
 	//std :: cout<<walletFile;
 	
-	EXPECT_EQ("-599.45",balance.PrintBalance(walletFile));
+	EXPECT_EQ("-599.45",balance.PrintBalance(walletFile,""));
 }
 //=============================================================================

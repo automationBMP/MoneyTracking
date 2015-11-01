@@ -27,7 +27,8 @@ HEADERS = \
 	$(INC_DIR)\Types.h \
 	$(INC_DIR)\MainFunctions.h \
 	$(INC_DIR)\ReadConfig.h \
-	$(INC_DIR)\GetBalance.h
+	$(INC_DIR)\GetBalance.h \
+	$(INC_DIR)\ConfigFile.h
 
 TST_OBJECTS=\
 	TestRemoveStartingZeroes.o \
@@ -41,7 +42,8 @@ TST_OBJECTS=\
 	TestAddLineinWallet.o \
 	TestReturnFileasString.o \
 	TestGetBalance.o \
-	TestSpecifyCategory.o
+	TestSpecifyCategory.o\
+	TestValidateIncomeSpendCommands.o
 
 
 SRC_OBJECTS=\
@@ -50,7 +52,8 @@ SRC_OBJECTS=\
 	$(SRC_DIR)\PrintError.o\
 	$(SRC_DIR)\MainFunctions.o\
 	$(SRC_DIR)\ReadConfig.o\
-	$(SRC_DIR)\GetBalance.o
+	$(SRC_DIR)\GetBalance.o\
+	$(SRC_DIR)\ConfigFile.o
 
 all: test.a test.exe
 	
@@ -113,6 +116,8 @@ TestGetBalance: TestGetBalance.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(G
 TestSpecifyCategory: TestSpecifyCategory.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
 	$(CPP) -o TestSpecifyCategory.exe TestSpecifyCategory.o .\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
 
+TestValidateIncomeSpendCommands: ValidateIncomeSpendCommands.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o ValidateIncomeSpendCommands.exe ValidateIncomeSpendCommands.o .\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
 #Test.o 
 TestRemoveStartingZeroes.o: TestRemoveStartingZeroes.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestRemoveStartingZeroes.o -c TestRemoveStartingZeroes.cpp
@@ -150,11 +155,13 @@ TestGetBalance.o: TestGetBalance.cpp $(HEADERS)
 TestSpecifyCategory.o: TestSpecifyCategory.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestSpecifyCategory.o -c TestSpecifyCategory.cpp
 	
+TestValidateIncomeSpendCommands.o: TestValidateIncomeSpendCommands.cpp $(HEADERS)
+	$(CPP) $(GTEST_INC) -o TestValidateIncomeSpendCommands.o -c TestValidateIncomeSpendCommands.cpp
 #..\main.o:
 #	..\$(MAKE) -c ..\main.o	
 	
 ..\src\DoCreateWallet.o:
-	$(MAKE) -C ..\src
+	$(MAKE) -C ..\src\DoCreateWallet.o
 
 ..\src\ValidateCreate.o:
 	$(MAKE) -c ..\src\ValidateCreate.o
@@ -167,6 +174,13 @@ TestSpecifyCategory.o: TestSpecifyCategory.cpp $(HEADERS)
 
 ..\src\ReadConfig.o:
 	$(MAKE) -c ..\src\ReadConfig.o
+	
+..\src\GetBalance.o:
+	$(MAKE) -c ..\src\GetBalance.o
+	
+..\src\ConfigFile.o:
+	$(MAKE) -c ..\src\ConfigFile.o
+
 	
 clean:
 	$(RM) test.a
@@ -183,3 +197,4 @@ clean:
 	$(RM) TestAddLineinWallet.exe
 	$(RM) test.exe
 	$(RM) TestGetBalance.exe
+	$(RM) TestValidateIncomeSpendCommands.exe

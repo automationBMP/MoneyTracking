@@ -17,7 +17,9 @@ HEADERS = \
 	..\inc\MainFunctions.h\
 	..\inc\Types.h\
 	..\inc\ReadConfig.h \
-	..\inc\GetBalance.h
+	..\inc\GetBalance.h \
+	..\inc\ConfigFile.h
+	
 
 SRC_OBJECTS=\
 	DoCreateWallet.o\
@@ -25,7 +27,8 @@ SRC_OBJECTS=\
 	PrintError.o\
 	MainFunctions.o\
 	ReadConfig.o\
-	GetBalance.o
+	GetBalance.o\
+	ConfigFile.o
 	
 SRC_CPP=\
 	DoCreateWallet.cpp\
@@ -33,7 +36,8 @@ SRC_CPP=\
 	PrintError.cpp\
 	MainFunctions.cpp\
 	ReadConfig.cpp\
-	GetBalance.cpp
+	GetBalance.cpp\
+	ConfigFile.cpp
 	
 src.a: $(SRC_OBJECTS)
 	$(AR) src.a $(SRC_OBJECTS) 
@@ -58,6 +62,10 @@ ReadConfig.o: ReadConfig.cpp $(HEADERS)
 
 GetBalance.o: GetBalance.cpp $(HEADERS)
 	$(CPP) -o GetBalance.o -c GetBalance.cpp
+
+ConfigFile.o: ConfigFile.cpp $(HEADERS)
+	$(CPP) -o ConfigFile.o -c ConfigFile.cpp
+
 
 clean:
 	$(RM) src.a

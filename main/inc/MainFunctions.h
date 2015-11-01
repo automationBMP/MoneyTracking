@@ -24,7 +24,7 @@ std::string ConvertPathToOriginal(std::string &givenPath);
 //function read config file
 // returns all content of file
 std::string ReturnFileasString(const std::string &filename);
-
+std::string* ValidateIncomeSpendCommands(int argc, char* argv[]);
 void CommandInterpreter(int arc, char *argv[]);
 void ImplementCreateThreeArguments(int arc,char *argv[]);
 void ImplementCreateFourArguments(int arc,char *argv[]);
@@ -34,6 +34,7 @@ void ImprementIncomeSpendFiveArguments(int argc, char *argv[], std::string strin
 void ImpelmentCreate(int arc, char *argv[]);
 void ImpelmentBalance(int arc, char *argv[]);
 void ImplementIncomeSpend(int arc, char *argv[]);
+void ImplementConfig(int arc, char *argv[]);
 void PrintIncomeSpendNegative(std::string, std::string);
 void PrintNoAmountSpecified(std::string);
 void PrintInFileIfWalletFound(std::string, std::string, std:: string);
