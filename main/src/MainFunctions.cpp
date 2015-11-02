@@ -373,7 +373,6 @@ void ImplementConfig(int arc, char *argv[])
 				}
 		}
 	}
-	
 }
 
 std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
@@ -403,8 +402,9 @@ std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 			}
 			else 
 			{
-				PrintError::Print(SHOULD_BE_POSITIVE,
-									argv[1], argv[2]);
+				//PrintError::Print(SHOULD_BE_POSITIVE,
+				//					argv[1], argv[2]);
+				cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
 				k = argc;
 			}
 		}
@@ -423,7 +423,8 @@ std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 				}
 				else 
 				{
-					cout << "Not a valid comand for " << argv[1] << endl;
+					cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
+					//cout << "Not a valid comand for " << argv[1] << endl;
 					k = argc;
 				}
 			}
@@ -442,14 +443,16 @@ std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 					}
 					else 
 					{
-						cout << "Not a valid comand for " << argv[1] << endl;
+						cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
+						//cout << "Not a valid comand for " << argv[1] << endl;
 						k = argc;
 						
 					}
 				}
 				else 
 				{
-					cout << "Not a valid comand for " << argv[1] << endl;
+					cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
+					//cout << "Not a valid comand for " << argv[1] << endl;
 					k = argc;
 				}
 			}	
@@ -469,7 +472,8 @@ std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 				}
 				else 
 				{
-					cout << "Not a valid comand for " << argv[1] << endl;
+					cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
+					//cout << "Not a valid comand for " << argv[1] << endl;
 					k = argc;
 					
 				}
@@ -490,7 +494,8 @@ std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 					}
 					else 
 					{
-						cout << "Not a valid comand for " << argv[1] << endl;
+						cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
+						//cout << "Not a valid comand for " << argv[1] << endl;
 						k = argc;
 					}
 				}
@@ -510,13 +515,15 @@ std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 						}
 						else 
 						{
-							cout << "Not a valid comand for " << argv[1] << endl;
+							//cout << "Not a valid comand for " << argv[1] << endl;
+							cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
 							k = argc;
 						}
 					}
 					else 
 					{
-						cout << "Not a valid comand for " << argv[1] << endl;
+						//cout << "Not a valid comand for " << argv[1] << endl;
+						cout << "error: invalid parameter for '" << argv[1] << "'."<<endl;
 						k = argc;
 										
 					}
@@ -525,7 +532,8 @@ std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 		}
 		else 
 		{
-			cout << "Not a valid command for " << argv[1] << endl;
+			//cout << "Not a valid command for " << argv[1] << endl;
+			cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
 			k = argc;
 		} 
 	}
@@ -694,7 +702,8 @@ void PrintInFileIfWalletFound(string amount,
 			{	
 				//if valid path then add new line in wallet
 				DoCreateWallet newWallet(reconvert,amount);	
-				newWallet.AddLineInWalletFile(amount, incomeOrSpend, category);
+				std::string wallettt;
+				newWallet.AddLineInWalletFile(amount, incomeOrSpend, category ,wallettt);
 			}
 			else 
 			{
@@ -716,7 +725,7 @@ void PrintInFileIfWalletFound(string amount,
 		{	
 			//if valid path then add new line in wallet
 			DoCreateWallet newWallet(reconvert,amount);	
-			newWallet.AddLineInWalletFile(amount, incomeOrSpend, category);
+			newWallet.AddLineInWalletFile(amount, incomeOrSpend, category, wallet);
 		}
 		else 
 		{

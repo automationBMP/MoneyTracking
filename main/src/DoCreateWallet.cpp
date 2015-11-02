@@ -72,7 +72,7 @@ Error_E DoCreateWallet::CreateWalletFile()
 	return ALL_GOOD;
 }
 
-Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, string &category)
+Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, string &category, string &wallet)
 {	
 	//apeal function add decimals
 	amount=DoCreateWallet::AddDecimalsToDefaultAmount();
@@ -94,18 +94,36 @@ Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, stri
 	// if argument ArgNr2 is income 
 	if (ArgNr2 == "income") 
 		{	
+			if (wallet.length() == 0) 
+			{
 			cout << "Income '" << category << "' in an amount of " 
 			     << defaultAmount_m << " RON was registered." << endl;
 			cout << buffer << " GMT" << endl;
+			}
+			else 
+			{
+				cout << "Income '" << category << "' in an amount of " 
+			     << defaultAmount_m << " RON was registered to " << "'"<<wallet<< "'."<<endl;
+			cout << buffer << " GMT" << endl;
+			}
 			printline += printline + ";" + "+" + ";" 				
 					     + defaultAmount_m +";" +category + ";"+ "RON";
 		}
 	// if argument ArgNr2 is spend
 	else if (ArgNr2 == "spend") 
 		{
+			if (wallet.length() == 0) 
+			{
 			cout << "Spending '" << category << "' in an amount of " 
 			     << defaultAmount_m << " RON was registered." << endl;
 			cout << buffer << " GMT" << endl;
+			}
+			else 
+			{
+				cout << "Spending '" << category << "' in an amount of " 
+			     << defaultAmount_m << " RON was registered to " << "'"<<wallet<< "'."<<endl;
+			cout << buffer << " GMT" << endl;
+			}
 			printline += printline+";" + "-" + ";" 
 						 + defaultAmount_m +";" + category + ";"+ "RON";
 		}

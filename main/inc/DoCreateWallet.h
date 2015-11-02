@@ -26,7 +26,7 @@ public :
 	DoCreateWallet(std::string walletName,  std::string defaultAmount);
 	// creating the wallet file and adding the default amount
 	Error_E CreateWalletFile();
-	Error_E AddLineInWalletFile(std::string &amount , std::string &ArgNr2, std::string &category);
+	Error_E AddLineInWalletFile(std::string &amount , std::string &ArgNr2, std::string &category, std::string &wallet);
 	//adding 2 decimals if needed
 	std::string AddDecimalsToDefaultAmount();
 	//removes any extra zero from the start of the number

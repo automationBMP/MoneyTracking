@@ -22,7 +22,7 @@ void PrintError::Print(Error_E error,
 						<< defaultAmount_m 
 						<< " to wallet "
 						<< walletName_m
-						<< "\n";
+						<< ".\n";
 		break;
 		case WALLET_ALREADY_EXISTS:
 			std::cout 	<< "error: wallet "
@@ -48,13 +48,13 @@ void PrintError::Print(Error_E error,
 		case PATH_DOES_NOT_EXIST:
 			std::cout 	<< "error: could not create "
 						<< walletName_m
-						<< "\n";
+						<< ".\n";
 		break;
 		case CREATE_WALLET_MESSAGE:
 			std::cout 	<< walletName_m 
 						<< " created with the initial amount of "
 						<< defaultAmount_m
-						<< " RON"
+						<< " RON."
 						<< "\n";
 		break;				
 		case AMOUNT_NOT_POSITIVE_INCOME:
@@ -71,12 +71,12 @@ void PrintError::Print(Error_E error,
 		break;
 		case NO_DEFAULT_WALLET:
 			std::cout	<< "error: no default wallet "
-						<< "configured in 'moneytracker.config'"
+						<< "configured in 'moneytracker.config'."
 						<< "\n";
 		break;
 		case COULD_NOT_OPEN_CONFIG:
 			std::cout	<< "error: could not open configuration "
-					    << "'moneytracker.config'"
+					    << "'moneytracker.config'."
 						<< "\n";
 		break;
 		case SHOULD_BE_POSITIVE:
@@ -84,7 +84,7 @@ void PrintError::Print(Error_E error,
 						<< "'"
 						<< walletName_m
 						<< "' "
-						<< "should be a positive number"
+						<< "should be a positive number."
 						<< "\n";
 		break;
 		case NO_AMOUNT_SPECIFIED:
@@ -99,7 +99,7 @@ void PrintError::Print(Error_E error,
 						<< "'"
 						<< walletName_m
 						<< "'"
-						<< " to register transaction"
+						<< " to register transaction."
 						<< "\n";
 		break;
 		case COULD_NOT_OPEN_PATH_BALANCE:
@@ -107,12 +107,14 @@ void PrintError::Print(Error_E error,
 						<< "'"
 						<< walletName_m
 						<< "'"
-						<< " to calculate balance"
+						<< " to calculate balance."
 						<< "\n";
 		break;
 		case INVALID_PARAMETER:
-			std::cout	<< "Invalid parameter for "
+			std::cout	<< "error: invalid parameters for "
+						<< "'"
 						<< walletName_m
+						<< "'"
 						<< ".\n";
 		break;
 		case ALL_GOOD:
