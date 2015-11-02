@@ -13,6 +13,7 @@
 #include "GetBalance.h"
 #include "ConfigFile.h"
 
+
 using namespace std ;
 
 //function for converting path  Ex: C:\learn in C:/learn for validating
@@ -249,24 +250,70 @@ void ImplementConfig(int arc, char *argv[])
 {
 	std::string configString = "moneytracker.config";
 	std::string printConfig = ReturnFileasString(configString);
+	std::string content;
+	int pozition = 0;
+	size_t l=0;
+	std::string * arguments = new string[2];
 	if (arc == 2) 
 	{
 		cout << printConfig;
 	}
 	else if (arc > 2)
 	{
-		string *arguments = new string [arc-2];
+		string *argument = new string [arc-2];
 		int j = 0;
 		for (int i =2; i<arc; i++)
 		{
-			arguments[j] = argv[i];
-			//cout << arguments[j] << endl;
+			argument[j] = argv[i];
 			j++;
 		}
-		for (int i =0; i<arc-2; i++)
+		if ((arc == 3) || (arc == 4) || (arc == 5))
 		{
-			 std:: string checkIfCorect = arguments[i].substr(0,arguments[i].find('='));
-			 if (((arguments[i].find("default_wallet") != std::string::npos)||
+	       // cout << argument [0]<<endl;
+			for (int i =0; i<arc-2; i++)
+			{
+				content = content + argument[i];
+			}
+			//cout << content<<endl;
+			//content.erase(std::remove(content.begin(),content.end(),' '),content.end());
+			cout << content<<endl;
+			for (size_t i=0; i<content.length(); i++)
+			{
+				//cout << content<<endl;
+				if (content[i] == '=') 
+				{
+					pozition = i;
+					//cout << pozition << endl;
+					break;
+				}
+			}
+			for (size_t i=0; i<content.length(); i++)
+			{
+				//cout << content<<endl;
+				if (content[i] != '=') 
+				{
+					l++;
+				}
+			}
+			if (l == content.length())
+			{
+				cout << "invalid parameter for config"<<endl;
+			}
+			
+			arguments[0] = content.substr(0,pozition);
+			arguments[1] = content.substr(pozition+1,content.length()-pozition-1);
+			cout << arguments [0] << endl;
+			cout << arguments [1] << endl;
+		}
+		else 
+		{
+			std::cout <<"invalid parameter for config." <<endl;
+		}
+		for (int i =0; i<2; i++)
+		{
+			 //std:: string checkIfCorect = arguments[i].substr(0,arguments[i].find('='));
+			 std:: string checkIfCorect = arguments[0];
+			 if ((arguments[i].find("default_wallet") != std::string::npos)||
 				(arguments[i].find("default_currency") != std::string::npos)||
 				(arguments[i].find("default_income_category") != std::string::npos)||
 				(arguments[i].find("default_spending_category") != std::string::npos)||
@@ -274,8 +321,7 @@ void ImplementConfig(int arc, char *argv[])
 				(arguments[i].find("rate_EUR_RON") != std::string::npos)||
 				(arguments[i].find("rate_RON_EUR") != std::string::npos)||
 				(arguments[i].find("rate_USD_RON") != std::string::npos)||
-				(arguments[i].find("rate_EUR_USD") != std::string::npos))&&
-				(arguments[i].find("=")!= std::string::npos))
+				(arguments[i].find("rate_EUR_USD") != std::string::npos))
 				{
 					//cout << arguments[i].find("default_wallet") <<endl;
 					if ((checkIfCorect == "default_wallet")||
@@ -289,20 +335,23 @@ void ImplementConfig(int arc, char *argv[])
 						(checkIfCorect == "rate_EUR_USD"))
 						{
 							// apeal function change
-							 size_t pozEquals = arguments[i].find('=');
-							size_t lengthOfCommandWithoutFirstParameter = arguments[i].length()-arguments[i].find('=');
-							std:: string changeValue = arguments[i].substr(pozEquals+1,lengthOfCommandWithoutFirstParameter);
+							//size_t pozEquals = arguments[i].find('=');
+							//size_t lengthOfCommandWithoutFirstParameter = arguments[i].length()-arguments[i].find('=');
+							//std:: string changeValue = arguments[i].substr(pozEquals+1,lengthOfCommandWithoutFirstParameter);
 							//cout << changeValue <<endl;
 							//cout << checkIfCorect <<endl;
+							std:: string changeValue = arguments[1];
 							if (changeValue == "")
 							{
 								cout << "Invalid parameter for config" << endl;
+								break;
 							}
 							else
 							{
 							ConfigFile changeConfig(printConfig, changeValue, checkIfCorect);
 							std::string newConfig = changeConfig.ChangeConfigFile();
 							changeConfig.ReWriteConfigFile(); 
+							break;
 							}
 						}
 					else 
@@ -311,6 +360,7 @@ void ImplementConfig(int arc, char *argv[])
 							 << checkIfCorect
 							 << "'"
 							 << " is not a valid configuration value.";
+							 break;
 					}   
 				} 
 				else 
