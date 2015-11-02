@@ -42,7 +42,7 @@ mymain: main\main.cpp $(HEADERS)
 test:
 	$(MAKE) -C main\src
 	$(MAKE) moneytracker.exe
-	$(MAKE) -C main\tst test.exe
+	$(MAKE) -C main\tst test
 	$(MAKE) test.exe
 	
 test.exe: main\tst\test.exe

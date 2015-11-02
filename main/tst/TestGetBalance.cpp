@@ -80,15 +80,16 @@ TEST(TestGetBalance, IncomeAmountBalance)
 	std::string amountt = "+100";
 	std::string choise = "income";
 	std::string category1 = "salary";
+	std::string wallet5 = "";
 	DoCreateWallet wallet1("main\\tst\\WalletBalance",amountt);
-	wallet1.AddLineInWalletFile(amountt, choise, category1);
+	wallet1.AddLineInWalletFile(amountt, choise, category1, wallet5);
 	
 	//add income
 	amountt = "+700";
 	choise = "income";
 	category1 = "bonus";
 	DoCreateWallet wallet2("main\\tst\\WalletBalance",amountt);
-	wallet2.AddLineInWalletFile(amountt, choise, category1);
+	wallet2.AddLineInWalletFile(amountt, choise, category1, wallet5);
 	
 	//convert file content to string
 	std::string walletFile = ReturnWalletString(wallet);
@@ -110,15 +111,16 @@ TEST(TestGetBalance, SpendAmountBalance)
 	std::string amountt = "100";
 	std::string choise = "spend";
 	std::string category1 = "donation";
+	std::string wallet6 = "";
 	DoCreateWallet wallet1("main\\tst\\WalletBalance",amountt);
-	wallet1.AddLineInWalletFile(amountt, choise, category1);
+	wallet1.AddLineInWalletFile(amountt, choise, category1, wallet6);
 	
 	//add income
 	amountt = "700";
 	choise = "spend";
 	category1 = "food";
 	DoCreateWallet wallet2("main\\tst\\WalletBalance",amountt);
-	wallet2.AddLineInWalletFile(amountt, choise, category1);
+	wallet2.AddLineInWalletFile(amountt, choise, category1, wallet6);
 	
 	//convert file content to string
 	std::string walletFile = ReturnWalletString(wallet);

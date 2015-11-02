@@ -43,8 +43,9 @@ TEST(TestAddLineinWallet, Income)
 	std::string amountt = "+100";
 	std::string choise = "income";
 	std::string category1 = "salary";
+	std::string walletc = "";
 	DoCreateWallet wallet1("main\\tst\\WalletTestt",amountt);
-	wallet1.AddLineInWalletFile(amountt, choise, category1);
+	wallet1.AddLineInWalletFile(amountt, choise, category1, walletc);
 	time_t result = time(0);
 	
 	// return wallet as string
@@ -109,8 +110,9 @@ TEST(TestAddLineInWallet, Spend)
 	std::string amountt = "+99";
 	std::string choise = "spend";
 	std::string category1 = "other";
+	std::string wallet2 = "";
 	DoCreateWallet wallet1("main\\tst\\WalletTesttt",amountt);
-	wallet1.AddLineInWalletFile(amountt, choise, category1);
+	wallet1.AddLineInWalletFile(amountt, choise, category1, wallet2);
 	
 	// return wallet as string
 	std::string walletFile = ReturnWalletasStringSpend(wallet);

@@ -43,7 +43,9 @@ TST_OBJECTS=\
 	TestReturnFileasString.o \
 	TestGetBalance.o \
 	TestSpecifyCategory.o\
-	TestValidateIncomeSpendCommands.o
+	TestValidateIncomeSpendCommands.o\
+	TestGetBalanceCategory.o\
+	TestChangeDefWallet.o
 
 
 SRC_OBJECTS=\
@@ -64,7 +66,7 @@ test.exe: $(TST_OBJECTS) $(SRC_OBJECTS) $(GTEST_LIB)
 	g++ -o test.exe $(TST_OBJECTS) $(SRC_OBJECTS) $(GTEST_LIB)
 
 #test: test.exe
-#	test.exe --gtest_filter=GetWalletName.NoConfig
+#	test.exe --gtest_filter=ChangeDefWallet.CorectDefaultWallet
 
 # run tests
 test: test.exe
@@ -114,10 +116,17 @@ TestGetBalance: TestGetBalance.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(G
 	$(CPP) -o TestGetBalance.exe TestGetBalance.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 	
 TestSpecifyCategory: TestSpecifyCategory.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
-	$(CPP) -o TestSpecifyCategory.exe TestSpecifyCategory.o .\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o TestSpecifyCategory.exe TestSpecifyCategory.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
 
 TestValidateIncomeSpendCommands: ValidateIncomeSpendCommands.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
-	$(CPP) -o ValidateIncomeSpendCommands.exe ValidateIncomeSpendCommands.o .\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o ValidateIncomeSpendCommands.exe ValidateIncomeSpendCommands.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
+
+TestGetBalanceCategory: TestGetBalanceCategory.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o TestGetBalanceCategory.exe TestGetBalanceCategory.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
+
+TestChangeDefWallet: TestChangeDefWallet.o ..\src\MainFunctions.o ..\src\ReadConfig.o $(GTEST_LIB)
+	$(CPP) -o TestChangeDefWallet.exe TestChangeDefWallet.o ..\src\MainFunctions.o ..\src\ReadConfig.o $(GTEST_LIB)
+	
 #Test.o 
 TestRemoveStartingZeroes.o: TestRemoveStartingZeroes.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestRemoveStartingZeroes.o -c TestRemoveStartingZeroes.cpp
@@ -157,6 +166,12 @@ TestSpecifyCategory.o: TestSpecifyCategory.cpp $(HEADERS)
 	
 TestValidateIncomeSpendCommands.o: TestValidateIncomeSpendCommands.cpp $(HEADERS)
 	$(CPP) $(GTEST_INC) -o TestValidateIncomeSpendCommands.o -c TestValidateIncomeSpendCommands.cpp
+	
+TestGetBalanceCategory.o: TestGetBalanceCategory.cpp $(HEADERS)
+	$(CPP) $(GTEST_INC) -o TestGetBalanceCategory.o -c TestGetBalanceCategory.cpp
+
+TestChangeDefWallet.o: TestChangeDefWallet.cpp $(HEADERS)
+	$(CPP) $(GTEST_INC) -o TestChangeDefWallet.o -c TestChangeDefWallet.cpp
 #..\main.o:
 #	..\$(MAKE) -c ..\main.o	
 	
@@ -198,3 +213,4 @@ clean:
 	$(RM) test.exe
 	$(RM) TestGetBalance.exe
 	$(RM) TestValidateIncomeSpendCommands.exe
+	$(RM) TestGetBalanceCategory.exe
