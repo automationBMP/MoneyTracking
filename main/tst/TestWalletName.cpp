@@ -61,9 +61,10 @@ TEST(GetWalletName, EmptyAfterDefWallet)
 	std::ifstream configFile("main\\tst\\ConfigFiles\\empty_after_def_wallet.config");
 	std::string content = ReturnFileAsStringHelper(configFile);
 	configFile.close();
-	std::string defaultWalletCheck = "default_wallet";
+	std::string defaultWalletCheck = "default_wallet =";
 	ReadConfig wallet;
-	std::string actual = "NoWalletNameFound";
+	//std::string actual = "NoWalletNameFound";
+	std::string actual = "NoDefaultWalletFound";
 	
 	EXPECT_EQ(actual, wallet.GetDefaultWallet(content, defaultWalletCheck));
 }
