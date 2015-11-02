@@ -428,6 +428,7 @@ void ImplementConfig(int arc, char *argv[])
 		}
 		for (int i =0; i<arc-2; i++)
 		{
+			 std:: string checkIfCorect = arguments[i].substr(0,arguments[i].find('='));
 			 if (((arguments[i].find("default_wallet") != std::string::npos)||
 				(arguments[i].find("default_currency") != std::string::npos)||
 				(arguments[i].find("default_income_category") != std::string::npos)||
@@ -440,7 +441,6 @@ void ImplementConfig(int arc, char *argv[])
 				(arguments[i].find("=")!= std::string::npos))
 				{
 					//cout << arguments[i].find("default_wallet") <<endl;
-					std:: string checkIfCorect = arguments[i].substr(0,arguments[i].find('='));
 					if ((checkIfCorect == "default_wallet")||
 						(checkIfCorect == "default_currency")||
 						(checkIfCorect == "default_income_category")||
@@ -454,13 +454,19 @@ void ImplementConfig(int arc, char *argv[])
 							// apeal function change
 							 size_t pozEquals = arguments[i].find('=');
 							size_t lengthOfCommandWithoutFirstParameter = arguments[i].length()-arguments[i].find('=');
-							
 							std:: string changeValue = arguments[i].substr(pozEquals+1,lengthOfCommandWithoutFirstParameter);
 							//cout << changeValue <<endl;
 							//cout << checkIfCorect <<endl;
+							if (changeValue == "")
+							{
+								cout << "Invalid parameter for config" << endl;
+							}
+							else
+							{
 							ConfigFile changeConfig(printConfig, changeValue, checkIfCorect);
 							std::string newConfig = changeConfig.ChangeConfigFile();
 							changeConfig.ReWriteConfigFile(); 
+							}
 						}
 					else 
 					{
@@ -472,10 +478,10 @@ void ImplementConfig(int arc, char *argv[])
 				} 
 				else 
 				{
-					cout << "Invalid" 
-						 << " parameter"
-						 << " for"
-						 << " config.";
+					cout << "'" 
+						 << checkIfCorect
+						 << "'"
+						 << " is not a valid configuration value.";
 					break;
 				}
 		}
