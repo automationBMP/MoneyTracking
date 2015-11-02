@@ -251,6 +251,11 @@ void ImplementConfig(int arc, char *argv[])
 	std::string configString = "moneytracker.config";
 	std::string printConfig = ReturnFileasString(configString);
 	std::string content;
+	bool flag1 = true;
+	bool flag2 = true;
+	bool flag3 = true;
+	bool flag4 = true;
+	bool flag5 = true;
 	int pozition = 0;
 	size_t l=0;
 	std::string * arguments = new string[2];
@@ -267,7 +272,40 @@ void ImplementConfig(int arc, char *argv[])
 			argument[j] = argv[i];
 			j++;
 		}
-		if ((arc == 3) || (arc == 4) || (arc == 5))
+		for (int i =0; i<arc-2; i++)
+		{
+			if (argument[i] == "==")
+			{
+			    cout << "error: invalid parameters for 'config'."<<endl;
+				flag1 = false;
+				break;
+			}
+		}
+		
+		std::string stringCheck = argument[0];
+		if ((stringCheck[stringCheck.length()-1]== '=')&&(arc != 4))
+		{
+			    cout << "error: invalid parameters for 'config'."<<endl;
+				flag2 = false;
+			
+		}
+		
+		std::string stringCheckk = argument[0];
+		if ((stringCheck[stringCheck.length()-1]== '=')&&(stringCheck[stringCheck.length()-2]== '='))
+		{
+			    cout << "error: invalid parameters for 'config'."<<endl;
+				flag3 = false;
+			
+		}
+		/* std::string stringCheckk = argument[0];
+		if ((stringCheck[stringCheck.length()-1]== '=')&&(stringCheck[stringCheck.length()-2]== '='))
+		{
+			    cout << "invalid parameters for config"<<endl;
+				flag3 = false;
+			
+		} */
+		
+		if (((arc == 3) || (arc == 4) || (arc == 5))&&(flag1==true)&&(flag2==true)&&(flag3==true))
 		{
 	       // cout << argument [0]<<endl;
 			for (int i =0; i<arc-2; i++)
@@ -295,9 +333,10 @@ void ImplementConfig(int arc, char *argv[])
 					l++;
 				}
 			}
-			if (l == content.length())
+			if ((l == content.length())&&(flag1==true)&&(flag2==true)&&(flag3==true))
 			{
-				cout << "invalid parameters for config"<<endl;
+				cout << "error: invalid parameters for 'config'."<<endl;
+				flag4 = false;
 			}
 			
 			arguments[0] = content.substr(0,pozition);
@@ -305,9 +344,10 @@ void ImplementConfig(int arc, char *argv[])
 			//cout << arguments [0] << endl;
 			//cout << arguments [1] << endl;
 		}
-		else 
+		else if ((flag1==true)&&(flag2==true)&&(flag3==true)&&(flag4==true))
 		{
-			std::cout <<"invalid parameters for config." <<endl;
+			std::cout <<"error: invalid parameters for 'config'." <<endl;
+			flag5 = false;
 		}
 		for (int i =0; i<2; i++)
 		{
@@ -341,9 +381,9 @@ void ImplementConfig(int arc, char *argv[])
 							//cout << changeValue <<endl;
 							//cout << checkIfCorect <<endl;
 							std:: string changeValue = arguments[1];
-							if (changeValue == "")
+							if ((changeValue == "")&&(flag1==true)&&(flag2==true)&&(flag3==true)&&(flag4==true)&&(flag5==true))
 							{
-								cout << "Invalid parameters for config" << endl;
+								cout << "error: invalid parameters for 'config'." << endl;
 								break;
 							}
 							else
@@ -356,14 +396,17 @@ void ImplementConfig(int arc, char *argv[])
 						}
 					else 
 					{
+						if ((flag1==true)&&(flag2==true)&&(flag3==true)&&(flag4==true)&&(flag5==true))
+						{
 						cout << "'" 
 							 << checkIfCorect
 							 << "'"
 							 << " is not a valid configuration value.\n";
 							 break;
+						}
 					}   
 				} 
-				else 
+				else if ((flag1==true)&&(flag2==true)&&(flag3==true)&&(flag4==true)&&(flag5==true))
 				{
 					cout << "'" 
 						 << checkIfCorect
