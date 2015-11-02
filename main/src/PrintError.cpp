@@ -18,16 +18,16 @@ void PrintError::Print(Error_E error,
 	switch (error)
 	{
 		case WRITE_TO_FILE:
-			std::cout 	<< "error while writing " 
+			std::cout 	<< "error while writing '" 
 						<< defaultAmount_m 
-						<< " to wallet "
+						<< "' to wallet "
 						<< walletName_m
 						<< ".\n";
 		break;
 		case WALLET_ALREADY_EXISTS:
-			std::cout 	<< "error: wallet "
+			std::cout 	<< "error: wallet '"
 						<< walletName_m
-						<< " already exists!"	
+						<< "' already exists!"	
 						<< "\n";
 		break;
 		case CREATE_NAME_MISSING:
@@ -46,12 +46,14 @@ void PrintError::Print(Error_E error,
 						<< "\n";
 		break;
 		case PATH_DOES_NOT_EXIST:
-			std::cout 	<< "error: could not create "
+			std::cout 	<< "error: could not create '"
 						<< walletName_m
-						<< ".\n";
+						<< "'.\n";
 		break;
 		case CREATE_WALLET_MESSAGE:
-			std::cout 	<< walletName_m 
+			std::cout 	<< "'"
+						<< walletName_m
+						<< "'"
 						<< " created with the initial amount of "
 						<< defaultAmount_m
 						<< " RON."

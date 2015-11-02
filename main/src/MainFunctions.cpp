@@ -219,18 +219,18 @@ void ImplementBalance (int arc, char *argv[])
 				{
 					cout << "No transaction with category '" 
 						 << category 
-						 << "' is registered in "
+						 << "' is registered in '"
 						 << walletName
-						 << "."
+						 << "'."
 						 << endl;
 				}  
 				else if (validCommand == true)
 					
 				//if no category is introduced print balance for the whole wallet
 				{
-				cout << "Balance for " 
+				cout << "Balance for '" 
 					 << walletName 
-					 << " is " 
+					 << "' is " 
 					 << balanceWithdecimals 
 					 << " RON."
 				     << endl;
