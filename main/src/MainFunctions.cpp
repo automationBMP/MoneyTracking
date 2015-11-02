@@ -205,11 +205,11 @@ void ImplementBalance (int arc, char *argv[])
 				{
 					cout << "Balance for '" 
 					 << category 
-					 << "' in "
+					 << "' in '"
 					 << walletName 
-					 << " is " 
+					 << "' is " 
 					 << balanceWithdecimals 
-					 << " RON"
+					 << " RON."
 				     << endl;	
 				}
 				
@@ -232,7 +232,7 @@ void ImplementBalance (int arc, char *argv[])
 					 << walletName 
 					 << " is " 
 					 << balanceWithdecimals 
-					 << " RON"
+					 << " RON."
 				     << endl;
 				}					 
 			}
@@ -297,7 +297,7 @@ void ImplementConfig(int arc, char *argv[])
 			}
 			if (l == content.length())
 			{
-				cout << "invalid parameter for config"<<endl;
+				cout << "invalid parameters for config"<<endl;
 			}
 			
 			arguments[0] = content.substr(0,pozition);
@@ -307,7 +307,7 @@ void ImplementConfig(int arc, char *argv[])
 		}
 		else 
 		{
-			std::cout <<"invalid parameter for config." <<endl;
+			std::cout <<"invalid parameters for config." <<endl;
 		}
 		for (int i =0; i<2; i++)
 		{
@@ -343,7 +343,7 @@ void ImplementConfig(int arc, char *argv[])
 							std:: string changeValue = arguments[1];
 							if (changeValue == "")
 							{
-								cout << "Invalid parameter for config" << endl;
+								cout << "Invalid parameters for config" << endl;
 								break;
 							}
 							else
@@ -593,7 +593,7 @@ void CommandInterpreter(int arc, char *argv[])
 	}
 	else 
 	{
-		cout << "Not a valid command.";
+		cout << "error: invalid command !\n";
 	}
 	
 }
@@ -735,6 +735,83 @@ void PrintInFileIfWalletFound(string amount,
 	}
 }
 
+// removing the 0's from the begining
+string RemoveStartingZeroes(string wallet)
+{
+	unsigned int start = 0, i = 0;
+	char sign ;
+	//searching for an existing sign
+	if (wallet[0] == '+' || wallet[0] == '-')
+	{
+		sign = wallet[0];
+		start = 1;
+		i = start;
+		// counting the start 0's
+		while (wallet[i] == '0')
+		{
+			++i;
+		}
+		// case : 000.7
+		if ((wallet[i] == '.') && (i < wallet.length()))
+		{
+			wallet = 
+				wallet.substr (i-1,wallet.length()-i+1);
+
+		}
+		//case : 001
+		else if (i < wallet.length())
+		{
+			wallet = 
+				wallet.substr (i,wallet.length()-i);
+		}
+		//case: 0000
+		else 
+		{
+			wallet = 
+				wallet.substr (i-1,wallet.length()-i+1);
+		}
+		if (wallet != "0") 
+		{
+		return wallet = sign + wallet;
+		}
+		else return "0";
+
+	}else 
+		{
+			start = 0;
+			i = start;
+			// counting the start 0's
+			while (wallet[i] == '0')
+			{
+			++i;
+			}
+			// case : 000.7
+			if ((wallet[i] == '.') && (i < wallet.length()))
+			{
+				wallet = 
+					wallet.substr (i-1,wallet.length()-i+1);
+
+			}
+			//case : 001
+			else if (i < wallet.length())
+			{
+				wallet = 
+					wallet.substr (i,wallet.length()-i);
+			}
+			//case: 0000
+			else 
+			{
+				wallet = 
+					wallet.substr (i-1,wallet.length()-i+1);
+			}		
+		}
+		if (wallet != "0") 
+		{
+			wallet = "+" + wallet;
+		}
+	return wallet;
+}
+
 void ImplementIncomeSpend(int argc, char *argv[])
 {
 	string stringArgumentNr2(argv[1]);
@@ -791,13 +868,13 @@ void ImplementIncomeSpend(int argc, char *argv[])
 		else 
 		{
 			// if amount is negative or 0 print error
-			if ((amount[0] == '-') || (amount[0] == '0')) 
+			if (amount[0] == '-' || amount == "0" || amount == "0.0") 
 			{
 				PrintIncomeSpendNegative(argv[1], amount);
 			}
 			
 			// if amount is positive
-			else
+			else if (amount == "00.00")
 			{
 				//create object validate with parameters "default_wallet" 
 				//and amount
@@ -806,6 +883,29 @@ void ImplementIncomeSpend(int argc, char *argv[])
 				// check if amount is a valid number
 				if (validate.IsValidNumber() == true)
 				{
+					PrintInFileIfWalletFound(amount,
+											 argv[1], 
+											 category,
+											 wallet);
+				}
+				//if amount is not valid number print error
+				else PrintError::Print(SHOULD_BE_POSITIVE,
+									   argv[1], 
+									   amount);
+			}
+			else 
+			{
+				DoCreateWallet amountWithZeroes(wallet, amount);
+				amount = amountWithZeroes.RemoveStartingZeroes();
+				
+				//create object validate with parameters "default_wallet" 
+				//and amount
+				ValidateCreate validate("default_wallet", amount);
+				
+				// check if amount is a valid number
+				if (validate.IsValidNumber() == true)
+				{
+					
 					PrintInFileIfWalletFound(amount,
 											 argv[1], 
 											 category,

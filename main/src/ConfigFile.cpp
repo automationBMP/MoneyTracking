@@ -55,7 +55,7 @@ void ConfigFile::ReWriteConfigFile()
 	cout << "'"
 		 << default_change_m
 		 << "'"
-		 << " was configured as default.";
+		 << " was configured as default.\n";
 	ofs.close();
 }
 std::string ReturnDefaultNoUnderLine(std::string &change)
@@ -95,7 +95,7 @@ std::string ConfigFile::ChangeConfigFile()
 	{ 	
 		// if not found
 		std::string output = ReturnDefaultNoUnderLine(change_m);
-		std::cout << "error: no " << output << " configured in 'moneytracker.config'" << endl;
+		std::cout << "error: no " << output << " configured in 'moneytracker.config'." << endl;
 	}
 	else 
 	{	
@@ -183,7 +183,7 @@ std::string ConfigFile::ChangeConfigFile()
 		{
 			// print message for no parameter found 
 			std::string output = ReturnDefaultNoUnderLine(change_m);
-			std::cout << "error: no " << output << " configured in 'moneytracker.config'" << endl;
+			std::cout << "error: no " << output << " configured in 'moneytracker.config'." << endl;
 		
 		}
 	}

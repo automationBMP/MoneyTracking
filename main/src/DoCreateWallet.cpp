@@ -14,6 +14,8 @@
 #include <fstream>
 #include <iostream>
 #include <ctime>
+#include "MainFunctions.h"
+#include "ReadConfig.h"
 
 using namespace std;
 
@@ -96,8 +98,17 @@ Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, stri
 		{	
 			if (wallet.length() == 0) 
 			{
+			std::string str = "moneytracker.config";
+			//const char *cstr = str.c_str();
+			string contentConfigFile(ReturnFileasString(str));
+			//read config file
+			//create object ReadConfig for geting the wallet
+			ReadConfig getWallet;
+			string variable = "default_wallet";
+			string walletName = 
+					getWallet.GetDefaultWallet(contentConfigFile, variable);
 			cout << "Income '" << category << "' in an amount of " 
-			     << defaultAmount_m << " RON was registered." << endl;
+			     << defaultAmount_m << " RON was registered to " << "'"<<walletName<< "'."<<endl;
 			cout << buffer << " GMT" << endl;
 			}
 			else 
@@ -114,8 +125,17 @@ Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, stri
 		{
 			if (wallet.length() == 0) 
 			{
+			std::string str = "moneytracker.config";
+			//const char *cstr = str.c_str();
+			string contentConfigFile(ReturnFileasString(str));
+			//read config file
+			//create object ReadConfig for geting the wallet
+			ReadConfig getWallet;
+			string variable = "default_wallet";
+			string walletName = 
+					getWallet.GetDefaultWallet(contentConfigFile, variable);
 			cout << "Spending '" << category << "' in an amount of " 
-			     << defaultAmount_m << " RON was registered." << endl;
+			     << defaultAmount_m << " RON was registered to " << "'"<<walletName<< "'."<<endl;
 			cout << buffer << " GMT" << endl;
 			}
 			else 

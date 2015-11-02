@@ -36,13 +36,13 @@ void PrintError::Print(Error_E error,
 						<< "\n";
 		break;			
 		case CREATE_INITIAL_AMMOUNT_INVALID:
-			std::cout 	<< "error: "
+			std::cout 	<< "error: '"
 						<< defaultAmount_m 
-						<< " is not a valid initial amount."
+						<< "' is not a valid initial amount."
 						<< "\n"
-						<< "Creating " 
+						<< "Creating '" 
 						<< walletName_m
-						<< " aborted."
+						<< "' aborted."
 						<< "\n";
 		break;
 		case PATH_DOES_NOT_EXIST:
