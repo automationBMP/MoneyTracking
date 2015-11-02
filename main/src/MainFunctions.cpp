@@ -499,10 +499,10 @@ if (flag == true)
 	}
 }
 
-for (int i=0 ; i<=argc-3; i++)
+/* for (int i=0 ; i<=argc-3; i++)
 {
 	cout << newArguments[i] << endl;
-} 
+}  */
 /* else
 {
 	cout << "no valid " << endl;
@@ -701,8 +701,8 @@ void ImplementIncomeSpend(int argc, char *argv[])
 	
 	// get parameters for income/spend
 	string* parameters = ValidateIncomeSpendCommands(argc, argv);
-	
-	for (unsigned int i = 0; i <= parameters->length(); i++)
+	 
+ 	for (int i = 0; i < (argc - 2) ; i++)
 	{
 		if (parameters[i] == "-c" || 
 			parameters[i] == "--category")
@@ -714,6 +714,8 @@ void ImplementIncomeSpend(int argc, char *argv[])
 		{
 			wallet = parameters[++i];
 		}
+		else 
+		{}
 	}
 	
 	string amount = parameters[0];
@@ -759,7 +761,6 @@ void ImplementIncomeSpend(int argc, char *argv[])
 	}
 	else if (parameters->length() == 0)
 	{
-	
 	}
 }
 
