@@ -276,7 +276,7 @@ void ImplementConfig(int arc, char *argv[])
 			}
 			//cout << content<<endl;
 			//content.erase(std::remove(content.begin(),content.end(),' '),content.end());
-			cout << content<<endl;
+			//cout << content<<endl;
 			for (size_t i=0; i<content.length(); i++)
 			{
 				//cout << content<<endl;
@@ -302,8 +302,8 @@ void ImplementConfig(int arc, char *argv[])
 			
 			arguments[0] = content.substr(0,pozition);
 			arguments[1] = content.substr(pozition+1,content.length()-pozition-1);
-			cout << arguments [0] << endl;
-			cout << arguments [1] << endl;
+			//cout << arguments [0] << endl;
+			//cout << arguments [1] << endl;
 		}
 		else 
 		{
