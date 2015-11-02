@@ -37,5 +37,5 @@ void ImplementIncomeSpend(int arc, char *argv[]);
 void ImplementConfig(int arc, char *argv[]);
 void PrintIncomeSpendNegative(std::string, std::string);
 void PrintNoAmountSpecified(std::string);
-void PrintInFileIfWalletFound(std::string, std::string, std:: string);
+void PrintInFileIfWalletFound(std::string, std::string, std:: string, std:: string);
 #endif
