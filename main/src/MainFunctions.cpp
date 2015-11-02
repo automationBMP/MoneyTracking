@@ -359,7 +359,7 @@ void ImplementConfig(int arc, char *argv[])
 						cout << "'" 
 							 << checkIfCorect
 							 << "'"
-							 << " is not a valid configuration value.";
+							 << " is not a valid configuration value.\n";
 							 break;
 					}   
 				} 
@@ -368,7 +368,7 @@ void ImplementConfig(int arc, char *argv[])
 					cout << "'" 
 						 << checkIfCorect
 						 << "'"
-						 << " is not a valid configuration value.";
+						 << " is not a valid configuration value.\n";
 					break;
 				}
 		}
