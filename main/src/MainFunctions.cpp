@@ -194,7 +194,8 @@ void ImplementBalance (int arc, char *argv[])
 				string contentWalletFile(ReturnFileasString(walletName));
 				GetBalance balance;
 				string balanceFromWallet = 
-									balance.PrintBalance(contentWalletFile, category);
+									balance.PrintBalance(contentWalletFile, 
+									category);
 				// add decimals to balance 
 				DoCreateWallet addDecimals(walletName, balanceFromWallet);
 				string balanceWithdecimals = 
@@ -248,7 +249,9 @@ void ImplementBalance (int arc, char *argv[])
 
 void ImplementConfig(int arc, char *argv[])
 {
+	// creating string with name of config
 	std::string configString = "moneytracker.config";
+	// obtain the content of config
 	std::string printConfig = ReturnFileasString(configString);
 	std::string content;
 	bool flag1 = true;
@@ -258,13 +261,17 @@ void ImplementConfig(int arc, char *argv[])
 	bool flag5 = true;
 	int pozition = 0;
 	size_t l=0;
+	//create a string array with  2 pozitions
 	std::string * arguments = new string[2];
+	// if only 2 arguments (moneytracker config) print config
 	if (arc == 2) 
 	{
 		cout << printConfig;
 	}
+	// else validate the commands
 	else if (arc > 2)
 	{
+		// create a string array with elements from argv from poz 2
 		string *argument = new string [arc-2];
 		int j = 0;
 		for (int i =2; i<arc; i++)
@@ -272,6 +279,7 @@ void ImplementConfig(int arc, char *argv[])
 			argument[j] = argv[i];
 			j++;
 		}
+		// check case we have 3 parameters and one is == , print error
 		for (int i =0; i<arc-2; i++)
 		{
 			if (argument[i] == "==")
@@ -282,6 +290,7 @@ void ImplementConfig(int arc, char *argv[])
 			}
 		}
 		
+		//check if we don't have 4 arguments and one has = at the end
 		std::string stringCheck = argument[0];
 		if ((stringCheck[stringCheck.length()-1]== '=')&&(arc != 4))
 		{
@@ -289,81 +298,77 @@ void ImplementConfig(int arc, char *argv[])
 				flag2 = false;
 			
 		}
-		
+		//check if one parameter has = at the end and the other parameter 
+		//contain =
 		std::string stringCheckk = argument[0];
-		if ((stringCheck[stringCheck.length()-1]== '=')&&(stringCheck[stringCheck.length()-2]== '='))
+		if ((stringCheck[stringCheck.length()-1]== '=')
+			&&(stringCheck[stringCheck.length()-2]== '='))
 		{
 			    cout << "error: invalid parameters for 'config'."<<endl;
 				flag3 = false;
 			
 		}
-		/* std::string stringCheckk = argument[0];
-		if ((stringCheck[stringCheck.length()-1]== '=')&&(stringCheck[stringCheck.length()-2]== '='))
+
+		// validate case
+		if (((arc == 3) || (arc == 4) || (arc == 5))&&(flag1==true)
+			&&(flag2==true)&&(flag3==true))
 		{
-			    cout << "invalid parameters for config"<<endl;
-				flag3 = false;
-			
-		} */
-		
-		if (((arc == 3) || (arc == 4) || (arc == 5))&&(flag1==true)&&(flag2==true)&&(flag3==true))
-		{
-	       // cout << argument [0]<<endl;
+			//obtain a string with all parameters
 			for (int i =0; i<arc-2; i++)
 			{
 				content = content + argument[i];
 			}
-			//cout << content<<endl;
-			//content.erase(std::remove(content.begin(),content.end(),' '),content.end());
-			//cout << content<<endl;
+			//check for = sign
 			for (size_t i=0; i<content.length(); i++)
 			{
-				//cout << content<<endl;
 				if (content[i] == '=') 
 				{
 					pozition = i;
-					//cout << pozition << endl;
 					break;
 				}
 			}
+			//check if we don't have sign =
 			for (size_t i=0; i<content.length(); i++)
 			{
-				//cout << content<<endl;
 				if (content[i] != '=') 
 				{
 					l++;
 				}
 			}
-			if ((l == content.length())&&(flag1==true)&&(flag2==true)&&(flag3==true))
+			//print error if we don't have sign =
+			if ((l == content.length())&&(flag1==true)&&
+			(flag2==true)&&(flag3==true))
 			{
 				cout << "error: invalid parameters for 'config'."<<endl;
 				flag4 = false;
 			}
-			
+			// obtain first parameter and second
 			arguments[0] = content.substr(0,pozition);
-			arguments[1] = content.substr(pozition+1,content.length()-pozition-1);
-			//cout << arguments [0] << endl;
-			//cout << arguments [1] << endl;
+			arguments[1] = content.substr(pozition+1,
+			content.length()-pozition-1);
 		}
+		// print error if we don't have enough arguments
 		else if ((flag1==true)&&(flag2==true)&&(flag3==true)&&(flag4==true))
 		{
 			std::cout <<"error: invalid parameters for 'config'." <<endl;
 			flag5 = false;
 		}
+		// check for validating the arguments
 		for (int i =0; i<2; i++)
 		{
-			 //std:: string checkIfCorect = arguments[i].substr(0,arguments[i].find('='));
+			
 			 std:: string checkIfCorect = arguments[0];
-			 if ((arguments[i].find("default_wallet") != std::string::npos)||
-				(arguments[i].find("default_currency") != std::string::npos)||
-				(arguments[i].find("default_income_category") != std::string::npos)||
-				(arguments[i].find("default_spending_category") != std::string::npos)||
-				(arguments[i].find("currencies") != std::string::npos)||
-				(arguments[i].find("rate_EUR_RON") != std::string::npos)||
-				(arguments[i].find("rate_RON_EUR") != std::string::npos)||
-				(arguments[i].find("rate_USD_RON") != std::string::npos)||
-				(arguments[i].find("rate_EUR_USD") != std::string::npos))
+			if ((arguments[i].find("default_wallet") != std::string::npos)||
+			(arguments[i].find("default_currency") != std::string::npos)||
+			(arguments[i].find("default_income_category") != std::string::npos)||
+			(arguments[i].find("default_spending_category") != std::string::npos)||
+			(arguments[i].find("currencies") != std::string::npos)||
+			(arguments[i].find("rate_EUR_RON") != std::string::npos)||
+			(arguments[i].find("rate_RON_EUR") != std::string::npos)||
+			(arguments[i].find("rate_USD_RON") != std::string::npos)||
+			(arguments[i].find("rate_EUR_USD") != std::string::npos))
 				{
-					//cout << arguments[i].find("default_wallet") <<endl;
+					// check if first parameter is correct
 					if ((checkIfCorect == "default_wallet")||
 						(checkIfCorect == "default_currency")||
 						(checkIfCorect == "default_income_category")||
@@ -374,29 +379,32 @@ void ImplementConfig(int arc, char *argv[])
 						(checkIfCorect == "rate_USD_RON")||
 						(checkIfCorect == "rate_EUR_USD"))
 						{
-							// apeal function change
-							//size_t pozEquals = arguments[i].find('=');
-							//size_t lengthOfCommandWithoutFirstParameter = arguments[i].length()-arguments[i].find('=');
-							//std:: string changeValue = arguments[i].substr(pozEquals+1,lengthOfCommandWithoutFirstParameter);
-							//cout << changeValue <<endl;
-							//cout << checkIfCorect <<endl;
+
 							std:: string changeValue = arguments[1];
-							if ((changeValue == "")&&(flag1==true)&&(flag2==true)&&(flag3==true)&&(flag4==true)&&(flag5==true))
+							//check if second parameter is null
+							if ((changeValue == "")&&(flag1==true)
+								&&(flag2==true)&&(flag3==true)&&
+							(flag4==true)&&(flag5==true))
 							{
-								cout << "error: invalid parameters for 'config'." << endl;
+								cout << "error: invalid parameters for 'config'."
+								<< endl;
 								break;
 							}
+							// else change config
 							else
 							{
-							ConfigFile changeConfig(printConfig, changeValue, checkIfCorect);
+							ConfigFile changeConfig(printConfig, changeValue, 
+							checkIfCorect);
 							std::string newConfig = changeConfig.ChangeConfigFile();
 							changeConfig.ReWriteConfigFile(); 
 							break;
 							}
 						}
+					// else if first parameter is not correct print error
 					else 
 					{
-						if ((flag1==true)&&(flag2==true)&&(flag3==true)&&(flag4==true)&&(flag5==true))
+						if ((flag1==true)&&(flag2==true)&&(flag3==true)
+							&&(flag4==true)&&(flag5==true))
 						{
 						cout << "'" 
 							 << checkIfCorect
@@ -405,8 +413,11 @@ void ImplementConfig(int arc, char *argv[])
 							 break;
 						}
 					}   
-				} 
-				else if ((flag1==true)&&(flag2==true)&&(flag3==true)&&(flag4==true)&&(flag5==true))
+				}
+				//else we don't found a match for first parameter in config
+				//print error
+				else if ((flag1==true)&&(flag2==true)&&(flag3==true)
+					&&(flag4==true)&&(flag5==true))
 				{
 					cout << "'" 
 						 << checkIfCorect
@@ -420,9 +431,10 @@ void ImplementConfig(int arc, char *argv[])
 
 std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 {
-	// implement for default categorry
+	// create string array with argc-2 nr of elements
 	string *arguments = new string [argc-2];
 	int j = 0;
+	// adding the arguments from command line in string array
 	 for (int i =2; i<argc; i++)
 	{
 		arguments[j] = argv[i];
@@ -431,46 +443,64 @@ std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 	int k = 0;
 	int pozition = 0;
 	bool flag = false;
+	// cheack if we have enough arguments
 	while (k <= argc-3) 
 	{
+		//case we have 3 arguments EX: moneytracker income 200
 		if ((argc-3)==0)
 		{
 			ValidateCreate validateNumber("default_wallet",arguments[k]);
 			bool flag2 = validateNumber.IsValidNumber();
+			// if valid command
 			if (flag2 == true)
 			{	
 				pozition = k;
 				flag = true;
 				k = argc;				
 			}
+			// else print error
 			else 
 			{
 				//PrintError::Print(SHOULD_BE_POSITIVE,
 				//					argv[1], argv[2]);
-				cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
+				cout << "error: invalid parameters for '" 
+				     << argv[1] 
+				     << "'."
+					 << endl;
 				k = argc;
 			}
 		}
+		//case we have 5 arguments EX: moneytracker income -c category 200
 		else if ((argc-3)==2)
 		{
-			//cout << "enter";
+			//check if first argument is a valid number
 			ValidateCreate validateNumber("default_wallet",arguments[k]);
 			bool flag2 = validateNumber.IsValidNumber();
+			// if true
 			if (flag2 == true)
 			{
-				if ((arguments[k+1]=="-c")||(arguments[k+1]=="--category")||(arguments[k+1]=="-w")||(arguments[k+1]=="--wallet"))
+				//check second argument
+				if ((arguments[k+1]=="-c")
+					||(arguments[k+1]=="--category")
+					||(arguments[k+1]=="-w")
+					||(arguments[k+1]=="--wallet"))
 				{
 					pozition = k;
 					k = argc;
 					flag = true;
 				}
+				//if second argument not valid print error
 				else 
 				{
-					cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
-					//cout << "Not a valid comand for " << argv[1] << endl;
+					cout << "error: invalid parameters for '" 
+					     << argv[1] 
+					     << "'."
+						 << endl;
+
 					k = argc;
 				}
 			}
+			//check if the 3 'th argument is a valid number
 			else 
 			{
 				ValidateCreate validateNumber("default_wallet",arguments[2]);
@@ -478,105 +508,157 @@ std::string* ValidateIncomeSpendCommands(int argc, char* argv[])
 				k = 2;
 				if (flag2 == true)
 				{
-					if ((arguments[k-2]=="-c")||(arguments[k-2]=="--category")||(arguments[k-2]=="-w")||(arguments[k-2]=="--wallet"))
+					//if valid check first argument
+					if ((arguments[k-2]=="-c")
+						||(arguments[k-2]=="--category")
+						||(arguments[k-2]=="-w")
+						||(arguments[k-2]=="--wallet"))
 					{
 						pozition = k;
 						k = argc;
 						flag = true;
 					}
+					// else error
 					else 
 					{
-						cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
-						//cout << "Not a valid comand for " << argv[1] << endl;
+						cout << "error: invalid parameters for '" 
+						     << argv[1] 
+						     << "'."
+							 << endl;
 						k = argc;
 						
 					}
 				}
+				// if not valid number print error
 				else 
 				{
-					cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
-					//cout << "Not a valid comand for " << argv[1] << endl;
+					cout << "error: invalid parameters for '"
+   					     << argv[1] 
+					     << "'."
+						 << endl;
 					k = argc;
 				}
 			}	
 		}
+		//case we have 7 arguments EX: moneytracker income -c 
+		//category -w wallet 200
 		else if ((argc-3)==4)
 		{
 			ValidateCreate validateNumber("default_wallet",arguments[k]);
 			bool flag2 = validateNumber.IsValidNumber();
+			// check if first argument is valid
 			if (flag2 == true)
 			{	
-				if ((arguments[k+1] != arguments[k+3])&&((arguments[k+1]=="-c")||(arguments[k+1]=="--category")||(arguments[k+1]=="-w")||(arguments[k+1]=="--wallet"))
-								&&((arguments[k+3]=="-c")||(arguments[k+3]=="--category")||(arguments[k+3]=="-w")||(arguments[k+3]=="--wallet")))
+				if ((arguments[k+1] != arguments[k+3])
+					&&((arguments[k+1]=="-c")
+					||(arguments[k+1]=="--category")
+					||(arguments[k+1]=="-w")
+					||(arguments[k+1]=="--wallet"))
+					&&((arguments[k+3]=="-c")
+				    ||(arguments[k+3]=="--category")
+				    ||(arguments[k+3]=="-w")
+				    ||(arguments[k+3]=="--wallet")))
 				{	
 					pozition = k;
 					k = argc;
 					flag = true;
 				}
+				//else print error
 				else 
 				{
-					cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
-					//cout << "Not a valid comand for " << argv[1] << endl;
+					cout << "error: invalid parameters for '" 
+					     << argv[1] 
+						 << "'."
+						 << endl;
 					k = argc;
 					
 				}
 			}
+			//else if 3'th argument is valid number
 			else 
 			{
 				ValidateCreate validateNumber("default_wallet",arguments[2]);
 				bool flag2 = validateNumber.IsValidNumber();
 				k = 2;
+				//check if first argument and last ar valid commands
 				if (flag2 == true)
 				{
-					if ((arguments[k-2] != arguments[k+1])&&((arguments[k-2]=="-c")||(arguments[k-2]=="--category")||(arguments[k-2]=="-w")||(arguments[k-2]=="--wallet"))
-								&&((arguments[k+1]=="-c")||(arguments[k+1]=="--category")||(arguments[k+1]=="-w")||(arguments[k+1]=="--wallet")))
+					if ((arguments[k-2] != arguments[k+1])&&
+					((arguments[k-2]=="-c")
+					||(arguments[k-2]=="--category")
+					||(arguments[k-2]=="-w")
+					||(arguments[k-2]=="--wallet"))
+					&&((arguments[k+1]=="-c")
+					||(arguments[k+1]=="--category")
+					||(arguments[k+1]=="-w")
+					||(arguments[k+1]=="--wallet")))
 					{
 						pozition = k;
 						k = argc;
 						flag = true;
 					}
+					//else print error
 					else 
 					{
-						cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
-						//cout << "Not a valid comand for " << argv[1] << endl;
+						cout << "error: invalid parameters for '" 
+						     << argv[1] 
+							 << "'."
+							 << endl;
 						k = argc;
 					}
 				}
+				//else check if last argument is a valid number
 				else 
 				{
-					ValidateCreate validateNumber("default_wallet",arguments[4]);
+					ValidateCreate validateNumber("default_wallet", arguments[4]);
 					bool flag2 = validateNumber.IsValidNumber();
 					k = 4;
+					//check if argument on first and 3'th position ar valid
 					if (flag2 == true)
 					{
-						if ((arguments[k-2] != arguments[k-4])&&((arguments[k-2]=="-c")||(arguments[k-2]=="--category")||(arguments[k-2]=="-w")||(arguments[k-2]=="--wallet"))
-									&&((arguments[k-4]=="-c")||(arguments[k-4]=="--category")||(arguments[k-4]=="-w")||(arguments[k-4]=="--wallet")))
+						if ((arguments[k-2] != arguments[k-4])
+						&&((arguments[k-2]=="-c")
+						||(arguments[k-2]=="--category")
+						||(arguments[k-2]=="-w")
+						||(arguments[k-2]=="--wallet"))
+						&&((arguments[k-4]=="-c")
+						||(arguments[k-4]=="--category")
+						||(arguments[k-4]=="-w")
+						||(arguments[k-4]=="--wallet")))
 						{
 							pozition = k;
 							k = argc;
 							flag = true;
 						}
+						//else print error
 						else 
 						{
-							//cout << "Not a valid comand for " << argv[1] << endl;
-							cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
+							cout << "error: invalid parameters for '" 
+							     << argv[1] 
+								 << "'."<<endl;
 							k = argc;
 						}
 					}
+					//else if not valid print error
 					else 
 					{
-						//cout << "Not a valid comand for " << argv[1] << endl;
-						cout << "error: invalid parameter for '" << argv[1] << "'."<<endl;
+						cout << "error: invalid parameter for '" 
+						     << argv[1] 
+							 << "'."
+							 << endl;
 						k = argc;
 										
 					}
 				}
 			}		
 		}
+		//else not a valid command
 		else 
 		{
-			//cout << "Not a valid command for " << argv[1] << endl;
-			cout << "error: invalid parameters for '" << argv[1] << "'."<<endl;
+			cout << "error: invalid parameters for '" 
+			     << argv[1] 
+				 << "'."
+				 << endl;
 			k = argc;
 		} 
 	}
@@ -712,8 +794,6 @@ void PrintInFileIfWalletFound(string amount,
 		//const char *cstr = str.c_str();
 		string contentConfigFile(ReturnFileasString(str));
 		//read config file
-		//string moneytrackerConfig = "moneytracker.config";
-		//string contentConfigFile(ReturnFileasString(moneytrackerConfig));
 		//create object ReadConfig for geting the wallet
 		ReadConfig getWallet;
 		string variable = "default_wallet";
@@ -746,7 +826,8 @@ void PrintInFileIfWalletFound(string amount,
 				//if valid path then add new line in wallet
 				DoCreateWallet newWallet(reconvert,amount);	
 				std::string wallettt;
-				newWallet.AddLineInWalletFile(amount, incomeOrSpend, category ,wallettt);
+				newWallet.AddLineInWalletFile(amount, incomeOrSpend, category 
+				,wallettt);
 			}
 			else 
 			{
@@ -776,83 +857,6 @@ void PrintInFileIfWalletFound(string amount,
 			PrintError::Print(COULD_NOT_OPEN_PATH, reconvert, amount);
 		}
 	}
-}
-
-// removing the 0's from the begining
-string RemoveStartingZeroes(string wallet)
-{
-	unsigned int start = 0, i = 0;
-	char sign ;
-	//searching for an existing sign
-	if (wallet[0] == '+' || wallet[0] == '-')
-	{
-		sign = wallet[0];
-		start = 1;
-		i = start;
-		// counting the start 0's
-		while (wallet[i] == '0')
-		{
-			++i;
-		}
-		// case : 000.7
-		if ((wallet[i] == '.') && (i < wallet.length()))
-		{
-			wallet = 
-				wallet.substr (i-1,wallet.length()-i+1);
-
-		}
-		//case : 001
-		else if (i < wallet.length())
-		{
-			wallet = 
-				wallet.substr (i,wallet.length()-i);
-		}
-		//case: 0000
-		else 
-		{
-			wallet = 
-				wallet.substr (i-1,wallet.length()-i+1);
-		}
-		if (wallet != "0") 
-		{
-		return wallet = sign + wallet;
-		}
-		else return "0";
-
-	}else 
-		{
-			start = 0;
-			i = start;
-			// counting the start 0's
-			while (wallet[i] == '0')
-			{
-			++i;
-			}
-			// case : 000.7
-			if ((wallet[i] == '.') && (i < wallet.length()))
-			{
-				wallet = 
-					wallet.substr (i-1,wallet.length()-i+1);
-
-			}
-			//case : 001
-			else if (i < wallet.length())
-			{
-				wallet = 
-					wallet.substr (i,wallet.length()-i);
-			}
-			//case: 0000
-			else 
-			{
-				wallet = 
-					wallet.substr (i-1,wallet.length()-i+1);
-			}		
-		}
-		if (wallet != "0") 
-		{
-			wallet = "+" + wallet;
-		}
-	return wallet;
 }
 
 void ImplementIncomeSpend(int argc, char *argv[])
@@ -966,69 +970,3 @@ void ImplementIncomeSpend(int argc, char *argv[])
 	}
 }
 
-/* void ImplementIncomeSpend(int argc, char* argv[])
-{
-	// get parameters for income/spend
-	string* parameters = getParametersIncomeSpend(argc - 2, &argv[2]);
-	string amount = parameters[0];
-	string category = parameters[1];
-	string wallet = parameters[2];
-	
-	if (category == "")
-	{
-		if (strcmp(argv[1], "income") == 0)
-		{
-			category = "salary";
-		}
-		else
-		{
-			category = "other";
-		}
-	}
-	else
-	{}
-	
-	// if there are invalid parameters print error
-	if(amount == "error")
-	{
-		PrintError::Print(INVALID_PARAMETER, argv[1], amount);
-	}
-	
-	// if there is no amount specified print error
-	else if (amount == "")
-	{
-		PrintError::Print(NO_AMOUNT_SPECIFIED, argv[1], amount);
-	}
-	
-	// if there is an amount specified
-	else 
-	{
-		// if amount is negative or 0 print error
-		if ((amount[0] == '-') || (amount[0] == '0')) 
-		{
-			PrintIncomeSpendNegative(argv[1], amount);
-		}
-		
-		// if amount is positive
-		else
-		{
-			//create object validate with parameters "default_wallet" 
-			//and amount
-			ValidateCreate validate("default_wallet", amount);
-			
-			// check if amount is a valid number
-			if (validate.IsValidNumber() == true)
-			{
-				PrintInFileIfWalletFound(amount,
-										 argv[1], 
-										 category,
-										 wallet);
-			}
-			//if amount is not valid number print error
-			else PrintError::Print(SHOULD_BE_POSITIVE,
-								   argv[1], 
-								   amount);
-		}
-	}
-	
-} */
