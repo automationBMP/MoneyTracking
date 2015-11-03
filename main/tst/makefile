@@ -214,3 +214,7 @@ clean:
 	$(RM) TestGetBalance.exe
 	$(RM) TestValidateIncomeSpendCommands.exe
 	$(RM) TestGetBalanceCategory.exe
+	$(RM) WalletBalance
+	$(RM) WalletTestt
+	$(RM) WalletTesttt
+	$(RM) WalletTest.txt

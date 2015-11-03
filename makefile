@@ -53,3 +53,10 @@ clean:
 	$(MAKE) -C main\tst clean
 	$(RM) moneytracker.exe
 	$(RM) main\main.o
+	$(RM) my.wallet
+	$(RM) my.wallet1
+	$(RM) mywallet
+	$(RM) newWallet
+	$(RM) WalletBalanceCategory
+	$(RM) WalletTest
+	$(RM) yetother
