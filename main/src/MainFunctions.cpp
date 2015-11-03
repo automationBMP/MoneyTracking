@@ -681,16 +681,6 @@ if (flag == true)
 		}
 	}
 }
-
-/* for (int i=0 ; i<=argc-3; i++)
-{
-	cout << newArguments[i] << endl;
-}  */
-/* else
-{
-	cout << "no valid " << endl;
-} */
-
 return newArguments;
 }
 
@@ -720,7 +710,6 @@ void CommandInterpreter(int arc, char *argv[])
 	{
 		cout << "error: invalid command !\n";
 	}
-	
 }
 
 //implement create commands and apeal functions for comands
@@ -881,7 +870,6 @@ void ImplementIncomeSpend(int argc, char *argv[])
 			category = "other";
 		}
 	}
-	
 	// get parameters for income/spend
 	string* parameters = ValidateIncomeSpendCommands(argc, argv);
 	 

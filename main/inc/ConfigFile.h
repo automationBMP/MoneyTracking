@@ -1,20 +1,8 @@
+//Author: Andrei Martinescu, v0.2
 #ifndef CHANGECONFIG_H
 #define CHANGECONFIG_H
 
 #include <string>
-
-/* enum Config_E
-{
-	default_wallet ,
-	default_currency ,
-	default_income_category ,
-	default_spending_category ,
-	currencies ,
-	rate_EUR_RON ,
-	rate_RON_EUR ,
-	rate_USD_RON ,
-	rate_EUR_USD ,
-}; */
 
 class ConfigFile
 {

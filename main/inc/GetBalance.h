@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
-
+// class getbalance returns the balance
 class GetBalance
 {
 	private:

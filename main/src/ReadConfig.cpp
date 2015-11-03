@@ -10,7 +10,8 @@
 #include <algorithm>
 
 //implementation of GetDefaultWallet
-std::string ReadConfig::GetDefaultWallet(std::string &contentConfigFile, std::string &checkVariable)
+std::string ReadConfig::GetDefaultWallet(std::string &contentConfigFile,
+ std::string &checkVariable)
 {
 	//the value returned by ReturnFileasString is transfered to string content
 	//std::string content = ReturnFileasString();
@@ -63,8 +64,10 @@ std::string ReadConfig::GetDefaultWallet(std::string &contentConfigFile, std::st
 					else 
 					{
 						// erase space and tabs ;
-						workLine.erase(std::remove(workLine.begin(),workLine.end(),' '),workLine.end());
-						workLine.erase(std::remove(workLine.begin(),workLine.end(),'\t'),workLine.end());
+						workLine.erase(std::remove(workLine.begin(),
+						workLine.end(),' '),workLine.end());
+						workLine.erase(std::remove(workLine.begin(),
+						workLine.end(),'\t'),workLine.end());
 						
 						// obtain the string for comparing
 						defaultCheck = workLine.substr(0,workLine.find('=')); 
@@ -86,8 +89,10 @@ std::string ReadConfig::GetDefaultWallet(std::string &contentConfigFile, std::st
 			// if we found the exact string in config
 			if (flag == true)
 			{
-				workContent.erase(std::remove(workContent.begin(),workContent.end(),' '),workContent.end());
-				workContent.erase(std::remove(workContent.begin(),workContent.end(),'\t'),workContent.end());
+				workContent.erase(std::remove(workContent.begin(),
+				workContent.end(),' '),workContent.end());
+				workContent.erase(std::remove(workContent.begin(),
+				workContent.end(),'\t'),workContent.end());
 				size_t pozitionAfterSignEqual = 0;
 				size_t pozitionSignNextLine = 0;
 				size_t countLineNumbers = 0;
@@ -110,7 +115,8 @@ std::string ReadConfig::GetDefaultWallet(std::string &contentConfigFile, std::st
 						break;
 					}
 				}
-				std::string walletName = workContent.substr(pozitionAfterSignEqual,pozitionSignNextLine-pozitionAfterSignEqual);
+				std::string walletName = workContent.substr(pozitionAfterSignEqual
+				,pozitionSignNextLine-pozitionAfterSignEqual);
 				if (walletName.length() == 0)
 				{
 					return "NoWalletNameFound";

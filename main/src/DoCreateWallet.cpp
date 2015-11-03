@@ -74,7 +74,8 @@ Error_E DoCreateWallet::CreateWalletFile()
 	return ALL_GOOD;
 }
 
-Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, string &category, string &wallet)
+Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, 
+											string &category, string &wallet)
 {	
 	//apeal function add decimals
 	amount=DoCreateWallet::AddDecimalsToDefaultAmount();
@@ -107,15 +108,35 @@ Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, stri
 			string variable = "default_wallet";
 			string walletName = 
 					getWallet.GetDefaultWallet(contentConfigFile, variable);
-			cout << "Income '" << category << "' in an amount of " 
-			     << defaultAmount_m << " RON was registered to " << "'"<<walletName<< "'."<<endl;
-			cout << buffer << " GMT" << endl;
+			//print error
+			cout << "Income '" 
+			     << category 
+				 << "' in an amount of " 
+			     << defaultAmount_m 
+				 << " RON was registered to " 
+				 << "'"
+				 << walletName
+				 << "'."
+				 << endl;
+			cout << buffer 
+			     << " GMT" 
+				 << endl;
 			}
 			else 
 			{
-				cout << "Income '" << category << "' in an amount of " 
-			     << defaultAmount_m << " RON was registered to " << "'"<<wallet<< "'."<<endl;
-			cout << buffer << " GMT" << endl;
+				//print error
+				cout << "Income '" 
+				     << category 
+					 << "' in an amount of " 
+			         << defaultAmount_m 
+					 << " RON was registered to " 
+					 << "'"
+					 << wallet
+					 << "'."
+					 << endl;
+				cout << buffer 
+				     << " GMT" 
+					 << endl;
 			}
 			printline += printline + ";" + "+" + ";" 				
 					     + defaultAmount_m +";" +category + ";"+ "RON";
@@ -134,15 +155,34 @@ Error_E DoCreateWallet::AddLineInWalletFile(string &amount, string &ArgNr2, stri
 			string variable = "default_wallet";
 			string walletName = 
 					getWallet.GetDefaultWallet(contentConfigFile, variable);
-			cout << "Spending '" << category << "' in an amount of " 
-			     << defaultAmount_m << " RON was registered to " << "'"<<walletName<< "'."<<endl;
-			cout << buffer << " GMT" << endl;
+			//print message 
+			cout << "Spending '" 
+			     << category 
+				 << "' in an amount of " 
+			     << defaultAmount_m 
+				 << " RON was registered to " 
+				 << "'"
+				 << walletName
+				 << "'."
+				 << endl;
+				cout << buffer 
+				     << " GMT" 
+					 << endl;
 			}
 			else 
-			{
-				cout << "Spending '" << category << "' in an amount of " 
-			     << defaultAmount_m << " RON was registered to " << "'"<<wallet<< "'."<<endl;
-			cout << buffer << " GMT" << endl;
+			{	
+				cout << "Spending '"
+  				     << category 
+					 << "' in an amount of " 
+			         << defaultAmount_m 
+					 << " RON was registered to " 
+					 << "'"
+					 << wallet
+					 << "'."
+					 << endl;
+					cout << buffer 
+					     << " GMT" 
+						 << endl;
 			}
 			printline += printline+";" + "-" + ";" 
 						 + defaultAmount_m +";" + category + ";"+ "RON";

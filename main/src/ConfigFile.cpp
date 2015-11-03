@@ -82,7 +82,8 @@ std::string ReturnDefaultNoUnderLine(std::string &change)
 		else 
 		{
 			std::string output1 = change.substr(0,change.find("_"));
-			output = output + " " + output1 + " " + change.erase(0,change.find("_")+1);
+			output = output + " " + output1 + " " + 
+			change.erase(0,change.find("_")+1);
 		}
 		return output;
 	}
@@ -95,7 +96,10 @@ std::string ConfigFile::ChangeConfigFile()
 	{ 	
 		// if not found
 		std::string output = ReturnDefaultNoUnderLine(change_m);
-		std::cout << "error: no " << output << " configured in 'moneytracker.config'." << endl;
+		std::cout << "error: no " 
+		          << output 
+				  << " configured in 'moneytracker.config'." 
+				  << endl;
 	}
 	else 
 	{	
@@ -125,8 +129,10 @@ std::string ConfigFile::ChangeConfigFile()
 				else 
 				{
 					// erase space and tabs ;
-					workLine.erase(std::remove(workLine.begin(),workLine.end(),' '),workLine.end());
-					workLine.erase(std::remove(workLine.begin(),workLine.end(),'\t'),workLine.end());
+					workLine.erase(std::remove(workLine.begin(),
+					workLine.end(),' '),workLine.end());
+					workLine.erase(std::remove(workLine.begin(),
+					workLine.end(),'\t'),workLine.end());
 					
 					// obtain the string for comparing
 					defaultCheck = workLine.substr(0,workLine.find('=')); 
@@ -174,7 +180,8 @@ std::string ConfigFile::ChangeConfigFile()
 			string add = "= " + default_change_m;
 			
 			//erase from default_walet to /n;
-			content_m.erase(pozitionSignEqual,pozitionSignNextLine-pozitionSignEqual);
+			content_m.erase(pozitionSignEqual,
+			pozitionSignNextLine-pozitionSignEqual);
 			
 			// insert new default wallet
 			content_m.insert(pozitionSignEqual,add);
@@ -183,187 +190,12 @@ std::string ConfigFile::ChangeConfigFile()
 		{
 			// print message for no parameter found 
 			std::string output = ReturnDefaultNoUnderLine(change_m);
-			std::cout << "error: no " << output << " configured in 'moneytracker.config'." << endl;
+			std::cout << "error: no " 
+			          << output 
+					  << " configured in 'moneytracker.config'." 
+					  << endl;
 		
 		}
 	}
 	return content_m;
 }
-
-/*  int main (int argc , char *argv[])
-{ */
-	/* // implement for default categorry
-	string *arguments = new string [argc-2];
-	int j = 0;
-	for (int i =2; i<argc; i++)
-	{
-		arguments[j] = argv[i];
-		cout << arguments[j] << endl;
-		j++;
-	}
-	//cout << argc-3;
-	//cout << arguments.length();
-	int k = 0;
-	while (k <= argc-3) 
-	{
-		if ((arguments[k] == "-c") || (arguments[k] == "-w")) 
-		{
-			k = k+2;
-		}
-		else 
-		{
-			cout << "Invalid parameter for command" << argv[1] << endl;
-			k = argc;
-		}
-	} 
-	
-	 // implement for default categorry
-	string *arguments = new string [argc-2];
-	int j = 0;
-	for (int i =2; i<argc; i++)
-	{
-		arguments[j] = argv[i];
-		cout << arguments[j] << endl;
-		j++;
-	}
-	int k = 0;
-	bool flag = false;
-	while (k <= argc-3) 
-	{
-		if ((argc-3)==0)
-		{
-			ValidateCreate validateNumber("default_wallet",arguments[k]);
-			bool flag2 = validateNumber.IsValidNumber();
-			if (flag2 == true)
-			{	
-				k = argc;
-			}
-			else 
-			{
-				PrintError::Print(SHOULD_BE_POSITIVE,
-									argv[1], argv[2]);
-				k = argc;
-			}
-		}
-		else if ((argc-3)==2)
-		{
-			ValidateCreate validateNumber("default_wallet",arguments[k]);
-			bool flag2 = validateNumber.IsValidNumber();
-			if (flag2 == true)
-			{
-				if ((arguments[k+1]=="-c")||(arguments[k+1]=="--category")||(arguments[k+1]=="-w")||(arguments[k+1]=="--wallet"))
-				{
-					k = argc;
-					flag = true;
-				}
-				else 
-				{
-					cout << "Not a valid comand for " << argv[1] << endl;
-					k = argc;
-				}
-			}
-			else 
-			{
-				ValidateCreate validateNumber("default_wallet",arguments[2]);
-				bool flag2 = validateNumber.IsValidNumber();
-				k = 2;
-				if (flag2 == true)
-				{
-					if ((arguments[k-2]=="-c")||(arguments[k-2]=="--category")||(arguments[k-2]=="-w")||(arguments[k-2]=="--wallet"))
-					{
-						k = argc;
-						flag = true;
-					}
-					else 
-					{
-						cout << "Not a valid comand for " << argv[1] << endl;
-						k = argc;
-					}
-				}	
-			}	
-		}
-		else if ((argc-3)==4)
-		{
-			ValidateCreate validateNumber("default_wallet",arguments[k]);
-			bool flag2 = validateNumber.IsValidNumber();
-			if (flag2 == true)
-			{
-				if ((arguments[k+1] != arguments[k+3])&&((arguments[k+1]=="-c")||(arguments[k+1]=="--category")||(arguments[k+1]=="-w")||(arguments[k+1]=="--wallet"))
-								&&((arguments[k+3]=="-c")||(arguments[k+3]=="--category")||(arguments[k+3]=="-w")||(arguments[k+3]=="--wallet")))
-				{	
-					k = argc;
-					flag = true;
-				}
-				else 
-				{
-					cout << "Not a valid comand for " << argv[1] << endl;
-					k = argc;
-				}
-			}
-			else 
-			{
-				ValidateCreate validateNumber("default_wallet",arguments[2]);
-				bool flag2 = validateNumber.IsValidNumber();
-				k = 2;
-				if (flag2 == true)
-				{
-					if ((arguments[k-2] != arguments[k+2])&&((arguments[k-2]=="-c")||(arguments[k-2]=="--category")||(arguments[k-2]=="-w")||(arguments[k-2]=="--wallet"))
-								&&((arguments[k+2]=="-c")||(arguments[k+2]=="--category")||(arguments[k+2]=="-w")||(arguments[k+2]=="--wallet")))
-					{
-						k = argc;
-						flag = true;
-					}
-					else 
-					{
-						cout << "Not a valid comand for " << argv[1] << endl;
-						k = argc;
-					}
-				}
-				else 
-				{
-					ValidateCreate validateNumber("default_wallet",arguments[4]);
-					bool flag2 = validateNumber.IsValidNumber();
-					k = 4;
-					if (flag2 == true)
-					{
-						if ((arguments[k-2] != arguments[k-4])&&((arguments[k-2]=="-c")||(arguments[k-2]=="--category")||(arguments[k-2]=="-w")||(arguments[k-2]=="--wallet"))
-									&&((arguments[k-4]=="-c")||(arguments[k-4]=="--category")||(arguments[k-4]=="-w")||(arguments[k-4]=="--wallet")))
-						{
-							k = argc;
-							flag = true;
-						}
-						else 
-						{
-							cout << "Not a valid comand for " << argv[1] << endl;
-							k = argc;
-						}
-					}
-				}
-			}		
-		}
-	}
-
-if (flag == true)
-{
-	for (int i=0 ; i<=argc-3; i++)
-	{
-		cout << arguments[i] << endl;
-	}
-}	
-else
-{
-	cout << "no valid " << endl;
-}
-	
-	*/
-/* 	 const string str = "moneytracker.config";
-	std::string contentConfig(ReturnFileasString(str));
-	string defaultChange = "mywalletfdss";
-	string change = "rate_EUR_RON";
-	ConfigFile newWallet(contentConfig, defaultChange, change);
-	std::string newConfig = newWallet.ChangeConfigFile();
-	//std::cout << newConfig;
-	newWallet.ReWriteConfigFile();
-	 
-	return 0;
-}   */

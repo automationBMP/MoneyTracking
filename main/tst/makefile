@@ -73,11 +73,13 @@ test: test.exe
 	test.exe
 	
 #Test.exe	
-TestRemoveStartingZeroes: TestRemoveStartingZeroes.o ..\src\DoCreateWallet.o ..\src\PrintError.o ..\inc\Types.h $(GTEST_LIB)
+TestRemoveStartingZeroes: TestRemoveStartingZeroes.o ..\src\DoCreateWallet.o 
+	..\src\PrintError.o ..\inc\Types.h $(GTEST_LIB)
 	$(CPP) -o TestRemoveStartingZeroes.exe TestRemoveStartingZeroes.o \
 	..\src\DoCreateWallet.o ..\src\PrintError.o ..\inc\Types.h $(GTEST_LIB)
 
-TestIsValidNumber: TestIsValidNumber.o ..\src\ValidateCreate.o ..\src\PrintError.o $(GTEST_LIB) 
+TestIsValidNumber: TestIsValidNumber.o ..\src\ValidateCreate.o 
+	..\src\PrintError.o $(GTEST_LIB) 
 	$(CPP) -o TestIsValidNumber.exe TestIsValidNumber.o \
 	..\src\ValidateCreate.o ..\src\PrintError.o $(GTEST_LIB)
 
@@ -85,23 +87,28 @@ TestConvertPath: TestConvertPath.o ..\src\MainFunctions.o $(GTEST_LIB)
 	$(CPP) -o TestConvertPath.exe TestConvertPath.o \
 	..\src\MainFunctions.o $(GTEST_LIB)
 
-TestConvertPathToOriginal: TestConvertPathToOriginal.o ..\src\MainFunctions.o $(GTEST_LIB) 
+TestConvertPathToOriginal: TestConvertPathToOriginal.o 
+	..\src\MainFunctions.o $(GTEST_LIB) 
 	$(CPP) -o TestConvertPathToOriginal.exe TestConvertPathToOriginal.o \
 	..\src\MainFunctions.o $(GTEST_LIB)
 
-TestValidateCreate:  TestValidateCreate.o ..\src\ValidateCreate.o ..\src\PrintError.o $(GTEST_LIB)
+TestValidateCreate:  TestValidateCreate.o ..\src\ValidateCreate.o 
+	..\src\PrintError.o $(GTEST_LIB)
 	$(CPP) -o TestValidateCreate.exe TestValidateCreate.o \
 	..\src\ValidateCreate.o ..\src\PrintError.o $(GTEST_LIB)
 
-TestCreateWallet: TestCreateWallet.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
+TestCreateWallet: TestCreateWallet.o ..\src\DoCreateWallet.o 
+	..\src\PrintError.o $(GTEST_LIB)
 	$(CPP) -o TestCreateWallet.exe TestCreateWallet.o \
 	..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 	
-TestAddDecimalsToDefaultAmount: TestAddDecimalsToDefaultAmount.o ..\src\DoCreateWallet.o  ..\src\PrintError.o $(GTEST_LIB)
+TestAddDecimalsToDefaultAmount: TestAddDecimalsToDefaultAmount.o 
+	..\src\DoCreateWallet.o  ..\src\PrintError.o $(GTEST_LIB)
 	$(CPP) -o TestAddDecimalsToDefaultAmount.exe TestAddDecimalsToDefaultAmount.o \
 	..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 	
-TestAddLineinWallet: TestAddLineinWallet.o ..\src\DoCreateWallet.o  ..\src\PrintError.o $(GTEST_LIB)
+TestAddLineinWallet: TestAddLineinWallet.o ..\src\DoCreateWallet.o  
+	..\src\PrintError.o $(GTEST_LIB)
 	$(CPP) -o TestAddLineinWallet.exe TestAddLineinWallet.o \
 
 TestWalletName: TestWalletName.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
@@ -112,20 +119,30 @@ TestReturnFileasString: TestReturnFileasString.o ..\src\MainFunctions.o $(GTEST_
 	$(CPP) -o TestReturnFileasString.exe TestReturnFileasString.o \
 	..\src\MainFunctions.o $(GTEST_LIB)
 
-TestGetBalance: TestGetBalance.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
-	$(CPP) -o TestGetBalance.exe TestGetBalance.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
+TestGetBalance: TestGetBalance.o ..\src\DoCreateWallet.o 
+	..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o TestGetBalance.exe TestGetBalance.o ..\src\DoCreateWallet.o 
+	..\src\PrintError.o $(GTEST_LIB)
 	
-TestSpecifyCategory: TestSpecifyCategory.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
-	$(CPP) -o TestSpecifyCategory.exe TestSpecifyCategory.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
+TestSpecifyCategory: TestSpecifyCategory.o ..\src\MainFunctions.o 
+	..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o TestSpecifyCategory.exe TestSpecifyCategory.o 
+	..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
 
-TestValidateIncomeSpendCommands: ValidateIncomeSpendCommands.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
-	$(CPP) -o ValidateIncomeSpendCommands.exe ValidateIncomeSpendCommands.o ..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
+TestValidateIncomeSpendCommands: ValidateIncomeSpendCommands.o 
+	..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o ValidateIncomeSpendCommands.exe ValidateIncomeSpendCommands.o 
+	..\src\MainFunctions.o ..\src\ReadConfig.o ..\src\PrintError.o $(GTEST_LIB)
 
-TestGetBalanceCategory: TestGetBalanceCategory.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
-	$(CPP) -o TestGetBalanceCategory.exe TestGetBalanceCategory.o ..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
+TestGetBalanceCategory: TestGetBalanceCategory.o ..\src\DoCreateWallet.o 
+	..\src\PrintError.o $(GTEST_LIB)
+	$(CPP) -o TestGetBalanceCategory.exe TestGetBalanceCategory.o 
+	..\src\DoCreateWallet.o ..\src\PrintError.o $(GTEST_LIB)
 
-TestChangeDefWallet: TestChangeDefWallet.o ..\src\MainFunctions.o ..\src\ReadConfig.o $(GTEST_LIB)
-	$(CPP) -o TestChangeDefWallet.exe TestChangeDefWallet.o ..\src\MainFunctions.o ..\src\ReadConfig.o $(GTEST_LIB)
+TestChangeDefWallet: TestChangeDefWallet.o ..\src\MainFunctions.o 
+	..\src\ReadConfig.o $(GTEST_LIB)
+	$(CPP) -o TestChangeDefWallet.exe TestChangeDefWallet.o 
+	..\src\MainFunctions.o ..\src\ReadConfig.o $(GTEST_LIB)
 	
 #Test.o 
 TestRemoveStartingZeroes.o: TestRemoveStartingZeroes.cpp $(HEADERS)

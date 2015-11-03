@@ -9,7 +9,8 @@ class ReadConfig
 {
 public:
 	//std::string ReturnFileasString();
-	std::string GetDefaultWallet(std::string &contentConfigFile, std::string &checkVariable);
+	std::string GetDefaultWallet(std::string &contentConfigFile, 
+								std::string &checkVariable);
 };
 
 
