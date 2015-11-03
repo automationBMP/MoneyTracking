@@ -235,3 +235,4 @@ clean:
 	$(RM) WalletTestt
 	$(RM) WalletTesttt
 	$(RM) WalletTest.txt
+	$(RM) WalletBalanceCategory

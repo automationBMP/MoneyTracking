@@ -24,7 +24,11 @@ std::string ReturnWalletNameLine()
 				isEmpty = isEmpty && isspace(ch);
 			}
 			size_t lineStr = line.find("default_wallet ");
-			std::cout << std::endl << std::endl << lineStr << std::endl << std::endl;
+			std::cout << std::endl 
+					  << std::endl 
+					  << lineStr 
+					  << std::endl 
+					  << std::endl;
 			if ( lineStr != std::string::npos)
 			{
 				return line;
@@ -49,7 +53,8 @@ std::string ReturnWalletNameLine()
 //Test 1
 TEST(ChangeDefWallet, CorectDefaultWallet)
 {
-	char* argumente[4]= {(char*)"moneytracker", (char*)"config", (char*)"default_wallet=", (char*)"mywallet"};
+	char* argumente[4]= {(char*)"moneytracker", (char*)"config", 
+	(char*)"default_wallet=", (char*)"mywallet"};
 	ImplementConfig(4, argumente);
 	std::string expected = "default_wallet = mywallet";
 	EXPECT_EQ(expected, ReturnWalletNameLine());
@@ -58,7 +63,8 @@ TEST(ChangeDefWallet, CorectDefaultWallet)
 //Test 2
 TEST(ChangeDefWallet, SpacesBeforeEqualDefaultWallet)
 {
-	char* argumente[5]= {(char*)"moneytracker", (char*)"config", (char*)"default_wallet", (char*)"=", (char*)"mywallet"};
+	char* argumente[5]= {(char*)"moneytracker", (char*)"config", 
+	(char*)"default_wallet", (char*)"=", (char*)"mywallet"};
 	ImplementConfig(5, argumente);
 	std::string expected = "default_wallet = mywallet";
 	EXPECT_EQ(expected, ReturnWalletNameLine());
@@ -67,7 +73,9 @@ TEST(ChangeDefWallet, SpacesBeforeEqualDefaultWallet)
 /* //Test 3
 TEST(ChangeDefWallet, ErrorTooManyArgumentsAfterConfig)
 {
-	char* argumente[6]= {(char*)"moneytracker", (char*)"config", (char*)"tesallet", (char*)"testwllet", (char*)"default_wallet", (char*)"testwallet"};
+	char* argumente[6]= {(char*)"moneytracker", (char*)"config", 
+	(char*)"tesallet", (char*)"testwllet", (char*)"default_wallet",
+	(char*)"testwallet"};
 	ImplementConfig(6, argumente);
 	std::string expected = "default_wallet = testwallet";
 	EXPECT_EQ(expected, ReturnWalletNameLine());
@@ -76,7 +84,8 @@ TEST(ChangeDefWallet, ErrorTooManyArgumentsAfterConfig)
 //Test 4
 TEST(ChangeDefWallet, CorectDefaultWallet)
 {
-	char* argumente[4]= {(char*)"moneytracker", (char*)"config", (char*)"default_wallet=", (char*)"testwallet"};
+	char* argumente[4]= {(char*)"moneytracker", (char*)"config", 
+	(char*)"default_wallet=", (char*)"testwallet"};
 	ImplementConfig(4, argumente);
 	std::string expected = "default_wallet = testwallet";
 	EXPECT_EQ(expected, ReturnWalletNameLine());
@@ -85,7 +94,8 @@ TEST(ChangeDefWallet, CorectDefaultWallet)
 //Test 5
 TEST(ChangeDefWallet, CorectDefaultWallet)
 {
-	char* argumente[4]= {(char*)"moneytracker", (char*)"config", (char*)"default_wallet=", (char*)"testwallet"};
+	char* argumente[4]= {(char*)"moneytracker", (char*)"config", 
+	(char*)"default_wallet=", (char*)"testwallet"};
 	ImplementConfig(4, argumente);
 	std::string expected = "default_wallet = testwallet";
 	EXPECT_EQ(expected, ReturnWalletNameLine());
@@ -94,7 +104,8 @@ TEST(ChangeDefWallet, CorectDefaultWallet)
 //Test 6
 TEST(ChangeDefWallet, CorectDefaultWallet)
 {
-	char* argumente[4]= {(char*)"moneytracker", (char*)"config", (char*)"default_wallet=", (char*)"testwallet"};
+	char* argumente[4]= {(char*)"moneytracker", (char*)"config", 
+	(char*)"default_wallet=", (char*)"testwallet"};
 	ImplementConfig(4, argumente);
 	std::string expected = "default_wallet = testwallet";
 	EXPECT_EQ(expected, ReturnWalletNameLine());

@@ -41,7 +41,8 @@ std::string readLastLine()
 TEST(SpecifyCategory, IncomeCCategoryAmount)
 {
 	std::ofstream ifs("mywallet");
-	char* argumente[5]= {(char*)"moneytracker", (char*)"income", (char*)"--category", (char*)"category1", (char*)"300"};
+	char* argumente[5]= {(char*)"moneytracker", (char*)"income", 
+	(char*)"--category", (char*)"category1", (char*)"300"};
 	ImplementIncomeSpend(5, argumente);
 	time_t currentTime = time(NULL);
 	std::stringstream ss;
@@ -60,7 +61,8 @@ TEST(SpecifyCategory, IncomeCCategoryAmount)
 //Test 2
 TEST(SpecifyCategory, IncomeCategoryCategoryAmount)
 {
-	char* argumente[5]= {(char*)"moneytracker", (char*)"income", (char*)"--category", (char*)"category2", (char*)"300"};
+	char* argumente[5]= {(char*)"moneytracker", (char*)"income", 
+	(char*)"--category", (char*)"category2", (char*)"300"};
 	ImplementIncomeSpend(5, argumente);
 	time_t currentTime = time(NULL);
 	std::stringstream ss;
@@ -79,7 +81,8 @@ TEST(SpecifyCategory, IncomeCategoryCategoryAmount)
 //Test 3
 TEST(SpecifyCategory, IncomeCategoryCategoryAfterAmount)
 {
-	char* argumente[5]= {(char*)"moneytracker",(char*) "income", (char*)"233", (char*)"--category", (char*)"category3"};
+	char* argumente[5]= {(char*)"moneytracker",(char*) "income", 
+	(char*)"233", (char*)"--category", (char*)"category3"};
 	ImplementIncomeSpend(5, argumente);
 	time_t currentTime = time(NULL);
 	std::stringstream ss;
@@ -98,7 +101,8 @@ TEST(SpecifyCategory, IncomeCategoryCategoryAfterAmount)
 //Test 4
 TEST(SpecifyCategory, SpendCategoryCategoryAfterAmount)
 {
-	char* argumente[5]= {(char*)"moneytracker",(char*) "spend", (char*)"243", (char*)"--category", (char*)"category4"};
+	char* argumente[5]= {(char*)"moneytracker",(char*) "spend", 
+	(char*)"243", (char*)"--category", (char*)"category4"};
 	ImplementIncomeSpend(5, argumente);
 	time_t currentTime = time(NULL);
 	std::stringstream ss;
@@ -116,7 +120,8 @@ TEST(SpecifyCategory, SpendCategoryCategoryAfterAmount)
 //Test 5
 TEST(SpecifyCategory, SpendCCategoryAmount)
 {
-	char* argumente[5]= {(char*)"moneytracker", (char*)"spend", (char*)"--category", (char*)"category5", (char*)"300"};
+	char* argumente[5]= {(char*)"moneytracker", (char*)"spend", 
+	(char*)"--category", (char*)"category5", (char*)"300"};
 	ImplementIncomeSpend(5, argumente);
 	time_t currentTime = time(NULL);
 	std::stringstream ss;
